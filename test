@@ -1,2 +1,29 @@
 안녕 
 이건 내거다 하하하하 
+
+
+브런치 생성
+git checkout -b '이름'
+상태확인
+git status
+
+git add .
+git commit -m "설명"
+git push origin 브런치이름
+
+
+위 명령어를 해본 후 다음날 다시 할때 최신화된 main파일을 받아올 때 사용하는 명령어
+git pull origin main
+
+
+
+
+
+조장
+git checkout main
+
+git add.
+git commit -a -m "main m"
+
+git pull origin kms <-메인이랑 브런치 합체!
+만약 오류나오면 merge설정을 하라는 거임 merge설정 명령어 복붙
