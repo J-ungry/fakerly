@@ -1,10 +1,48 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-	<meta charset="UTF-8">
-    <title>Insert title here</title> 
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/login.css" />
 </head>
+
 <body>
-    <h1></h1>
+  <div class="contn">
+    <!-- <div class="child-contn"> -->
+    <nav class="nav-contn">
+      <div class="logo"><a th:href="@{/}">로고</a></div>
+    </nav>
+    <div class="main-contn">
+      <h1><strong>로그인</strong></h1>
+      <form action="" method="POST">
+        <div>
+          <label for="email">이메일</label>
+          <input type="email" id="email" name="email" 
+          class="" placeholder="이메일 입력" value="123@gmail.com"/>
+        </div>
+        <div>
+          <label for="password">비밀번호</label>
+          <input type="password" id="pw" name="pw" 
+          class="" placeholder="비밀번호 입력" value="123"/>
+        </div>
+        <div>
+          <button type="submit" class="login-btn">로그인</button>
+        </div>
+      </form>
+      <div>
+        <div class="login-triple-menu">
+          <a href="#">회원가입</a> | <a href="/user/findEmailPassword.do">이메일 찾기</a> |
+          <a href="/user/findEmailPassword.do">비밀번호 찾기</a>
+        </div>
+        <div class="non-member">
+          <a href="#">비회원으로 둘러보기</a>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div>푸터</div>
+    </footer>
+    <!-- </div> -->
+  </div>
 </body>
 </html>

@@ -1,0 +1,198 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.contn {
+  width: 100%;
+  height: 100%;
+  background-color: #f7f7f7;
+}
+
+.nav-contn {
+  width: 768px;
+  height: 6%;
+  text-align: center;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
+  border-top: none;
+  padding: 0 16px;
+}
+
+.nav-contn .logo {
+  width: 110px;
+  height: 100%;
+  background-color: yellow;
+  line-height: 60px;
+  font-size: 32px;
+}
+
+/* 아이디 찾기 / 비밀번호 찾기 TAB */
+.nav-tabs {
+  justify-content: space-evenly;
+}
+
+/* 가운데 하얀색 배경 부분 */
+.main-contn {
+  width: 768px;
+  height: 84%;
+  margin: 0 auto;
+  /* border: 1px dotted red; */
+  padding: 60px 200px 48px 200px;
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
+  border-bottom: none;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: space-evenly; */
+}
+
+.main-contn h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 80px;
+}
+
+form {
+  margin-top: 24px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  height: 48px;
+  margin-bottom: 16px;
+  border-radius: 5px;
+  border-color: #DBDBDB;
+}
+
+input:focus {
+  border: 2px solid #ED6653;
+  outline: none;
+  box-shadow: none;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 11px 23px;
+  background-color: #ED6653;
+  margin-bottom: 24px;
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  border-color: none;
+}
+
+.find-e-p-subbtn {
+  width: 100%;
+  padding: 11px 23px;
+  background-color: #ED6653;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  border-color: none;
+}
+
+/* 이메일 찾기 성공 페이지 */
+.find-e-success {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.find-e-success-btn {
+  display: inline;
+  text-decoration: none;
+  width: 45%;
+  padding: 11px 23px;
+  background-color: #ED6653;
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.find-e-fail-btn {
+  display: inline;
+  text-decoration: none;
+  width: 45%;
+  padding: 11px 23px;
+  background-color: #ED6653;
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/* 회원가입 | 이메일 찾기 | 비밀번호 찾기 */
+.login-triple-menu {
+  text-align: center;
+}
+
+.login-triple-menu a {
+  text-decoration: none;
+  outline: none;
+  color: #000;
+}
+
+.non-member {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.non-member a {
+  text-decoration: none;
+  outline: none;
+  color: #000;
+  text-decoration: underline;
+}
+
+
+/* ?a:hover,
+a:active {
+  text-decoration: none;
+  color: #fff;
+  background-color: #f59000;
+} */
+
+/* .logo-contn, .login-contn, footer 셋이서
+.child-contn의 height: 100%를 나눠 가짐 */
+footer {
+  height: 10%;
+  text-align: center;
+  border-top: 1px solid #dbdbdb;
+  background-color: #f7f7f7;
+}
