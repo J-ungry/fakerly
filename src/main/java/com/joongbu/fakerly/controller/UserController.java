@@ -1,5 +1,6 @@
 package com.joongbu.fakerly.controller;
 
+import java.sql.Date;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +60,8 @@ public class UserController {
 
 		if (loginUser != null) {
 			session.setAttribute("loginUser", loginUser);
-			System.out.println(loginUser);
+			System.out.println(loginUser.getBirth());
+			System.out.println(loginUser.getSignup());
 			System.out.println("로그인 성공, 세션 생성");
 			return "성공";
 		} else {
@@ -81,9 +83,13 @@ public class UserController {
 		System.out.println();
 	}
 
-	@PostMapping("/findEmailPassword.do")
-	public String findEmailPassword(HttpServletRequest req, String fEmail, @RequestParam(required = true) String fName,
-			@RequestParam(required = true) String fPhone) {
+	// 이메일/비밀번호 찾기 시도
+	/*@PostMapping("/findEmailPassword.do")
+	public String findEmailPassword(HttpServletRequest req, 
+			String fEmail, 
+			@RequestParam(required = true) String fName,
+			@RequestParam(required = true) String fPhone, 
+			@RequestParam(required = true) Date fBirth) {
 		System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
 		Enumeration params = req.getParameterNames();
 		System.out.print("Parameter> ");
@@ -92,11 +98,56 @@ public class UserController {
 			System.out.print(name + " : " + req.getParameter(name) + "\t");
 		}
 		System.out.println();
+		
+		UserDto findUserEmail = null;
+		UserDto findUserPassword = null;
+		
 
 		if (fEmail == null) {
-			return "이메일 찾기";
+			System.out.println("이메일 찾기");
+			try {
+				findUserEmail = userMapper.findUserEmail(fName, fPhone, fBirth);
+				System.out.println("이메일 찾기2");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			if(findUserEmail != null) {
+				System.out.println(findUserEmail);
+				return "이메일 찾기 성공";
+			} else {				
+				return "이메일 찾기 실패";
+			}
 		} else {
-			return "비밀번호 찾기";
+			System.out.println("비밀번호 찾기");
+			try {
+				findUserPassword = userMapper.findUserPassword(fEmail, fName, fPhone, fBirth);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (findUserPassword != null) {
+				System.out.println(findUserPassword.getPw());
+				return "비밀번호 찾기 성공";
+			} else {
+				return "비밀번호 찾기 실패";
+			}
 		}
+	}*/
+	
+	// 로그아웃
+	@GetMapping("/logout.do")
+	public String logout(HttpServletRequest req, HttpSession session) {
+		System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
+		Enumeration params = req.getParameterNames();
+		System.out.print("Parameter> ");
+		while (params.hasMoreElements()) {
+			String name = (String) params.nextElement();
+			System.out.print(name + " : " + req.getParameter(name) + "\t");
+		}
+		System.out.println();
+		
+		// session.invalidate();
+		session.removeAttribute("loginUser");
+		return "redirect:/";
 	}
 }

@@ -5,6 +5,14 @@
  <mapper namespace="com.joongbu.fakerly.mapper.UserMapper">
  	<select id="login" resultType="com.joongbu.fakerly.dto.UserDto">
 		SELECT * FROM user
-		WHERE user_email = #{email} AND user_password = #{pw}
+		WHERE email = #{email} AND pw = #{pw}
+	</select>
+	<select id="findUserEmail" resultType="com.joongbu.fakerly.dto.UserDto">
+		SELECT * FROM user
+		WHERE user_name = #{fName} AND phone = #{fPhone} AND birth = #{fBirth}
+	</select>
+	<select id="findUserPassword" resultType="com.joongbu.fakerly.dto.UserDto">
+		SELECT * FROM user
+		WHERE email = #{fEmail} AND user_name = #{fName} AND phone = #{fPhone} AND birth = #{fBirth}
 	</select>
  </mapper>
