@@ -1,7 +1,6 @@
 안녕 
 이건 내거다 하하하하 
 
-
 브런치 생성
 git checkout -b '이름'
 상태확인
@@ -27,3 +26,8 @@ git commit -a -m "main m"
 
 git pull origin kms <-메인이랑 브런치 합체!
 만약 오류나오면 merge설정을 하라는 거임 merge설정 명령어 복붙
+
+만약 동일 파일 수정해서 오류나면 임의로 수정 해서
+git add . 
+git commit -m ""
+git push origin main 
