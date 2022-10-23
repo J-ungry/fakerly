@@ -5,7 +5,7 @@
  <mapper namespace="com.joongbu.fakerly.mapper.UserMapper">
  	<select id="login" resultType="com.joongbu.fakerly.dto.UserDto">
 		SELECT * FROM user
-		WHERE email = #{email} AND pw = #{pw}
+		WHERE email = #{email}
 	</select>
 	<select id="findUserEmail" resultType="com.joongbu.fakerly.dto.UserDto">
 		SELECT * FROM user

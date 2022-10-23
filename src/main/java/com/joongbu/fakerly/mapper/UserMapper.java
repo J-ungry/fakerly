@@ -9,7 +9,7 @@ import com.joongbu.fakerly.dto.UserDto;
 
 @Mapper
 public interface UserMapper {
-	UserDto login(String email, String pw);
+	UserDto login(String email);
 
 	UserDto findUserEmail(String fName, String fPhone, Date fBirth);
 
