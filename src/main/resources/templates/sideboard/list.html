@@ -6,6 +6,18 @@
 <title>사이드 프로젝트</title>
 </head>
 <body>
+	<!-- <div th:text=${sideList}></div>-->
+	<div class="boards"><!-- 게시글 들어올 곳 -->
+		<div class="article" th:each="side:${sideList}"><!-- 게시글 한개 -->
+
+			<span th:if="${side.state == 1}">모집중</span>
+			<span th:if="${side.state == 0}">모집 완료</span>
+			제목:<span th:text="${side.title}"></span>
+			요약:<span th:text="${side.summ}"></span>
+			목적:<span th:text="${side.purpose}"></span>
+			
+		</div>	 
+	</div>
 
 </body>
 </html>
