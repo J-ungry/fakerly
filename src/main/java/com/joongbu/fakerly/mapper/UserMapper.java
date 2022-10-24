@@ -1,8 +1,6 @@
 
 package com.joongbu.fakerly.mapper;
 
-import java.util.Date;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.joongbu.fakerly.dto.UserDto;
@@ -11,7 +9,7 @@ import com.joongbu.fakerly.dto.UserDto;
 public interface UserMapper {
 	UserDto login(String email);
 
-	UserDto findUserEmail(String fName, String fPhone, Date fBirth);
+	UserDto findUserEmail(String fPhone);
 
-	UserDto findUserPassword(String fEmail, String fName, String fPhone, Date fBirth);
+	UserDto findUserPassword(String fEmail);
 }

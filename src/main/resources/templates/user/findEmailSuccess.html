@@ -11,16 +11,16 @@
   <div class="contn">
     <!-- <div class="child-contn"> -->
     <nav class="nav-contn">
-      <div class="logo">로고</div>
+      <div class="logo"><a th:href="@{/}">로고</a></div>
     </nav>
     <div class="main-contn">
       <h1><strong>이메일/비밀번호 찾기</strong></h1>
       <div style="text-align:center; margin: 128px 0;">
-        회원님의 이메일은 {email} 입니다.
+        회원님의 이메일은 <span th:text="${email}"></span> 입니다.
       </div>
       <div class="find-e-success">
-        <a href="#" class="find-e-success-btn">로그인하러 가기</a>
-        <a href="#" class="find-e-success-btn">비밀번호 찾기</a>
+        <a href="/user/login.do" class="find-e-success-btn">로그인하러 가기</a>
+        <a href="/user/findEmailPassword.do" class="find-e-success-btn">비밀번호 찾기</a>
       </div>
     </div>
     <footer>

@@ -7,6 +7,27 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
+//+-----------+-------------+------+-----+-------------------+-------------------+
+//| Field     | Type        | Null | Key | Default           | Extra             |
+//+-----------+-------------+------+-----+-------------------+-------------------+
+//| user_no   | int         | NO   | PRI | NULL              | auto_increment    |
+//| email     | varchar(50) | NO   | UNI | NULL              |                   |
+//| user_name | varchar(50) | NO   |     | NULL              |                   |
+//| nickname  | varchar(50) | NO   | UNI | NULL              |                   |
+//| pw        | varchar(50) | NO   |     | NULL              |                   |
+//| auth      | varchar(50) | NO   |     | NULL              |                   |
+//| birth     | date        | YES  |     | NULL              |                   |
+//| phone     | varchar(50) | NO   | UNI | NULL              |                   |
+//| state     | char(1)     | NO   |     | NULL              |                   |
+//| signup    | datetime    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+//| company   | varchar(50) | YES  |     | NULL              |                   |
+//| career    | varchar(50) | YES  |     | NULL              |                   |
+//| aboutme   | text        | YES  |     | NULL              |                   |
+//| sex       | char(1)     | YES  |     | NULL              |                   |
+//| age       | int         | NO   |     | NULL              |                   |
+//| img       | blob        | YES  |     | NULL              |                   |
+//+-----------+-------------+------+-----+-------------------+-------------------+
+
 @Data
 public class UserDto {
 	private int user_no;

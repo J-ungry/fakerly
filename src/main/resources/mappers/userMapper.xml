@@ -9,10 +9,10 @@
 	</select>
 	<select id="findUserEmail" resultType="com.joongbu.fakerly.dto.UserDto">
 		SELECT * FROM user
-		WHERE user_name = #{fName} AND phone = #{fPhone} AND birth = #{fBirth}
+		WHERE phone = #{fPhone}
 	</select>
 	<select id="findUserPassword" resultType="com.joongbu.fakerly.dto.UserDto">
 		SELECT * FROM user
-		WHERE email = #{fEmail} AND user_name = #{fName} AND phone = #{fPhone} AND birth = #{fBirth}
+		WHERE email = #{fEmail}
 	</select>
  </mapper>
