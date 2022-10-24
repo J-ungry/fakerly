@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/css/signup.css">
+    <script src="/js/signup.js" defer="defer"></script>
+</head>
+<body>
+
+<!-- <form action="/user/insert.do" id="signupForm"> -->
+    <div class="signupForms" id="accountInfo">
+        <h1>계정 정보</h1>
+        <div id="accountInfoForm">
+            <h1>회원가입</h1>
+            <label>
+                <input type="text" name="email" placeholder="example@naver.com">
+            </label>
+
+            <label>
+                <input type="passward" name="pw" placeholder="비밀번호">
+                <div id="pwHint" title="영문 대소문자 및 숫자 포함 8~15글자">?</div>
+            </label>
+
+            <label>
+                <input type="passward" name="pwCheck" placeholder="비밀번호 확인">
+            </label>
+        </div>
+        <button class="rBtn">다음</button>
+    </div>
+
+    <div class="signupForms userInfo" id="userInfo1">
+        <h1>회원 정보(필수)</h1>
+        <div class="userInfoForm" id="userInfo1Form">
+            <h1>회원 정보(필수)</h1>
+            <label>
+                <input type="text" name="name" placeholder="이름">
+            </label>
+
+            <label>
+                <input type="text" name="nickName" placeholder="닉네임">
+            </label>
+
+            <label>
+                <input type="date" name="birth">
+            </label>
+
+            <label>
+                <input type="text" name="phone" placeholder="휴대폰 번호">
+            </label>
+
+            <div id="gender">
+                <input type="radio" name="gender" id="male" placeholder="남성"><label for="male">남성</label>
+                <input type="radio" name="gender" id="female" placeholder="여성"><label for="female">여성</label>
+            </div>
+        </div>
+        <button class="lBtn">이전</button>
+        <button class="rBtn">다음</button>
+    </div>
+    
+    <div class="signupForms userInfo" id="userInfo2">
+        <h1>회원 정보(선택)</h1>
+        <div class="userInfoForm" id="userInfo2Form">
+            <h1>회원 정보(선택)</h1>
+            <label>
+                <input type="text" name="company" placeholder="소속">
+            </label>
+            
+            <label>
+                <input type="text" name="career" placeholder="경력">
+            </label>
+            
+            <label>
+                <input type="text" name="skill" placeholder="스킬">
+            </label>
+            
+            <label>
+                <input type="text" name="license" placeholder="자격증">
+            </label>
+            
+            <label>
+                <textarea type="text" name="aboutme" placeholder="자기소개"></textarea>
+            </label>
+
+        </div>
+        <button class="lBtn">이전</button>
+        <button class="rBtn">다음</button>
+    </div>
+    
+    <div class="signupForms userInfo" id="userInfo3">
+        <h1>키워드 선택</h1>
+        <div class="userInfoForm" id="userInfo3Form">
+            <h1>키워드 선택</h1>
+            <label>
+                <input type="text" name="keyword" placeholder="키워드">
+            </label>
+
+        </div>
+        <button class="lBtn">이전</button>
+        <button class="rBtn" type="submit">완료</button>
+    </div>
+<!-- </form> -->
+
+</body>
+</html>

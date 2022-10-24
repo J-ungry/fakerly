@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+
+    display: flex;
+    justify-content: center;
+
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    /* position:relative; */
+}
+
+.signupForms{
+    position:relative;
+    display: inline-block;
+
+    height: 100%;
+    padding: 0;
+    background-color: #f7f7f7;
+
+    /* position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%); */
+
+    /* border: 1px solid #000; */
+}
+
+.signupForms>h1{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.signupForms>div{
+    position:absolute;
+    top:40%;
+    left:50%;
+    transform:translate(-50%,-40%);
+
+    border-radius: 10px;
+    padding: 0px 30px 30px 30px;
+    background-color: #fff;
+
+    /* border: 1px solid #000; */
+}
+
+.signupForms h1{
+    padding: 20px;
+    margin-bottom: 50px;
+
+    /* border: 1px solid #000; */
+}
+
+.signupForms input{
+    display: block;
+
+    width: 500px;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid #000;
+    border-width: 2px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.signupForms textarea{
+    display: block;
+
+    width: 500px;
+    height: 150px;
+    border: none;
+    border-bottom: 1px solid #000;
+    border-width: 2px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.signupForms .lBtn{
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+
+    border-radius: 10px;
+    border: 0;
+    background-color: #ed6653;
+    color: white;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+}
+
+.signupForms .rBtn{
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+
+    border-radius: 10px;
+    border: 0;
+    background-color: #ed6653;
+    color: white;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+}
+
+
+
+#accountInfo{
+    width: 70%;
+    border-right: 3px solid #000;
+
+    transition: .6s ease-in-out;
+}
+
+#accountInfo>h1{
+    width: 90px;
+
+    visibility: hidden;
+    transition-delay: .3s;
+}
+
+#accountInfo #accountInfoForm{
+    /* visibility: hidden; */
+    transition-delay: .3s;
+}
+
+#accountInfo #accountInfoForm #pwHint{
+    line-height: 25px;
+    text-align: center;
+    position: absolute;
+    right: 35px;
+    bottom: 138px;
+    
+    background-color: #ddd;
+    width: 25px;
+    height: 25px;
+    border-radius: 12px;
+    color: #fff;
+}
+
+
+
+.userInfo{
+    width: 10%;
+    border-right: 3px solid #000;
+
+    transition: .6s ease-in-out;
+}
+
+.userInfo>h1{
+    width: 90px;
+
+    /* visibility: hidden; */
+    transition-delay: .3s;
+}
+
+.userInfo .userInfoForm{
+    visibility: hidden;
+    transition-delay: .3s;
+}
+
+#userInfo1 #gender input[type=radio]{
+    display: none;
+}
+#userInfo1 #gender input[type=radio]+label{
+    display: inline-block;
+
+    height: 50px;
+    width: 245px;
+    border: 1px solid #333;
+    text-align: center;
+    font-size:18px;
+    line-height: 50px;
+
+    cursor: pointer;
+}
+#userInfo1 #gender input[type=radio]+label{
+    background-color: #fff;
+    color: #333;
+}
+#userInfo1 #gender input[type=radio]:checked+label{
+    background-color: #ed6653;
+    color: #fff;
+}
+
+.userInfo button{
+    visibility: hidden;
+}
