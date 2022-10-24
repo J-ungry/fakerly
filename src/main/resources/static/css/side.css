@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap');
+
+#side-container {
+	width: 300px;
+	background-color: #fff;
+	position: absolute;
+	top: 10%;
+	right: 15%;
+	padding: 10px;
+	position: fixed;
+	margin: 0;
+	border: 1px solid #dbdbdb;
+}
+
+#side-container h3 {
+	margin-top: 2px;	
+	margin-bottom: 10px;
+	border-bottom: 1px solid lightgray;
+	padding: 5px;
+	font-size: 15px;
+}
+
+#side-container .userInfo {
+	display: flex;
+	float: left;
+}
+
+#side-container .userInfo .profileImg {
+	width: 30px;
+	height: 30px;
+	margin-top: 5px; 
+	margin-right: 10px;
+	border-radius: 50%;
+}
+
+#side-container .userInfo .info-container p {
+	height: 23px;
+	margin: 0;
+	font-size: 12px;
+}
+
+#side-container .userInfo .follow-btn {
+	margin-top: 5px;
+	margin-left: 30px;
+	line-height: 35px;
+}
+
+#side-container .userInfo .follow-btn .custom-btn {
+	cursor: pointer;
+	width: 60px;
+	background-color: #ffeeec;
+	border: none;
+	color: #c07f7f;
+	font-size: 14px;
+}
