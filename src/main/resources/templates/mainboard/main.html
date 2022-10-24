@@ -9,6 +9,7 @@
 <title>메인 게시판</title>
 </head>
 <body>
+	<!-- 게시판 몇 글자 수 더보기 기능 참고: https://moollang.tistory.com/8 -->
 	<header th:include="/headerNav"></header>
 	<main>	<!-- *주의* 게시판 데이터 넣을 때 반복문: class 이용 -->
 		<div id="mainboardInsert"> <!-- div 클릭 시 insert로 이동 -->
@@ -41,12 +42,12 @@
 			<div class="boardMain">	<!-- 게시글의 제목, 내용, 링크, 이미지 -->
 				<div class="boardTitle">
 					<p>
-						<span><strong>게시글 제목</strong></span>
+						<span><strong>제목</strong></span>
 					</p>
 				</div>
 				<div class="boardContents">
 					<p>
-						<span>게시글 내용......</span>
+						<span>주제</span>
 					</p>	<!-- 더보기 기능 how??? -->
 				</div>
 				<div class="boardFile">
