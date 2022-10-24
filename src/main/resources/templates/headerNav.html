@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/headerNav.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+<!-- 헤더 위 상단 메뉴바 (22.10.22) -->
+<!-- 수정해야할 사항: 검색창 input, 게시판 리스트 정렬, 메뉴바 고정 -->
+	<nav class="navbar navbar-expand-lg bg-white fixed-top">
+		<div class="container-fluid vw-100 mx-auto">
+	    	<a class="navbar-brand text-muted" href="/">Fakely</a>
+	    		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	      			<span class="navbar-toggler-icon"></span>
+	    		</button>
+	    	<div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+	      		<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+	        		<li class="nav-item">
+	          			<a class="nav-link active text-muted" aria-current="page" href="/mainboard/main">메인게시판</a>
+	        		</li>
+	        		<li class="nav-item">
+	          			<a class="nav-link text-muted" href="#">사이드 프로젝트</a>
+	        		</li>
+	        		<li class="nav-item">
+	          			<a class="nav-link text-muted">Q&A</a>
+	        		</li>
+	        	</ul>
+	        	<ul class="navbar-nav mb-2 mb-lg-0">
+	        		<li>
+			      		<form class="d-flex" role="search">
+			        		<input class="form-control me-2" type="search" placeholder="키워드로 검색해보세요." aria-label="Search">
+			        		<button class="btn btn-outline-success" type="submit">Search</button>
+			      		</form>
+	        		</li>
+	        		<li class="nav-item dropdown">
+	          			<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            			<img src="/img/profile.png" style="width:20px; height: 20px; border-radius: 50%;">
+	          			</a>
+	          			<ul class="dropdown-menu">
+	           				<li><a class="dropdown-item text-muted" href="#">프로필</a></li>
+	            			<li><a class="dropdown-item text-muted" href="#">로그아웃</a></li>
+	            			<!--  <li><hr class="dropdown-divider"></li>
+	            			<li><a class="dropdown-item text-muted" href="#">Something else here</a></li> -->
+	          			</ul>
+	        		</li>
+	      		</ul>
+	    	</div>
+	  	</div>
+	</nav>
+</html>

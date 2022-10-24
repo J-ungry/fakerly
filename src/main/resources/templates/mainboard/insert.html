@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Fakerly 메인 게시판 글 등록</title>
+<link rel="stylesheet" href="/css/insert.css">
+<script type="text/javascript" src="/js/insert.js"></script>
+</head>
+<body>
+	<form id="MainBoardInsert_Form" action="/mainboard/insert" method="post">
+		<div id="MainBoardNav">
+			<img onclick="goBack()" alt="preferPageImg" src="/img/mainboard_arrow.png">
+			<div>
+				<!-- 임시보관함 모달창 참고: https://goddino.tistory.com/74 -->
+				<button type="button">임시보관함</button>
+				<button type="button">보관</button>
+				<button>완료</button>
+			</div>
+		</div>
+		<div id="MainboardAddFile">
+			<img name="mainboardLink" alt="linkImg" src="/img/mainboard_link.png">
+			<img name="mainboardImg" alt="fileImg" src="/img/mainboard_picture.png">
+		</div>
+		<div id="Mainboard">	<!-- border 안 이어짐 -->
+			<div id="MainboardTitle">
+				<input type="text" name="mainboardTitle" placeholder="제목을 입력하세요.">
+			</div>
+			<div id="MainboardContents">
+				<textarea name="mainboardContents"  placeholder="나누고 싶은 생각을 적어주세요.&#13;&#10;링크나 사진을 추가할 수도 있어요."></textarea>
+			</div>
+		</div>
+	</form>
+</body>
+</html>
