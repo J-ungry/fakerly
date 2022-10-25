@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/login.css" />
+  <script defer="defer" src="/js/userLogin.js"></script>
+</head>
+
+<body>
+  <div class="contn">
+    <!-- <div class="child-contn"> -->
+    <nav class="nav-contn">
+      <div class="logo"><a th:href="@{/}">로고</a></div>
+    </nav>
+    <div class="main-contn">
+      <h1><strong>로그인</strong></h1>
+      <form action="" method="POST">
+        <div>
+          <label for="email">이메일</label>
+          <input type="email" id="email" name="email" 
+          class="" placeholder="이메일 입력" value="123@gmail.com"/>
+        </div>
+        <div>
+          <label for="password">비밀번호</label>
+          <input type="password" id="pw" name="pw" 
+          class="" placeholder="비밀번호 입력" value="123"/>
+        </div>
+        <div>
+          <button type="submit" class="login-btn">로그인</button>
+        </div>
+      </form>
+      <div>
+      	<a href="#" class="signup-btn">회원가입</a>
+        <div class="login-triple-menu">
+          <a href="/user/findEmailPassword.do">이메일/비밀번호 찾기</a>
+        </div>
+        <!-- <div class="non-member">
+          <a href="#">비회원으로 둘러보기</a>
+        </div> -->
+      </div>
+    </div>
+    <footer>
+      <div>푸터</div>
+    </footer>
+    <!-- </div> -->
+  </div>
+    <th:block th:if="${session.msg!=null}">
+		<script th:inline="javascript">
+		let msg = /*[[${session.msg}]]*/ + "";
+		alert(msg);
+		/*[[${#session.removeAttribute('msg')}]] */
+		</script>
+	</th:block>
+</body>
+</html>
