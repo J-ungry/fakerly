@@ -2,21 +2,27 @@ package com.joongbu.fakerly.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import com.joongbu.fakerly.dto.UserDto;
 import com.joongbu.fakerly.mapper.UserMapper;
@@ -27,6 +33,7 @@ public class UserController {
 
 	@Autowired
 	UserMapper userMapper;
+
 
 	// 로그인 페이지
 	@GetMapping("/login.do")
@@ -260,7 +267,41 @@ public class UserController {
 		
 		return hashedPw + " " + bool;
 	}
-}
 
 // @ResponseBody
 // RedirectAttributes
+
+	
+	@GetMapping("/signup.do")
+	public void signup() {}
+	
+	@PostMapping("/insert.do")
+	public String insert(UserDto user) {
+		
+		int insert = 0;
+		System.out.println(user);
+		
+		//calc age
+		Date birth = user.getBirth();
+		Date now = new Date(System.currentTimeMillis());
+		SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy"); 
+		user.setAge(Integer.parseInt(yearFormat.format(now)) - Integer.parseInt(yearFormat.format(birth)));
+		
+		//pw 암호화
+		user.setPw(BCrypt.hashpw(user.getPw(), BCrypt.gensalt()));
+		
+		try {
+			insert = userMapper.insert(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(insert>0) {
+			return "/user/login";
+		}else {
+			return "redirect:/user/signup.do";
+		}
+	}
+}
+
+

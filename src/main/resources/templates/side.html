@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/side.css">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<!-- 
+	사이드 메뉴 (알 수도 있는 사람 리스트)
+	주의: 반복문이 들어감 => class 이용
+	모두보기 => 모달창 (같은 소속) 인원 리스트 출력
+-->
+	<div id="side-container" class="me-5"> 
+		<h3>알 수도 있는 사람</h3>
+		<div class="userInfo d-flex justify-content-between">	<!-- userInfo 반복(5~6명)만 출력 -->
+			<div class="proflie">	<!-- 프로필 -->
+				<img class="profileImg align-middle" src="/img/profile.png">
+			</div>
+			<div class="info-container align-middle"> <!-- 정보 -->
+				<p><span><strong>김태형</strong></span></p>
+				<p><span>중부대학교 정보통신학과</span></p>
+			</div>
+			<div class="follow-btn align-middle">
+				<button class="custom-btn btn-8"><span>팔로우</span></button>
+			</div>
+		</div>
+		<div class="userInfo">	<!-- 리스트 테스트용 -->
+			<div class="proflie">
+				<img class="profileImg align-middle" src="/img/profile.png">
+			</div>
+			<div class="info-container align-middle"> <!-- 정보 -->
+				<p><span><strong>김태형</strong></span></p>
+				<p><span>중부대학교 정보통신학과</span></p>
+			</div>
+			<div class="follow-btn align-middle">
+				<button class="custom-btn btn-8"><span>팔로우</span></button>
+			</div>
+		</div>
+		<div>
+			<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  				<div class="modal-dialog modal-dialog-centered">
+    				<div class="modal-content" style="max-width: 400px; margin: 0 auto;">
+      					<div class="modal-header">
+        					<h1 class="modal-title fs-5" id="exampleModalToggleLabel">알 수도 있는 사람</h1>
+        					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      					</div>
+     					<div class="modal-body w-100">
+        					<div class="userInfo d-flex justify-content-between">	<!-- userInfo 반복(5~6명)만 출력 -->
+								<div class="proflie me-5">	<!-- 프로필 -->
+									<img class="profileImg align-middle" src="/img/profile.png">
+								</div>
+								<div class="info-container align-middle"> <!-- 정보 -->
+									<p><span><strong>김태형</strong></span></p>
+									<p><span>중부대학교 정보통신학과</span></p>
+								</div>
+								<div class="follow-btn align-middle ms-5">
+									<button class="custom-btn btn-8"><span>팔로우</span></button>
+								</div>
+							</div>
+							<div class="userInfo d-flex">	
+								<div class="proflie me-5">
+									<img class="profileImg align-middle" src="/img/profile.png">
+								</div>
+								<div class="info-container align-middle"> <!-- 정보 -->
+									<p><span><strong>김태형</strong></span></p>
+									<p><span>중부대학교 정보통신학과</span></p>
+								</div>
+								<div class="follow-btn align-middle ms-5">
+									<button class="custom-btn btn-8"><span>팔로우</span></button>
+								</div>
+							</div>
+      					</div>
+    				</div>
+  				</div>
+			</div>
+			<div id="allFollowBtn">
+				<a class="btn btn-light mt-2" data-bs-toggle="modal" href="#exampleModalToggle" role="button">모두 보기</a>
+			</div>
+		</div>
+	</div>
+</html>

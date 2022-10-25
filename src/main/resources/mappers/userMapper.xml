@@ -15,4 +15,10 @@
 		SELECT * FROM user
 		WHERE email = #{fEmail}
 	</select>
- </mapper>
+  	<insert id="insert" parameterType="com.joongbu.fakerly.dto.UserDto">
+  		insert into user
+  		(email, user_name, nickname, pw, auth, birth, phone, state, company, career, aboutme, sex, age, img) 
+  		values 
+  		(#{email},#{name},#{nickname},#{password},'normal',#{birth},#{phone},'Y',#{company},#{career},#{aboutme},#{sex},#{age},#{img})
+  	</insert>
+</mapper>

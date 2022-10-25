@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style>
+	main {
+		background-color: #f7f7f7;
+		width: 100%;
+		height: 100vh;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+
+	<!-- 임시로 넣어놓은거  -->
+	<a href="/sideboard/list.do">sideboard</a>
+
+	<header th:include="headerNav"></header>
+	<main>
+		<a href="/mainboard/main">메인</a>
+	</main>
+	<aside th:include="/side"></aside>
+
+</head>
+<body>
+
+
+<a href="/user/signup.do">signup</a>
+
+</body>
+</html>
