@@ -7,13 +7,15 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.joongbu.fakerly.dto.UserDto;
@@ -242,6 +244,23 @@ public class UserController {
 				session.removeAttribute("loginUser");
 				return "redirect:/";
 			}
+	
+	// JBcrypt 테스트
+	// http://localhost:8888/user/crypt?email=123@gmail.com
+	@GetMapping("/crypt")
+	public @ResponseBody String crypt(String email) {
+		UserDto loginUser = null;
+		try {
+			loginUser = userMapper.login(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String pw = loginUser.getPw();
+		String hashedPw = BCrypt.hashpw(pw, BCrypt.gensalt());
+		Boolean bool = BCrypt.checkpw(pw, hashedPw);
+		
+		return hashedPw + " " + bool;
+	}
 }
 
 // @ResponseBody
