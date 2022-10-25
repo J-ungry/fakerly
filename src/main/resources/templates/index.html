@@ -1,12 +1,27 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Fakerly</title>
+<title>Insert title here</title>
+<style>
+	main {
+		background-color: #f7f7f7;
+		width: 100%;
+		height: 100vh;
+		text-align: center;
+	}
+</style>
 </head>
 <body>
+<<<<<<< HEAD
 	<h1> 안농 </h1>
 	<a href="/sideboard/list.do">sideboard</a>
+=======
+	<header th:include="headerNav"></header>
+	<main>
+		<a href="/mainboard/main">메인</a>
+	</main>
+	<aside th:include="/side"></aside>
+>>>>>>> ed05e714aa2a4ed4684d311b8d928c8ccf070429
 </body>
 </html>
