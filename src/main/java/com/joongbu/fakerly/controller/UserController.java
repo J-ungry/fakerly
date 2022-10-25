@@ -83,7 +83,6 @@ public class UserController {
 		} else {
 			System.out.println("입력한 email에 맞는 user가 없어요");
 			msg = "입력하신 이메일로 가입한 회원이 없습니다.";
-			// 회원가입 하시겠습니까 물어보면서 회원가입 페이지로 넘길까?
 			session.setAttribute("msg", msg);
 			return "redirect:/user/login.do";
 		}
