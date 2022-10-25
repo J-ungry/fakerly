@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
+
 //+-----------+-------------+------+-----+-------------------+-------------------+
 //| Field     | Type        | Null | Key | Default           | Extra             |
 //+-----------+-------------+------+-----+-------------------+-------------------+
@@ -49,3 +50,4 @@ public class UserDto {
 	private int age;
 	private String img;
 }	
+

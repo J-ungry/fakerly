@@ -33,12 +33,12 @@ public class SideController {
 		return "/sideboard/list";
 	}
 	
-	@GetMapping("/detail.do")
-	public String detail(
-			@RequestParam(required=true) int sideBoardNo,
-			Model mode
-			){
-		SideDto side = null;
-		return "";
-	}
+//	@GetMapping("/detail.do")
+//	public String detail(
+//			@RequestParam(required=true) int sideBoardNo,
+//			Model model
+//			){
+//		SideDto side = null;
+//		return "";
+//	}
 }

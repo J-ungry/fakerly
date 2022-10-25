@@ -1,13 +1,19 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
   <meta charset="UTF-8" />
   <title>Document</title>
   <link rel="stylesheet" href="/css/login.css" />
   <script defer="defer" src="/js/userLogin.js"></script>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
 </head>
 
 <body>
+<<<<<<< HEAD
   <div class="contn">
     <!-- <div class="child-contn"> -->
     <nav class="nav-contn">
@@ -31,7 +37,7 @@
         </div>
       </form>
       <div>
-      	<a href="#" class="signup-btn">회원가입</a>
+      	<a href="/user/signup" class="signup-btn">회원가입</a>
         <div class="login-triple-menu">
           <a href="/user/findEmailPassword.do">이메일/비밀번호 찾기</a>
         </div>
@@ -52,5 +58,8 @@
 		/*[[${#session.removeAttribute('msg')}]] */
 		</script>
 	</th:block>
+
+	<h1>로그인폼</h1>
+
 </body>
 </html>
