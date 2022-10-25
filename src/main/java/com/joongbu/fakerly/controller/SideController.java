@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.joongbu.fakerly.dto.SideDto;
 import com.joongbu.fakerly.mapper.SideMapper;
@@ -31,5 +31,14 @@ public class SideController {
 		}
 		model.addAttribute("sideList",sideList); //내용 전달해주기 
 		return "/sideboard/list";
+	}
+	
+	@GetMapping("/detail.do")
+	public String detail(
+			@RequestParam(required=true) int sideBoardNo,
+			Model mode
+			){
+		SideDto side = null;
+		return "";
 	}
 }

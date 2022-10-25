@@ -5,8 +5,32 @@
   <mapper namespace="com.joongbu.fakerly.mapper.SideMapper">
 
    
-  <!--  <resultMap></resultMap>-->
-  <select id="list" resultType="SideDto">
-  	SELECT * FROM SIDEBOARD
+  <resultMap type="SideDto" id="SideMap">
+  	<id column="side_board_no" property="sideBoardNo"/>
+  	<result column="title" property="title"/>
+  	<result column="summ" property="summ"/>
+  	<result column="intro" property="intro"/>
+  	<result column="purpose" property="purpose"/>
+  	<result column="sup" property="sup"/>
+  	<result column="attend" property="attend"/>
+  	<result column="state" property="state"/>
+  	<result column="post_time" property="postTime"/>
+  	<result column="report" property="report"/>
+  	<result column="likes" property="likes"/>
+  	
+  	
+  	
+  </resultMap>
+  <select id="list" resultMap="SideMap"> <!-- 좋아요까지 받아온 쿼리  -->
+  	SELECT s.* ,
+  	(SELECT COUNT(*) FROM SIDEBOARD_PREFER f WHERE f.side_board_no=s.side_board_no) likes
+  	FROM SIDEBOARD s 
   </select>
+  
+<!--   <select id="detail" resultMap="BoardMap">
+  	SELECT s.* ,
+  	(SELECT COUNT(*) FROM SIDEBOARD_PREFER f WHERE f.side_board_no=s.side_board_no) likes
+  	FROM SIDEBOARD s 
+  	WHERE side_board_no=#{sideBoardNo}
+  </select> -->
   </mapper>
