@@ -9,5 +9,5 @@ import com.joongbu.fakerly.dto.UserDto;
 @Mapper
 public interface UserMapper {
 
-	List<UserDto> list();
+	int insert(UserDto user);
 }

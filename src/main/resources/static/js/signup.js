@@ -5,21 +5,11 @@ let btns = [document.querySelector("#accountInfo .rBtn"),document.querySelector(
 
 
 
-btns[6].onclick = async function(){
-	
-	const form = $('form').serialize(); 
-	console.log(form);
-	let url = "/user/insert.do";
-	
-	let resp = await fetch(url,{method:"POST", body:data});
-}
-
-
 
 btns[0].onclick = function(){
 	
 	divs.forEach(div =>div.style.width = "10%");
-	divs[1].style.width = "70%";
+	divs[1].style.width = "68%";
 
 	h1s.forEach(h1 =>h1.style.visibility = "visible");
 	h1s[1].style.visibility = "hidden";
@@ -35,7 +25,7 @@ btns[0].onclick = function(){
 btns[1].onclick = function(){
 	
 	divs.forEach(div =>div.style.width = "10%");
-	divs[0].style.width = "70%";
+	divs[0].style.width = "68%";
 
 	h1s.forEach(h1 =>h1.style.visibility = "visible");
 	h1s[0].style.visibility = "hidden";
@@ -50,7 +40,7 @@ btns[1].onclick = function(){
 btns[2].onclick = function(){
 	
 	divs.forEach(div =>div.style.width = "10%");
-	divs[2].style.width = "70%";
+	divs[2].style.width = "68%";
 
 	h1s.forEach(h1 =>h1.style.visibility = "visible");
 	h1s[2].style.visibility = "hidden";
@@ -66,7 +56,7 @@ btns[2].onclick = function(){
 btns[3].onclick = function(){
 	
 	divs.forEach(div =>div.style.width = "10%");
-	divs[1].style.width = "70%";
+	divs[1].style.width = "68%";
 
 	h1s.forEach(h1 =>h1.style.visibility = "visible");
 	h1s[1].style.visibility = "hidden";
@@ -81,7 +71,7 @@ btns[3].onclick = function(){
 btns[4].onclick = function(){
 	
 	divs.forEach(div =>div.style.width = "10%");
-	divs[3].style.width = "70%";
+	divs[3].style.width = "68%";
 
 	h1s.forEach(h1 =>h1.style.visibility = "visible");
 	h1s[3].style.visibility = "hidden";
@@ -96,7 +86,7 @@ btns[4].onclick = function(){
 btns[5].onclick = function(){
 	
 	divs.forEach(div =>div.style.width = "10%");
-	divs[2].style.width = "70%";
+	divs[2].style.width = "68%";
 
 	h1s.forEach(h1 =>h1.style.visibility = "visible");
 	h1s[2].style.visibility = "hidden";

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- <form action="/user/insert.do" id="signupForm"> -->
+<form action="/user/insert.do" id="signupForm" method="post">
     <div class="signupForms" id="accountInfo">
         <h1>계정 정보</h1>
         <div id="accountInfoForm">
@@ -18,15 +18,15 @@
             </label>
 
             <label>
-                <input type="passward" name="pw" placeholder="비밀번호">
+                <input type="password" name="password" placeholder="비밀번호">
                 <div id="pwHint" title="영문 대소문자 및 숫자 포함 8~15글자">?</div>
             </label>
 
             <label>
-                <input type="passward" name="pwCheck" placeholder="비밀번호 확인">
+                <input type="password" name="passwordCheck" placeholder="비밀번호 확인">
             </label>
         </div>
-        <button class="rBtn">다음</button>
+        <button type="button" class="rBtn">다음</button>
     </div>
 
     <div class="signupForms userInfo" id="userInfo1">
@@ -38,7 +38,7 @@
             </label>
 
             <label>
-                <input type="text" name="nickName" placeholder="닉네임">
+                <input type="text" name="nickname" placeholder="닉네임">
             </label>
 
             <label>
@@ -49,13 +49,13 @@
                 <input type="text" name="phone" placeholder="휴대폰 번호">
             </label>
 
-            <div id="gender">
-                <input type="radio" name="gender" id="male" placeholder="남성"><label for="male">남성</label>
-                <input type="radio" name="gender" id="female" placeholder="여성"><label for="female">여성</label>
+            <div id="sex">
+                <input type="radio" name="sex" value="M" id="male" placeholder="남성" checked><label for="male">남성</label>
+                <input type="radio" name="sex" value="F" id="female" placeholder="여성"><label for="female">여성</label>
             </div>
         </div>
-        <button class="lBtn">이전</button>
-        <button class="rBtn">다음</button>
+        <button type="button" class="lBtn">이전</button>
+        <button type="button" class="rBtn">다음</button>
     </div>
     
     <div class="signupForms userInfo" id="userInfo2">
@@ -83,8 +83,8 @@
             </label>
 
         </div>
-        <button class="lBtn">이전</button>
-        <button class="rBtn">다음</button>
+        <button type="button" class="lBtn">이전</button>
+        <button type="button" class="rBtn">다음</button>
     </div>
     
     <div class="signupForms userInfo" id="userInfo3">
@@ -96,10 +96,10 @@
             </label>
 
         </div>
-        <button class="lBtn">이전</button>
+        <button type="button" class="lBtn">이전</button>
         <button class="rBtn" type="submit">완료</button>
     </div>
-<!-- </form> -->
+</form>
 
 </body>
 </html>
