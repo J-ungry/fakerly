@@ -1,5 +1,6 @@
 package com.joongbu.fakerly.dto;
 
+import java.sql.Blob;
 import java.util.Date;
 
 import lombok.Data;
@@ -28,7 +29,7 @@ public class MainBoardDto {
 	private int keywordNo;
 	private String mainboardContents;
 	private int mainboardView;
-	// 이미지???
+	//private Blob mainboardImg;
 	private String mainboardLink;
 	private Date mainboardTime;
 }

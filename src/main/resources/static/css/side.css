@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap');
 
 #side-container {
-	width: 300px;
+	width: 290px;
 	background-color: #fff;
 	position: absolute;
 	top: 10%;
@@ -10,6 +10,7 @@
 	position: fixed;
 	margin: 0;
 	border: 1px solid #dbdbdb;
+	box-sizing: border-box;
 }
 
 #side-container h3 {
@@ -53,3 +54,16 @@
 	color: #c07f7f;
 	font-size: 14px;
 }
+
+#side-container #allFollowBtn {
+	box-sizing: border-box;
+}
+
+#side-container #allFollowBtn a {
+	width: 270px;
+}
+
+.modal-backdrop {
+	z-index: -1;
+}
+

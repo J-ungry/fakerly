@@ -9,6 +9,7 @@
 <title>메인 게시판</title>
 </head>
 <body>
+	<!-- 게시판 몇 글자 수 더보기 기능 참고: https://moollang.tistory.com/8 -->
 	<header th:include="/headerNav"></header>
 	<main>	<!-- *주의* 게시판 데이터 넣을 때 반복문: class 이용 -->
 		<div id="mainboardInsert"> <!-- div 클릭 시 insert로 이동 -->
@@ -19,7 +20,8 @@
 				<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
 			</a>
 		</div>
-		<div class="post-container">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
+	 	<div class="post-container"
+	 		 th.each="mainboard:${mainboardList}">		<!-- <div class="post-container">에는 게시판만 넣을 것 -->
 			<div class="boardInfo">	<!-- 작성자 프로필 사진, 이름, 소속, 글 등록 시간, 팔로우버튼 -->
 				<div class="boardProfile">
 					<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
@@ -30,7 +32,7 @@
 					<p><span style="font-size: 14px"><strong>작성자명</strong></span></p>
 					<p style="font-size: 9px; margin-top: 0; color: #d7d3cd">
 						<span>작성자 소속</span>
-						<span>·</span>
+						<span></span>
 						<span>게시글 등록날짜</span>
 					</p>
 				</div>
@@ -40,13 +42,15 @@
 			</div>
 			<div class="boardMain">	<!-- 게시글의 제목, 내용, 링크, 이미지 -->
 				<div class="boardTitle">
-					<p>
-						<span><strong>게시글 제목</strong></span>
+					<p >	
+						<span><strong>제목 :
+							<h1 th.text="${mainboard.mainboardNo}"></h1>
+						</strong></span>
 					</p>
 				</div>
 				<div class="boardContents">
 					<p>
-						<span>게시글 내용......</span>
+						<span>주제</span>
 					</p>	<!-- 더보기 기능 how??? -->
 				</div>
 				<div class="boardFile">
@@ -78,13 +82,14 @@
 						<span style="font-size: 13px; font-weight: bold;">좋아요</span>
 					</button>
 				</div>
-				<div class="boardComment">
+				<div class="boardComment"> 
+					
 					<button>
 						<img src="/img/mainboardComments.png">
 					</button>
 				</div>
 			</div>	
-		</div>
+		</div>  
 	</main>
 	<aside th:include="/side"></aside>
 </body>
