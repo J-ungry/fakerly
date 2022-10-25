@@ -12,8 +12,8 @@
 	<header th:include="headerNav"></header>
 	<!-- 게시판 몇 글자 수 더보기 기능 참고: https://moollang.tistory.com/8 -->
 	<main>	<!-- *주의* 게시판 데이터 넣을 때 반복문: class 이용 -->
-		<div style="border: 1px solid black; margin-top: 40px; background-color: #f7f7f7;">
-			<div class="w-25 p-3" id="mainboardInsert" style="margin-top: 50px;"> <!-- div 클릭 시 insert로 이동 -->
+		<div id="container" style="border: 1px solid black; margin-top: 40px; background-color: #f7f7f7;">
+			<div class="w-50 p-3" id="mainboardInsert" style="margin-top: 50px;"> <!-- div 클릭 시 insert로 이동 -->
 				<div id=userProfile>
 					<img src="/img/profile.png">
 				</div>
@@ -21,7 +21,7 @@
 					<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
 				</a>
 			</div>
-			<div class="post-container w-25 p-3 h-25" th:each="main : ${mainList}" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
+			<div class="post-container w-50 p-3 h-25" th:each="main : ${mainList}" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
 				<div class="boardInfo">	<!-- 작성자 프로필 사진, 이름, 소속, 글 등록 시간, 팔로우버튼 -->
 					<div class="boardProfile d-flex flex-column align-self-center">
 						<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->

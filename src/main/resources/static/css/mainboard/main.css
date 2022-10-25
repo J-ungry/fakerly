@@ -6,6 +6,10 @@ main {
 	height: 100vh;
 }
 
+#container {
+	box-sizing: border-box;
+}
+
 main #mainboardInsert {
 	margin: 0 auto;
 	display: flex;
@@ -55,7 +59,7 @@ main .post-container .boardInfo .boardProfile img {
 
 main .post-container .boardInfo .userInfo {
 	float: left;
-	margin-right: 300px;
+	margin-right: 425px;
 }
 
 main .post-container .boardInfo .userInfo p {
