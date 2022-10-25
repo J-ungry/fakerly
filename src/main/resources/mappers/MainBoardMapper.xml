@@ -3,11 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.joongbu.fakerly.mapper.MainBoardMapper">
+	<resultMap type="MainBoardDto" id="MainBoardMap">
+		<id column="mainboard_no" property="mainboardNo"/>
+		<result column="user_no" property="userNo"/>
+		<result column="keyword_no" property="keywordNo"/>
+		<result column="mainboard_title" property="mainboardTitle"/>
+		<result column="mainboard_contents" property="mainboardContents"/>
+		<result column="mainboard_view" property="mainboardView"/>
+		<result column="mainboard_link" property="mainboardLink"/>
+		<result column="mainboard_time" property="mainboardTime"/>
+	</resultMap>
+	<select id="list" resultMap="MainBoardMap">
+		<!-- SELECT m.*,u.user_name FROM mainboard m INNER JOIN user u ON m.user_no=u.user_no -->
+		SELECT * FROM mainboard ORDER BY mainboard_no DESC
+	</select>
 	<insert id="insert" parameterType="MainBoardDto">
 		<!-- user_no와 keyword_no 작성자의 아이디와 키워드를 가져올 예정 -->
-		insert into mainboard
+		INSERT INTO mainboard
 		(user_no,keyword_no,mainboard_title, mainboard_contents,mainboard_view,mainboard_link)
-     	values
+     	VALUES
      	(1,1,#{mainboardTitle},#{mainboardContents},#{mainboardView},#{mainboardLink})
 	</insert>
 </mapper>

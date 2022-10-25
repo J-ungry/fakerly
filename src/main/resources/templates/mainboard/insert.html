@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Fakerly 메인 게시판 글 등록</title>
-<link rel="stylesheet" href="/css/insert.css">
-<script type="text/javascript" src="/js/insert.js"></script>
+<link rel="stylesheet" href="/css/mainboard/insert.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/mainboard/insert.js"></script>
 </head>
 <body>
 	<form id="MainBoardInsert_Form" action="/mainboard/insert" method="post">
@@ -18,7 +20,7 @@
 			</div>
 		</div>
 		<div id="MainboardAddFile">
-			<img name="mainboardLink" alt="linkImg" src="/img/mainboard_link.png">
+			<img onclick="showLink()" name="mainboardLink" alt="linkImg" src="/img/mainboard_link.png">
 			<img name="mainboardImg" alt="fileImg" src="/img/mainboard_picture.png">
 		</div>
 		<div id="Mainboard">	<!-- border 안 이어짐 -->
@@ -26,7 +28,12 @@
 				<input type="text" name="mainboardTitle" placeholder="제목을 입력하세요.">
 			</div>
 			<div id="MainboardContents">
+				<div class="form-floating mb-2 mt-3" id="linkInputContainer" style="display: none;">
+					<input name="mainboardLink" type="text" class="form-control" id="floatingInput" placeholder="https://">
+					<label for="floatingInput">링크 입력</label>
+				</div>
 				<textarea name="mainboardContents"  placeholder="나누고 싶은 생각을 적어주세요.&#13;&#10;링크나 사진을 추가할 수도 있어요."></textarea>
+						
 			</div>
 		</div>
 	</form>

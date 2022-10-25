@@ -125,7 +125,7 @@ body {
 	resize: none;
 	padding: 10px;
 	width: inherit;
-	height: inherit;
+	height: 100vh;
 	border-style: none;
 }
 
@@ -137,3 +137,4 @@ body {
 #Mainboard #MainboardContents textarea:focus {
 	outline: none;
 }
+

@@ -23,13 +23,13 @@ import lombok.Data;
 
 @Data
 public class MainBoardDto {
-	private int mainboardNo;
-	private int userNo;
+	private int mainboardNo;	//PK
+	private int userNo;			//FK (user)
+	private int keywordNo;		//FK (user_keyword)
 	private String mainboardTitle;
-	private int keywordNo;
 	private String mainboardContents;
 	private int mainboardView;
-	private Blob mainboardImg;
+	//private Blob mainboardImg;
 	private String mainboardLink;
 	private Date mainboardTime;
 }

@@ -25,7 +25,15 @@ public class MainBoardController {
 	MainBoardMapper boardMapper;
 	
 	@GetMapping("/main")	// /mainboard/main GET 요청 처리
-	public String main() {
+	public String main(Model model) {
+		List<MainBoardDto> mainList=null;
+		try {
+			mainList=boardMapper.list();
+			System.out.println(mainList.get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("mainList", mainList);
 		return "/mainboard/main";
 	}
 	
