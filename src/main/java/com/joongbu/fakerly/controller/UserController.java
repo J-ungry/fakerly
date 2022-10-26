@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.joongbu.fakerly.dto.UserDto;
 import com.joongbu.fakerly.mapper.UserMapper;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @RequestMapping("/user")
 @Controller
 public class UserController {
@@ -302,6 +305,24 @@ public class UserController {
 		}else {
 			return "redirect:/user/signup.do";
 		}
+	}
+	
+	@GetMapping("/checkNickname.do")
+	public @ResponseBody Boolean checkNickname(@RequestParam(required = true)String nickname) {
+		
+		Boolean exist = false;
+		UserDto user = null;
+		
+		try {
+			user = userMapper.checkNickname(nickname);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(user != null) exist = true;
+		else exist = false;
+		
+		return exist;
 	}
 }
 

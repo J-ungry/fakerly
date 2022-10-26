@@ -19,7 +19,7 @@ body{
 	
 	width: 100%;
 	height: 100%;
-	box-sizing: border-box;
+	box-sizing: content-box;
 }
 
 .signupForms{
@@ -43,13 +43,17 @@ body{
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
+    
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
 }
 
 .signupForms>div{
     position:absolute;
-    top:40%;
+    top:60%;
     left:50%;
-    transform:translate(-50%,-40%);
+    transform:translate(-50%,-60%);
 
     border-radius: 10px;
     padding: 0px 30px 30px 30px;
@@ -58,7 +62,7 @@ body{
     /* border: 1px solid #000; */
 }
 
-.signupForms h1{
+.signupForms h1:not(.signupForms>h1){
     padding: 20px;
     margin-bottom: 50px;
 
