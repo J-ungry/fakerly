@@ -4,12 +4,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.joongbu.fakerly.dto.MainBoardDto;
+import com.joongbu.fakerly.dto.UserDto;
 import com.joongbu.fakerly.mapper.MainBoardMapper;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +33,7 @@ public class MainBoardController {
 		List<MainBoardDto> mainList=null;
 		try {
 			mainList=boardMapper.list();
-			System.out.println(mainList.get(0));
+			System.out.println(mainList.get(0).getPrefer());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,18 +44,41 @@ public class MainBoardController {
 	@GetMapping("/insert")
 	public void insert() {}
 	@PostMapping("/insert")
-	public String insert(MainBoardDto mainboard) {
+	public String insert(
+			MainBoardDto mainboard,
+			HttpSession session,
+			@SessionAttribute(required=true) UserDto loginUser
+			) {
+		System.out.println(mainboard);
+		String msg="";
 		int insert=0;
 		try {
-			insert=boardMapper.insert(mainboard);
+			if(loginUser!=null) {
+				insert=boardMapper.insert(mainboard);
+				System.out.println(mainboard);
+			} else {
+				msg="로그인 한 사용자만 글을 등록할 수 있습니다.";
+				session.setAttribute("msg", msg);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(insert>0) {
+			msg="게시글 등록 성공";
+			session.setAttribute("msg", msg);
 			return "redirect:/mainboard/main";
 		} else {
+			msg="게시글 등록 실패";
+			session.setAttribute("msg", msg);
 			return "redirect:/mainboard/insert";
 		}
 	}
 	
 }
+
+
+
+
+
+
+

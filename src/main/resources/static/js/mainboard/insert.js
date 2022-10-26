@@ -10,3 +10,13 @@ function showLink() {
 		linkInput.style.display="none";
 	}
 }
+
+function showImg() {
+	const imgInput=document.getElementById("fileInputContainer");
+	if(imgInput.style.display=="none") {
+		imgInput.style.display="block";
+	} else {
+			imgInput.style.display="none";
+	}
+	
+}

@@ -12,12 +12,12 @@
 	<header th:include="headerNav"></header>
 	<!-- 게시판 몇 글자 수 더보기 기능 참고: https://moollang.tistory.com/8 -->
 	<main>	<!-- *주의* 게시판 데이터 넣을 때 반복문: class 이용 -->
-		<div id="container" style="border: 1px solid black; margin-top: 40px; background-color: #f7f7f7;">
+		<div style="margin-top: 40px; background-color: #f7f7f7;">
 			<div class="w-50 p-3" id="mainboardInsert" style="margin-top: 50px;"> <!-- div 클릭 시 insert로 이동 -->
 				<div id=userProfile>
 					<img src="/img/profile.png">
 				</div>
-				<a href="/mainboard/insert" id=insertPlaceholder class="w-100">
+				<a th:href="@{/mainboard/insert(userNo=${session.loginUser.user_no})}" id=insertPlaceholder class="w-100">
 					<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
 				</a>
 			</div>
@@ -29,9 +29,9 @@
 						</a>
 					</div>
 					<div class="userInfo d-flex flex-column align-self-center">
-						<div><span style="font-size: 14px" class="align-middle"><strong>작성자명</strong></span></div>
+						<div><span style="font-size: 14px" class="align-middle" th:text="${main.userName}"><strong></strong></span></div>
 						<div style="font-size: 9px; margin-top: 0; color: #d7d3cd">
-							<span>작성자 소속</span>
+							<span th:text="${main.userCompany}"></span>
 							<span>·</span>
 							<span th:text="${#dates.format(main.mainboardTime,'yyyy-MM-dd HH:mm')}"></span>
 						</div>
@@ -53,8 +53,9 @@
 					</div>
 					<div class="boardFile w-75">
 						<div class="boardLink">	<!-- 이미지와 기능은 추가 안하면 안보임 -->
-							<div th:if="${main.mainboardLink==null}">추가한 링크가 없습니다.</div>
-							<div th:unless="${main.mainboardLink==null}" th:text="${main.mainboardLink}"></div>	
+							<span th:if="${not #strings.isEmpty(main.mainboardLink)}" th:text="${main.mainboardLink}"></span>
+							<span th:unless="${not #strings.isEmpty(main.mainboardLink)}" 
+							th:text="|< ${main.userName}님이 추가한 링크가 없습니다. >|"></span>
 						</div>
 						<div class="boardImg">
 							<img src="/img/exampleImg.jpg" 
@@ -66,7 +67,7 @@
 					<div class="preferCount" style="margin-left: 30px;">
 						<a href="#">	<!-- 누르면 좋아요 누른 사람의 리스트 -->
 							<span>좋아요</span> 
-							<span><strong>(좋아요 수)</strong></span>
+							<span><strong th:text=${main.prefer}>(좋아요 수)</strong></span>
 						</a>
 					</div>
 					<div class="boardView" style="margin-right: 30px;">
@@ -76,10 +77,10 @@
 				</div>
 				<div class="boardBtn">	<!-- 게시글 좋아요 버튼, 댓글 버튼 -->
 					<div class="boardPrefer">
-						<button>
+						<a class="btn" th:href="@{/mainboard/putLike(userNo=${session.loginUser.user_no},boardNo=${main.mainboardNo})}">
 							<img src="/img/mainboardPrefer.png" style="width: 13px; height: 13px;">
 							<span style="font-size: 13px; font-weight: bold;">좋아요</span>
-						</button>
+						</a>
 					</div>
 					<div class="boardComment">
 						<button>

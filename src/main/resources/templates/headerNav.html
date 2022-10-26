@@ -38,7 +38,7 @@
 	          			</a>
 	          			<ul class="dropdown-menu">
 	           				<li><a class="dropdown-item text-muted" href="#">프로필</a></li>
-	            			<li><a class="dropdown-item text-muted" href="#">로그아웃</a></li>
+	            			<li><a class="dropdown-item text-muted" href="/user/logout.do">로그아웃</a></li>
 	            			<!--  <li><hr class="dropdown-divider"></li>
 	            			<li><a class="dropdown-item text-muted" href="#">Something else here</a></li> -->
 	          			</ul>
@@ -47,4 +47,12 @@
 	    	</div>
 	  	</div>
 	</nav>
+	
+	<th:block th:if="${session.msg!=null}">
+		<script th:inline="javascript">
+		let msg = /*[[${session.msg}]]*/ + "";
+		alert(msg);
+		/*[[${#session.removeAttribute('msg')}]] */
+		</script>
+	</th:block>
 </html>
