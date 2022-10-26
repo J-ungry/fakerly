@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.joongbu.fakerly.mapper.RolesMapper">
+  
+  <resultMap type="RolesDto" id="RolesMap">
+  	<result column="side_role_no" property="sideRoleNo"/>
+  	<result column="role_name" property="roleName"/>
+  </resultMap>
+  <select id="list" resultMap="RolesMap">
+  	SELECT * 
+  	FROM ROLES 
+  	WHERE side_role_no 
+  	IN(SELECT side_role_no 
+  	FROM side_role 
+  	WHERE side_board_no=#{sideBoardNo});
+  </select>
+  
+  </mapper>
+  

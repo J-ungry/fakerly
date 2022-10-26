@@ -35,6 +35,7 @@ public class SideDto {
 	private int state;        
 	private Date postTime;
 	private int report;   
+	private UserDto user; //user.user_no
 	
 	private int likes; //좋아요 개수 (싫어요는 별도 구현 안함)
     

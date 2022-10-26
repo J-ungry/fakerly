@@ -10,6 +10,11 @@
 </head>
 <body>
 <div class="container">
+		<h1 class="mt-5">Spring_board.board list</h1>
+		<p class="d-flex justify-content-end">
+			<a class="btn btn-outline-primary" href="/sideboard/insert.do">
+			글작성</a>
+		</p>
 
 	<div class="boards"><!-- 게시글 들어올 곳 -->
 		<div class="article" th:each="side:${sideList}" th:onclick="location.href='detail.do?sideBoardNo=[[${side.sideBoardNo}]]'"><!-- 게시글 한개 -->
@@ -23,15 +28,21 @@
 		</div>	 
 	</div>
 	
-	<div class="sidebar" th:onclick="">
+	<div class="sidebar">
 		<ul>
-			<li>프론트엔드</li>
-			<li>백엔드</li>
-			<li>디자인</li>
-			<li>기획</li>
-			<li>기타</li>
+
+			<li><a th:href="@{''(searchRoleNo=)}">전체</a></li>
+			<li><a th:href="@{''(searchRoleNo=1)}">프론트엔드</a></li>
+			<li><a th:href="@{''(searchRoleNo=2)}">백엔드</a></li>
+			<li><a th:href="@{''(searchRoleNo=3)}">디자인</a></li>
+			<li><a th:href="@{''(searchRoleNo=4)}">기획</a></li>
+			<li><a th:href="@{''(searchRoleNo=5)}">기타</a></li>
 			
 		</ul>
+	</div>
+	
+	<div>
+		
 	</div>
 </div>
 	<!-- <div th:text=${sideList}></div>-->

@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"><!-- 개발할땐 css 배포할땐 min css -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>사이드 프로젝트</title>
+</head>
+<body>
+	<h1>게시글 수정 </h1>
+	<div class="container">
+	<div th:text="${side}"></div>
+	<form action="/sideboard/update.do" method="post">
+		<input type="hidden" name="sideBoardNo" th:value="${side.sideBoardNo}">
+		<input type="hidden" name="user_no" th:value="${side.user.user_no}">
+		<div class="content">
+		<p>
+			<input type="radio" name="state" value=1 th:checked="${side.state==1}">모집 중
+			<input type="radio" name="state" value=0 th:checked="${side.state==0}">모집 완료
+		</p>
+<!-- 			<span th:if="${side.state == 1}">모집중</span>
+			<span th:if="${side.state == 0}">모집 완료</span> -->
+			<p>제목:
+				<input name="title" th:value="${side.title}" placeholder="제목 입력">
+			</p>
+			<!-- <span th:text="${side.title}"></span> -->
+			<p>요약:
+				<input name="summ" th:value="${side.summ}" placeholder="요약 내용 입력">
+			</p>
+			<p>소개:
+				<input name="intro" th:value="${side.intro}" placeholder="소개 입력">
+			</p>
+			<p>
+			<input type="radio" name="purpose" value="수익창출" th:checked="${side.purpose=='수익창출'}">수익창출
+			<input type="radio" name="purpose" value="포트폴리오" th:checked="${side.purpose=='포트폴리오'}">포트폴리오
+			<input type="radio" name="purpose" value="재미" th:checked="${side.purpose=='재미'}">재미
+			<input type="radio" name="purpose" value="네트워킹" th:checked="${side.purpose=='네트워킹'}">네트워킹
+			<input type="radio" name="purpose" value="직무역량강화" th:checked="${side.purpose=='직무역량강화'}">직무역량강화
+			</p>
+<!-- 			목적:<span th:text="${side.purpose}"></span> -->
+			<p>
+			<input type="radio" name="attend" value="매주 4시간 이하" th:checked="${side.attend=='매주 4시간 이하'}">매주 4시간 이하
+			<input type="radio" name="attend" value="매주 4-10시간" th:checked="${side.attend=='매주 4-10시간'}">매주 4-10시간
+			<input type="radio" name="attend" value="매주 10시간 이상" th:checked="${side.attend=='매주 10시간 이상'}">매주 10시간 이상
+			</p>
+<!-- 			참여시간:<span th:text="${side.attend}"></span> -->
+			<p>
+				신청 링크:
+				<input name="sup" th:value="${side.sup}" placeholder="신청 링크 입력">
+			</p>
+
+			모집역할:
+			<div th:each="role:${roles}">
+				<ul>
+					<li th:text="${role.roleName}"></li>
+				</ul>
+			</div>
+
+		</div>
+		<div>
+			<button>
+			수정하기
+			</button>
+			<a th:href="@{/sideboard/delete.do(sideBoardNo=${side.sideBoardNo})}">삭제</a>
+			
+		</div>
+	</form>
+	</div>
+</body>
+</html>

@@ -17,20 +17,55 @@
   	<result column="post_time" property="postTime"/>
   	<result column="report" property="report"/>
   	<result column="likes" property="likes"/>
+  	<association property="user" foreignColumn="user_no">
+  		<id column="user_no" property="user_no"/> <!-- userDto 에는 user_no map 이 없기때문에 이렇게 써줬음 -->
+  		<result column="email" property="email"/>
+  		<result column="user_name" property="user_name"/>
+  		<result column="nickname" property="nickname"/>
+  		<result column="company" property="company"/>
+  		
+  	</association>
   	
   	
   	
   </resultMap>
-  <select id="list" resultMap="SideMap"> <!-- 좋아요까지 받아온 쿼리  -->
+  <select id="list" resultMap="SideMap"> <!--좋아요까지 받아온 쿼리 -->
   	SELECT s.* ,
   	(SELECT COUNT(*) FROM SIDEBOARD_PREFER f WHERE f.side_board_no=s.side_board_no) likes
   	FROM SIDEBOARD s 
+  	<if test="searchRoleNo!=null and !searchRoleNo.equals('')">
+  	 	where side_board_no in(select side_board_no from side_role where side_role_no=#{searchRoleNo})
+  	</if>
+  </select>
+
+  
+   <select id="detail" resultMap="SideMap">
+  	SELECT * ,
+  	(SELECT COUNT(*) FROM SIDEBOARD_PREFER f WHERE f.side_board_no=s.side_board_no) likes
+  	FROM SIDEBOARD s
+  	LEFT JOIN user using(user_no) 
+  	WHERE side_board_no=#{sideBoardNo}
   </select>
   
-<!--   <select id="detail" resultMap="BoardMap">
-  	SELECT s.* ,
-  	(SELECT COUNT(*) FROM SIDEBOARD_PREFER f WHERE f.side_board_no=s.side_board_no) likes
-  	FROM SIDEBOARD s 
-  	WHERE side_board_no=#{sideBoardNo}
-  </select> -->
+  <!-- session 으로 User_no 받아오면 그때 다시구현하기  -->
+<!--   <insert id="insert" parameterType="SideDto">
+  	INSERT INTO SIDEBOARD (title,summ,intro,purpose,sup,attend,user_no)
+  	 value 
+  	 ("1번째 작성글","요약 내용 들어갈 곳","소개글 들어갈 곳","수익창출","www.naver.com","매주 4시간 이하",1);
+  </insert> -->
+  <update id="update" parameterType="SideDto"> <!--  게시글 수정  -->
+  	UPDATE SIDEBOARD SET
+  		title=#{title},
+  		summ=#{summ},
+  		intro=#{intro},
+  		purpose=#{purpose},
+  		sup=#{sup},
+  		attend=#{attend},
+  		state=#{state}
+  		WHERE side_board_no=#{sideBoardNo}
+  		
+  		
+  </update>
+  
+
   </mapper>
