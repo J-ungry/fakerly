@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:include="headerNav"></header>
+	<main class="container mt-5">
+		<h1 class="mt-3">Qna.board detail</h1>
+		<div>
+		<p>
+				<strong>no : </strong>
+				<span th:text="${qnaboard.qaNo}"></span>
+			</p>
+			<p>
+				<strong>글쓴이 : </strong>
+				<span th:text="${qnaboard.user_no}"></span>
+			</p>
+			<p>
+				<strong>제목 : </strong>
+				<span th:text="${qnaboard.title}"></span>
+			</p>
+			<p>
+				<strong>게시일 : </strong>
+				<span th:text="${qnaboard.qaTime}"></span>
+			</p>
+			<p>
+				<strong>조회수 : </strong>
+				<span th:text="${qnaboard.views}"></span>
+			</p>
+		</div>
+	</main>
+</body>
+</html>
