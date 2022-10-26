@@ -134,7 +134,6 @@ public class UserController {
 
 				UserDto findUserEmail = null;
 				UserDto findUserPassword = null;
-				Date date = new Date();
 				SimpleDateFormat tranSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				String redirEmailSuccess = "redirect:/user/findEmailSuccess.do";
 				String redirPasswordSuccess = "redirect:/user/findPasswordSuccess.do";
@@ -173,7 +172,9 @@ public class UserController {
 						} else if (!fBirth.equals(tranSimpleDateFormat.format(findUserPassword.getBirth()))) {
 							return redirFail;
 						} else {
-							redirAtt.addFlashAttribute("pw", findUserPassword.getPw());
+							
+							
+							redirAtt.addFlashAttribute("pw", findUserPassword.getPw().substring(0, 3) + "****");
 							return redirPasswordSuccess;
 						}
 					} else {
