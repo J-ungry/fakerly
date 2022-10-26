@@ -32,11 +32,11 @@ public class MainBoardDto {
 	private byte[] mainboardImg;
 	private String mainboardLink;
 	private Date mainboardTime;
-<<<<<<< HEAD
+
 	private String userName;
 	private String userCompany;
 	private int prefer;
-=======
+
 	private List<MainReplyDto> replyList;
->>>>>>> 8e71c990534e456bbca990fba70ff0243eac4d5e
+
 }
