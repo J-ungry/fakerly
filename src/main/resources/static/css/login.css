@@ -112,9 +112,9 @@ input:focus {
 
 .signup-btn {
 	display: block;
-	width : 100%;
-	text-decoration : none;
-	text-align : center;
+	width: 100%;
+	text-decoration: none;
+	text-align: center;
 	padding: 11px 23px;
 	background-color: #fff;
 	margin-bottom: 24px;
@@ -176,7 +176,7 @@ button:hover {
 	cursor: pointer;
 }
 
-/* 회원가입 | 이메일 찾기 | 비밀번호 찾기 */
+/* 회원가입 | 이메일/비밀번호 찾기 */
 .login-triple-menu {
 	text-align: center;
 }
@@ -213,4 +213,10 @@ footer {
 	text-align: center;
 	border-top: 1px solid #dbdbdb;
 	background-color: #f7f7f7;
+}
+
+#phoneNbChkE, #phoneNbChkP {
+	text-align: center;
+	color: red;
+	margin-bottom: 8px;
 }

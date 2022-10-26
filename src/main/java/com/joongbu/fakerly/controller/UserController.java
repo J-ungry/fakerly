@@ -57,48 +57,47 @@ public class UserController {
 			HttpServletRequest req, 
 			HttpSession session, 
 			@RequestParam(required = true) String email,
-			@RequestParam(required = true) String pw) {
-		System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
-		Enumeration params = req.getParameterNames();
-		System.out.print("Parameter> ");
-		while (params.hasMoreElements()) {
-			String name = (String) params.nextElement();
-			System.out.print(name + " : " + req.getParameter(name) + "\t");
-		}
-		System.out.println();
+			@RequestParam(required = true) String pw
+			) {
+				System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
+				Enumeration params = req.getParameterNames();
+				System.out.print("Parameter> ");
+				while (params.hasMoreElements()) {
+					String name = (String) params.nextElement();
+					System.out.print(name + " : " + req.getParameter(name) + "\t");
+				}
+				System.out.println();
 
-		UserDto loginUser = null;
-		String msg = "";
+				UserDto loginUser = null;
+				String msg = "";
 
-		try {
-			loginUser = userMapper.login(email);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+				try {
+					loginUser = userMapper.login(email);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
-		if (loginUser != null) {
-			// 비밀번호 비교
-			if (!pw.equals(loginUser.getPw())) {
-				System.out.println("입력한 비밀번호가 틀려요.");
-				msg = "비밀번호가 일치하지 않습니다.";
-				session.setAttribute("msg", msg);
-				return "redirect:/user/login.do";
-			} else {
-				session.setAttribute("loginUser", loginUser);
-				System.out.println(session.getAttribute("loginUser"));
-				System.out.println("로그인 성공, 세션 생성");
-				msg = "로그인 성공!";
-				session.setAttribute("msg", msg);
-				return "redirect:/mainboard/main"; // 메인 페이지로 이동
+				// DB에서 유저 찾기
+				if (loginUser != null) {
+					// 비밀번호 비교
+					// Boolean bool = BCrypt.checkpw(pw, loginUser.getPw());
+					if (!pw.equals(loginUser.getPw())) {
+						msg = "비밀번호가 일치하지 않습니다.";
+						session.setAttribute("msg", msg);
+						return "redirect:/user/login.do";
+					} else {
+						session.setAttribute("loginUser", loginUser);
+						System.out.println(session.getAttribute("loginUser"));
+						msg = "로그인 성공!";
+						session.setAttribute("msg", msg);
+						return "redirect:/mainboard/main"; // 메인 페이지로 이동
+					}
+				} else {
+					msg = "입력하신 이메일로 가입한 회원이 없습니다.";
+					session.setAttribute("msg", msg);
+					return "redirect:/user/login.do";
+				}
 			}
-		} else {
-			System.out.println("입력한 email에 맞는 user가 없어요");
-			msg = "입력하신 이메일로 가입한 회원이 없습니다.";
-			session.setAttribute("msg", msg);
-			return "redirect:/user/login.do";
-		}
-
-	}
 	
 	// 이메일/비밀번호 찾기 페이지
 	@GetMapping("/findEmailPassword.do")
@@ -147,7 +146,6 @@ public class UserController {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-
 					if (findUserEmail != null) {
 						System.out.println(findUserEmail);
 						if (!fName.equals(findUserEmail.getUser_name())) {
@@ -156,7 +154,6 @@ public class UserController {
 							return redirFail;
 						} else {
 							redirAtt.addFlashAttribute("email", findUserEmail.getEmail());
-//							session.setAttribute("status", 1);
 							return redirEmailSuccess;
 						}
 					} else {
@@ -176,8 +173,7 @@ public class UserController {
 						} else if (!fBirth.equals(tranSimpleDateFormat.format(findUserPassword.getBirth()))) {
 							return redirFail;
 						} else {
-							redirAtt.addFlashAttribute("pw",findUserPassword.getPw());
-//							session.setAttribute("status", 1);
+							redirAtt.addFlashAttribute("pw", findUserPassword.getPw());
 							return redirPasswordSuccess;
 						}
 					} else {
@@ -198,8 +194,8 @@ public class UserController {
 					String name = (String) params.nextElement();
 					System.out.print(name + " : " + req.getParameter(name) + "\t");
 				}
-				System.out.println();				
-	}
+				System.out.println();
+			}
 	
 	
 	// 비밀번호 찾기 성공
@@ -216,8 +212,7 @@ public class UserController {
 					System.out.print(name + " : " + req.getParameter(name) + "\t");
 				}
 				System.out.println();
-				System.out.println(session.getAttribute("status"));
-	}
+			}
 
 	
 	// 이메일/비밀번호 찾기 실패
@@ -233,7 +228,7 @@ public class UserController {
 					System.out.print(name + " : " + req.getParameter(name) + "\t");
 				}
 				System.out.println();
-	}
+			}
 
 	// 로그아웃
 	@GetMapping("/logout.do")
@@ -251,7 +246,6 @@ public class UserController {
 				}
 				System.out.println();
 
-				// session.invalidate();
 				session.removeAttribute("loginUser");
 				msg="로그아웃 되었습니다.";
 				session.setAttribute("msg", msg);
