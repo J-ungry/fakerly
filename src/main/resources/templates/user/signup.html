@@ -7,6 +7,7 @@
     <script src="/js/signup.js" defer="defer"></script>
 </head>
 <body>
+<header th:include="/headerNav"></header>
 
 <form action="/user/insert.do" id="signupForm" method="post">
     <div class="signupForms" id="accountInfo">
@@ -14,16 +15,18 @@
         <div id="accountInfoForm">
             <h1>회원가입</h1>
             <label>
-                <input type="text" name="email" placeholder="example@naver.com">
+                <input class="form-control" type="text" name="email" placeholder="example@naver.com" value="">
+                <div class="invalid-feedback" id="emailInvalid"></div>
             </label>
 
             <label>
-                <input type="password" name="password" placeholder="비밀번호">
-                <div id="pwHint" title="영문 대소문자 및 숫자 포함 8~15글자">?</div>
+                <input class="form-control" type="password" name="pw" placeholder="비밀번호(영문 대소문자 및 숫자 포함 8~15글자)" value="">
+                <div class="invalid-feedback" id="pwInvalid"></div>
             </label>
 
             <label>
-                <input type="password" name="passwordCheck" placeholder="비밀번호 확인">
+                <input class="form-control" type="password" name="pwCheck" placeholder="비밀번호 확인" value="">
+                <div class="invalid-feedback" id="pwCheckInvalid"></div>
             </label>
         </div>
         <button type="button" class="rBtn">다음</button>
@@ -34,11 +37,12 @@
         <div class="userInfoForm" id="userInfo1Form">
             <h1>회원 정보(필수)</h1>
             <label>
-                <input type="text" name="name" placeholder="이름">
+                <input type="text" name="user_name" placeholder="이름">
             </label>
 
             <label>
-                <input type="text" name="nickname" placeholder="닉네임">
+                <input class="form-control" type="text" name="nickname" placeholder="닉네임" value="">
+                <div class="invalid-feedback" id="nicknameInvalid"></div>
             </label>
 
             <label>
@@ -46,7 +50,8 @@
             </label>
 
             <label>
-                <input type="text" name="phone" placeholder="휴대폰 번호">
+                <input class="form-control" maxlength="11" type="text" name="phone" placeholder="휴대폰 번호" value="">
+                <div class="invalid-feedback" id="phoneInvalid"></div>
             </label>
 
             <div id="sex">
@@ -97,7 +102,7 @@
 
         </div>
         <button type="button" class="lBtn">이전</button>
-        <button class="rBtn" type="submit">완료</button>
+        <button class="rBtn" type="submit" disabled="disabled" style="background-color: #ddd">완료</button>
     </div>
 </form>
 

@@ -20,7 +20,11 @@
   		insert into user
   		(email, user_name, nickname, pw, auth, birth, phone, state, company, career, aboutme, sex, age, img) 
   		values 
-  		(#{email},#{name},#{nickname},#{password},'normal',#{birth},#{phone},'Y',#{company},#{career},#{aboutme},#{sex},#{age},#{img})
+  		(#{email},#{user_name},#{nickname},#{pw},'normal',#{birth},#{phone},'Y',#{company},#{career},#{aboutme},#{sex},#{age},#{img})
   	</insert>
+  	<select id="checkNickname" resultType="com.joongbu.fakerly.dto.UserDto">
+  		select * from user 
+  		where nickname=#{nickname}
+  	</select>
 </mapper>
 
