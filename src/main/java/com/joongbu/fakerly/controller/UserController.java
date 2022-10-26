@@ -85,7 +85,7 @@ public class UserController {
 				System.out.println("로그인 성공, 세션 생성");
 				msg = "로그인 성공!";
 				session.setAttribute("msg", msg);
-				return "redirect:/"; // 메인 페이지로 이동
+				return "redirect:/mainboard/main"; // 메인 페이지로 이동
 			}
 		} else {
 			System.out.println("입력한 email에 맞는 user가 없어요");
