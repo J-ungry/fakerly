@@ -85,10 +85,11 @@ public class UserController {
 				return "redirect:/user/login.do";
 			} else {
 				session.setAttribute("loginUser", loginUser);
+				System.out.println(session.getAttribute("loginUser"));
 				System.out.println("로그인 성공, 세션 생성");
 				msg = "로그인 성공!";
 				session.setAttribute("msg", msg);
-				return "redirect:/"; // 메인 페이지로 이동
+				return "redirect:/mainboard/main"; // 메인 페이지로 이동
 			}
 		} else {
 			System.out.println("입력한 email에 맞는 user가 없어요");
@@ -99,7 +100,7 @@ public class UserController {
 		}
 
 	}
-
+	
 	// 이메일/비밀번호 찾기 페이지
 	@GetMapping("/findEmailPassword.do")
 	public void findEmailPassword(HttpServletRequest req) {
@@ -241,6 +242,7 @@ public class UserController {
 			HttpServletRequest req, 
 			HttpSession session
 			) {
+				String msg="";
 				System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
 				Enumeration params = req.getParameterNames();
 				System.out.print("Parameter> ");
@@ -252,6 +254,8 @@ public class UserController {
 
 				// session.invalidate();
 				session.removeAttribute("loginUser");
+				msg="로그아웃 되었습니다.";
+				session.setAttribute("msg", msg);
 				return "redirect:/";
 			}
 	

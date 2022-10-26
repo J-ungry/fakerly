@@ -12,16 +12,40 @@
 		<result column="mainboard_view" property="mainboardView"/>
 		<result column="mainboard_link" property="mainboardLink"/>
 		<result column="mainboard_time" property="mainboardTime"/>
+		<result column="user_name" property="userName"/>
+		<result column="company" property="userCompany"/>
+		<!--  <collection property="preferList" ofType="MainBoardPreferDto">
+			<id column="mainboard_prefer_no" property="mainboardPreferNo"/>
+			<result column="mainboard_no" property="mainboardNo"/>
+			<result column="mainboard_prefer" property="mainboardPrefer"/>
+			<result column="user_no" property="userNo"/>
+		</collection> -->
 	</resultMap>
+	
 	<select id="list" resultMap="MainBoardMap">
-		<!-- SELECT m.*,u.user_name FROM mainboard m INNER JOIN user u ON m.user_no=u.user_no -->
-		SELECT * FROM mainboard ORDER BY mainboard_no DESC
+		SELECT m.*,u.user_name,u.company,
+		(SELECT COUNT(*) FROM mainboard_prefer mf WHERE mf.mainboard_no=m.mainboard_no)
+		FROM mainboard m INNER JOIN user u 
+		ON m.user_no=u.user_no ORDER BY m.mainboard_no DESC
 	</select>
 	<insert id="insert" parameterType="MainBoardDto">
-		<!-- user_no와 keyword_no 작성자의 아이디와 키워드를 가져올 예정 -->
 		INSERT INTO mainboard
-		(user_no,keyword_no,mainboard_title, mainboard_contents,mainboard_view,mainboard_link)
-     	VALUES
-     	(1,1,#{mainboardTitle},#{mainboardContents},#{mainboardView},#{mainboardLink})
+		(user_no,keyword_no,mainboard_title,mainboard_contents,mainboard_view,mainboard_img,mainboard_link)
+		VALUES
+		(#{userNo},1,#{mainboardTitle},#{mainboardContents},#{mainboardView},#{mainboardImg},#{mainboardLink})
 	</insert>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

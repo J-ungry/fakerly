@@ -10,6 +10,7 @@
 </head>
 <body>
 	<form id="MainBoardInsert_Form" action="/mainboard/insert" method="post">
+		<input type="hidden" name="userNo" th:value="${session.loginUser.user_no}">
 		<div id="MainBoardNav">
 			<img onclick="goBack()" alt="preferPageImg" src="/img/mainboard_arrow.png">
 			<div>
@@ -21,18 +22,21 @@
 		</div>
 		<div id="MainboardAddFile">
 			<img onclick="showLink()" name="mainboardLink" alt="linkImg" src="/img/mainboard_link.png">
-			<img name="mainboardImg" alt="fileImg" src="/img/mainboard_picture.png">
+			<img onclick="showImg()" name="mainboardImg" alt="fileImg" src="/img/mainboard_picture.png">
 		</div>
 		<div id="Mainboard">	<!-- border 안 이어짐 -->
 			<div id="MainboardTitle">
-				<input type="text" name="mainboardTitle" placeholder="제목을 입력하세요.">
+				<input type="text" name="mainboardTitle" placeholder="제목을 입력하세요." maxlength="100">
 			</div>
 			<div id="MainboardContents">
 				<div class="form-floating mb-2 mt-3" id="linkInputContainer" style="display: none;">
 					<input name="mainboardLink" type="text" class="form-control" id="floatingInput" placeholder="https://">
 					<label for="floatingInput">링크 입력</label>
 				</div>
-				<textarea name="mainboardContents"  placeholder="나누고 싶은 생각을 적어주세요.&#13;&#10;링크나 사진을 추가할 수도 있어요."></textarea>
+				<div class="mb-3" id="fileInputContainer" style="display: none;">
+					<input class="form-control text text-muted" type="file" id="formFile" enctype="multipart/form-data">
+				</div>
+				<textarea name="mainboardContents"  placeholder="나누고 싶은 생각을 적어주세요.&#13;&#10;링크나 사진을 추가할 수도 있어요." maxlength="254"></textarea>
 						
 			</div>
 		</div>
