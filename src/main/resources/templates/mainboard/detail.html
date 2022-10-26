@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/mainboard/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:include="/headerNav"></header>
+	<main>
+		<div class="post-container w-50 p-3 h-25" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
+				<div class="boardInfo">	<!-- 작성자 프로필 사진, 이름, 소속, 글 등록 시간, 팔로우버튼 -->
+					<div class="boardProfile d-flex flex-column align-self-center">
+						<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
+							<img class="align-middle" src="/img/profile.png">
+						</a>
+					</div>
+					<div class="userInfo d-flex flex-column align-self-center">
+						<div><span style="font-size: 14px" class="align-middle"><strong>작성자명</strong></span></div>
+						<div style="font-size: 9px; margin-top: 0; color: #d7d3cd">
+							<span>작성자 소속</span>
+							<span>·</span>
+							<span th:text="${#dates.format(mainboard.mainboardTime,'yyyy-MM-dd HH:mm')}"></span>
+						</div>
+					</div>
+					<div class="followBtn d-flex justify-content-end">
+						<button class="h-50 mt-3" style="font-weight: 1000;">팔로우</button>
+					</div>
+				</div>
+				<div class="boardMain">	<!-- 게시글의 제목, 내용, 링크, 이미지 -->
+					<div class="boardTitle mt-2 ms-3">
+						<div>
+							<span><strong th:text="${mainboard.mainboardTitle}"></strong></span>
+						</div>
+					</div>
+					<div class="boardContents mt-2 ms-3">
+						<div>
+							<span th:text="${mainboard.mainboardContents}"></span>
+							<span th:text="${mainboard.mainboardNo}"></span>
+						</div>	<!-- 더보기 기능 how??? -->
+					</div>
+					<div class="boardFile w-75">
+						<div class="boardLink">	<!-- 이미지와 기능은 추가 안하면 안보임 -->
+							<div th:if="${mainboard.mainboardLink==null}">추가한 링크가 없습니다.</div>
+							<div th:unless="${mainboard.mainboardLink==null}" th:text="${main.mainboardLink}"></div>	
+						</div>
+						<div class="boardImg">
+							<img src="/img/exampleImg.jpg" 
+							style="width: 100px; height: 100px;">
+						</div>
+					</div>
+				</div>
+				<div class="boardData">	<!-- 게시글 좋아요 수, 조회 수 -->
+					<div class="preferCount" style="margin-left: 30px;">
+						<a href="#">	<!-- 누르면 좋아요 누른 사람의 리스트 -->
+							<span>좋아요</span> 
+							<span><strong>(좋아요 수)</strong></span>
+						</a>
+					</div>
+					<div class="boardView" style="margin-right: 30px;">
+						<span>조회</span>
+						<span><strong th:text="${mainboard.mainboardView}"></strong></span>
+					</div>
+				</div>	
+			</div>
+			<th:block th:include="/main_reply/list" th.with="replyList=${mainboard.replyList},mainboardNo=${mainboard.mainboardNo}">
+	</main>
+		
+</body>
+</html>
+	<!-- test용 
+	<div>
+			<strong>작성자프로필(정보들)</strong>
+			<span th:text="${mainboard.mainboardNo}"></span>
+			
+		</div>
+		
+		<div>
+			<strong>작성 시간</strong>
+			<span th:text="${mainboard.mainboardTime}"></span>
+		</div>
+		
+		<div>
+			<strong>제목</strong>
+			<span th:text="${mainboard.mainboardTitle}"></span>
+		</div>
+		
+		<div>
+			<strong>게시글 내용</strong>
+			<span th:text="${mainboard.mainboardContents}"></span>
+		</div>
+		
+		<div>
+			<strong>링크</strong>
+			<span th:text="${mainboard.mainboardLink}"></span>
+		</div>
+		
+		<div>
+			<strong>조회수</strong>
+			<span th:text="${mainboard.mainboardView}"></span>
+		</div>
+	 -->
+		
+	
+
+<!-- 
+userNo,
+keywordNo -> join해서 번호에 대한 값
+
+mainboardTitle
+mainboardContents
+mainboardView
+
+mainboardLink
+mainboardTime
+ -->

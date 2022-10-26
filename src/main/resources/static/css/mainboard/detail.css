@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap');
+/* 기능구현 먼저라 css main꺼 가져오기까지만 진행*/
+main {
+	font-family: 'Noto Sans KR';
+	width: 100%;
+	height: 100vh;
+}
+
+#container {
+	box-sizing: border-box;
+}
+
+main #mainboardInsert {
+	margin: 0 auto;
+	display: flex;
+	border: 1px solid #dbdbdb;
+	background-color: #fff;
+	padding: 25px;
+}
+
+main #mainboardInsert #userProfile img {
+	margin-top: 10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+main #mainboardInsert #insertPlaceholder {
+	margin-left: 15px;
+	padding: 15px;
+	width: 600px;
+	background-color: #f7f7f7;
+	border-radius: 10px;
+	text-decoration: none;
+}
+
+main #mainboardInsert #insertPlaceholder span {
+	color: #b6b6b8;
+}
+
+main .post-container {
+	border: 1px solid #dbdbdb;
+	margin: 0 auto;
+	background-color: #fff;
+}
+
+main .post-container .boardInfo {
+	display: flex;
+	height: 70px;
+	margin: 0;
+}
+
+main .post-container .boardInfo .boardProfile img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	margin: 20px;
+}
+
+main .post-container .boardInfo .userInfo {
+	float: left;
+	margin-right: 425px;
+}
+
+main .post-container .boardInfo .userInfo p {
+	margin-top: 15px;
+	margin-bottom: 1px;
+}
+
+main .post-container .boardInfo .followBtn {
+
+}
+
+main .post-container .boardInfo .followBtn button {
+	cursor: pointer;
+	width: 60px;
+	padding: 8px;
+	background-color: #ffeeec;
+	border: none;
+	color: #e993a0;
+	font-size: 13px;
+}
+
+main .post-container .boardMain .boardTitle p span {
+	margin: 20px 10px;
+}
+
+main .post-container .boardMain .boardContents p span {
+	margin: 20px 10px;
+}
+
+main .post-container .boardMain .boardFile {
+	padding: 20px;
+	margin-top: 160px;
+	margin-bottom: 30px;
+	width: 700px;
+	background-color: #f7f7f7;
+	display: flex;
+	justify-content: space-between;
+	margin-left: auto;
+	margin-right: auto;
+}	
+
+main .post-container .boardData {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+}
+
+main .post-container .boardData a {
+	text-decoration: none;
+	color: #d7d3cd;
+	font-size: 10px;
+	margin-top: 0;
+}
+
+main .post-container .boardData .boardView span {
+	font-size: 10px;
+}
+
+main .post-container .boardBtn {
+	display: flex;
+	margin-top: 5px;
+}
+
+main .post-container .boardBtn button {
+	border: none;
+	background-color: #fff;
+	color: #b4b4b2;
+}
+
+main .post-container .boardBtn .boardPrefer {
+	margin-left: 20px;
+}
+
+main .post-container .boardBtn .boardComment {
+	margin-right: 20px;
+}
+
+main .post-container .boardBtn .boardComment img {
+	width: 30px;
+	height: 30px;
+}
+
+
+
+
+
+

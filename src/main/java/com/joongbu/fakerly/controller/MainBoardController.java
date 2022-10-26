@@ -27,6 +27,12 @@ public class MainBoardController {
 	DataSource dataSource;
 	@Autowired
 	MainBoardMapper boardMapper;
+
+	
+//	@GetMapping("/main")	// /mainboard/main GET 요청 처리
+//	public String main() {
+//		return "/mainboard/main";
+//	}
 	
 	@GetMapping("/main")	// /mainboard/main GET 요청 처리
 	public String main(Model model) {
@@ -40,6 +46,7 @@ public class MainBoardController {
 		model.addAttribute("mainList", mainList);
 		return "/mainboard/main";
 	}
+	
 	
 	@GetMapping("/insert")
 	public void insert() {}
@@ -73,6 +80,32 @@ public class MainBoardController {
 			return "redirect:/mainboard/insert";
 		}
 	}
+	
+	@GetMapping("/detail")
+	public String detail(
+			@RequestParam(required=true)int mainboardNo,
+			Model model
+			) {
+		MainBoardDto mainboard=null;
+		
+		try {
+			mainboard=boardMapper.detailReply(mainboardNo);
+			System.out.println(mainboard);
+			//boardMapper.viewUpdate(mainboardNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(mainboard!=null) {
+			model.addAttribute("mainboard",mainboard);
+			return "/mainboard/detail";
+		}else {
+			return "redirect:/mainboard/main";
+		}
+	}
+	
+	
+
+	
 	
 }
 

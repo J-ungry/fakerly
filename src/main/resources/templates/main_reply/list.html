@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+
+<!-- 
+1. hierarchy -> 일반 댓글인것만 div 출력 (댓글 : 0, 대댓 : 1)
+2. group_no -> 대댓글인 것만 if 문으로 값 넣기 (댓글 : null, 대댓 : 부모 reply_no)
+3. depth -> 이용해서 대댓글의 순서 구분(이건 커리문으로 넣어야되나?)
+ -->
+
+			
+  		<div th:each="reply:${mainboard.replyList}">
+			<h1>댓글내용</h1>
+			<div th:if="${reply.hierarchy==0}">댓글!!!!!!
+				<span th:text="${reply.contents}">댓글내용 : </span>
+				<div th:unless="${reply.hierarchy==1}">대대대대대대댓글!!!!!!</div>
+			</div>
+			
+			<span th:text="${reply.main_reply_no}"></span>
+			<span th:text="${reply.contents}"></span>
+			<span th:text="${reply.hierarchy}"></span>
+			<span th:text="${reply.depth}"></span>
+			<span th:text="${reply.group_no}"></span>
+			<span th:text="${reply.reply_time}"></span>
+			<span th:text="${reply.user_no}"></span>
+  		</div>
+  		
+  	
+  	<!-- 
+  	<div href="#" class="list-group-item list-group-item-action py-3" aria-current="true">
+	    <div class="d-flex w-100 justify-content-between">
+	      <h5 class="mb-1" th:text="${reply.title}"></h5>
+	      <small th:text="${#dates.format(reply.postTime,'HH:mm:ss yyyy-MM-dd')}"></small>
+	    </div>
+	    <div class="mb-1 d-flex justify-content-between align-items-center	">
+		    <span th:text="${reply.userId}"></span>
+			<div>
+				<button class="rounded-pill btn btn-outline-danger btn-sm">
+					<i class="bi bi-hand-thumbs-up"></i>
+					<th:block th:text="${reply.likes}"></th:block>
+				</button>
+				<button class="rounded-pill btn btn-outline-primary btn-sm"> 
+					<i class="bi bi-hand-thumbs-down"></i>
+					<th:block th:text="${reply.bads}"></th:block>
+				</button>
+			</div>
+			<a th:href="@{/reply/update.do(replyNo=${reply.replyNo)">수정하기</a>
+	    </div>
+	    <div class="mb-1 row">
+	     	<img th:if="${reply.imgPath!=null}" alt="" class="col-2"
+	     	th.src="@{/img/{file}(file=${reply.imgPath})}">
+	     	<span class="col-10" th:text="${reply.contents}"></span>
+	     </div>
+ 	</div>
+	 
+  	 -->
+  	
