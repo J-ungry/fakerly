@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.joongbu.fakerly.mapper.TempBoardMapper">
+  <resultMap type="TempBoardDto" id="TempBoardMap">
+  	<id column="temp_no" property="tempNo"/>
+  	<result column="user_no" property="userNo" />
+  	<result column="title" property="title" />
+  	<result column="keyword_no" property="keywordNo" />
+  	<result column="contents" property="contents" />
+  	<result column="img" property="img" />
+  	<result column="link" property="link" />
+  	<result column="time" property="time" />
+  </resultMap>
+  <select id="list" resultMap="TempBoardMap">
+  
+  </select>
+  </mapper>
+  
+<!--
+temp_no    | int          | NO   | PRI | NULL              | auto_increment    |
+| user_no    | int          | NO   | MUL | NULL              |                   |                                      
+| title      | varchar(100) | NO   |     | NULL              |                   |         
+| keyword_no | int          | NO   | MUL | NULL              |                   |       
+| contents   | varchar(255) | NO   |     | NULL              |                   |       
+| img        | blob         | YES  |     | NULL              |                   |       
+| link       | varchar(255) | YES  |     | NULL              |                   |       
+| time       | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED
+  public class TempBoardDto {
+	private int tempNo;
+	private int userId;
+	private String title;
+	private int keywordNo;
+	private String contents;
+	private Blob img;
+	private String link;
+	private Date dataTime;
+}-->

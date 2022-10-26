@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Fakerly 메인 게시판 글 등록</title>
@@ -13,10 +13,8 @@
 		<div id="MainBoardNav">
 			<img onclick="goBack()" alt="preferPageImg" src="/img/mainboard_arrow.png">
 			<div>
-				<!-- 임시보관함 모달창 참고: https://goddino.tistory.com/74 -->
-				<button type="button" onclick="location.href='/tempboard/temp'">임시보관함</button>
-				<button type="button">보관</button>
-				<button>완료</button>
+				<button type="button">수정</button>
+				<button>보관</button>
 			</div>
 		</div>
 		<div id="MainboardAddFile">
@@ -25,7 +23,7 @@
 		</div>
 		<div id="Mainboard">	<!-- border 안 이어짐 -->
 			<div id="MainboardTitle">
-					<input type="text" name="mainboardTitle" placeholder="수정할 제목을 입력하세요.">
+				<input type="text" name="mainboardTitle" placeholder="제목을 입력하세요.">
 			</div>
 			<div id="MainboardContents">
 				<div class="form-floating mb-2 mt-3" id="linkInputContainer" style="display: none;">
