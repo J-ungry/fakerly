@@ -2,6 +2,7 @@ package com.joongbu.fakerly.dto;
 
 import java.sql.Blob;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -23,13 +24,14 @@ import lombok.Data;
 
 @Data
 public class MainBoardDto {
-	private int mainboardNo;
-	private int userNo;
+	private int mainboardNo;	//PK
+	private int userNo;			//FK (user)
+	private int keywordNo;		//FK (user_keyword)
 	private String mainboardTitle;
-	private int keywordNo;
 	private String mainboardContents;
 	private int mainboardView;
 	//private Blob mainboardImg;
 	private String mainboardLink;
 	private Date mainboardTime;
+	private List<MainReplyDto> replyList;
 }

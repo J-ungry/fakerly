@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.joongbu.fakerly.mapper.MainReplyMapper">
+
+	<resultMap type="MainReplyDto" id="MainReplyMap">
+		<id column="main_reply_no" property="reply_no"/>
+		<result column="contents" property="contents"/>
+		<result column="hierarchy" property="hierarchy"/>
+		<result column="depth" property="depth"/>
+		<result column="group_no" property="group_no"/>
+		<result column="reply_time" property="reply_time"/>
+		<result column="mainboard_no" property="mainboard_no"/>
+		<result column="user_no" property="user_no"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="MainReplyDto">
+		INSERT INTO main_reply
+		(contents,hierarchy,depth,group_no,mainboard_no,user_no)
+		VALUES
+		(#{contents},#{hierarchy},#{depth},#{group_no},#{mainboard_no},#{user_no})
+	</insert>
+	<update id="update" parameterType="MainReplyDto">
+		UPDATE main_reply SET
+		contents=#{contents}
+	</update>
+	<delete id="delete">
+		DELETE FROM main_reply WHERE main_reply_no=#{reply_no}
+	</delete>
+	<select id="list" resultMap="MainReplyMap">
+		SELECT * FROM main_reply
+			ORDER BY main_reply_no DESC
+	</select>
+	<select id="detail" resultMap="MainReplyMap">
+		SELECT * FROM main_reply WHERE main_reply_no=#{reply_no}
+	</select>
+</mapper>
+  

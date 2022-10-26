@@ -30,15 +30,16 @@ public class MainBoardController {
 //		return "/mainboard/main";
 //	}
 	
-	@GetMapping("/main")
+	@GetMapping("/main")	// /mainboard/main GET 요청 처리
 	public String main(Model model) {
-		List<MainBoardDto> mainboardList=null;
+		List<MainBoardDto> mainList=null;
 		try {
-			mainboardList=boardMapper.list();
+			mainList=boardMapper.list();
+			System.out.println(mainList.get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("mainboardList", mainboardList);
+		model.addAttribute("mainList", mainList);
 		return "/mainboard/main";
 	}
 	
@@ -60,17 +61,17 @@ public class MainBoardController {
 		}
 	}
 	
-	@GetMapping("detail.do")
+	@GetMapping("/detail")
 	public String detail(
-			@RequestParam(required=true)int boardNo,
+			@RequestParam(required=true)int mainboardNo,
 			Model model
 			) {
 		MainBoardDto mainboard=null;
 		
 		try {
-			mainboard=boardMapper.detail(boardNo);
+			mainboard=boardMapper.detailReply(mainboardNo);
 			System.out.println(mainboard);
-			boardMapper.viewUpdate(boardNo);
+			//boardMapper.viewUpdate(mainboardNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -83,20 +84,7 @@ public class MainBoardController {
 	}
 	
 	
-	
-//	public String list(
-//			Model model
-//			) {
-//		
-//		List<MainBoardDto> mainboardList=null;
-//		try {
-//			mainboardList = mainboardMapper.list();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		model.addAttribute("mainboardList",mainboardList);
-//		return "/mainboard/list";
-//	}
+
 	
 	
 }

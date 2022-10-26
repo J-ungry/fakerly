@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap');
-
+/* 기능구현 먼저라 css main꺼 가져오기까지만 진행*/
 main {
 	font-family: 'Noto Sans KR';
-	background-color: #f7f7f7;
 	width: 100%;
 	height: 100vh;
 }
 
+#container {
+	box-sizing: border-box;
+}
+
 main #mainboardInsert {
-	position: absolute;
-	top: 10.2%;
-	left: 22%;
+	margin: 0 auto;
 	display: flex;
 	border: 1px solid #dbdbdb;
 	background-color: #fff;
-	width: 800px;
 	padding: 25px;
 }
 
@@ -40,12 +40,7 @@ main #mainboardInsert #insertPlaceholder span {
 
 main .post-container {
 	border: 1px solid #dbdbdb;
-	width: 800px;
-	height: 550px;
 	margin: 0 auto;
-	position: absolute;
-	top: 27%;
-	left: 22%;
 	background-color: #fff;
 }
 
@@ -64,7 +59,7 @@ main .post-container .boardInfo .boardProfile img {
 
 main .post-container .boardInfo .userInfo {
 	float: left;
-	margin-right: 300px;
+	margin-right: 425px;
 }
 
 main .post-container .boardInfo .userInfo p {
@@ -73,9 +68,7 @@ main .post-container .boardInfo .userInfo p {
 }
 
 main .post-container .boardInfo .followBtn {
-	position: absolute;
-	top: 3%;
-	right: 3%;
+
 }
 
 main .post-container .boardInfo .followBtn button {
