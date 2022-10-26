@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>QNA프로젝트</title>
+</head>
+<body>
+
+	<h1>QNA프로젝트</h1>
+		<table>
+		<thead>
+			<tr>
+				<th>no</th>
+				<th>제목</th>
+				<th>게시일</th>
+				<th>글쓴이id</th>
+				<th>닉네임</th>
+				<th>views</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="link-secondary"
+				th:onclick="location.href='qadetail.do?qaNo=[[${qaboard.qaNo}]]'" 
+				th:each="qaboard:${qaList}">
+				<td th:text="${qaboard.qaNo}"></td>
+				<td th:text="${qaboard.title}"></td>
+				<td th:text="${#dates.format(qaboard.qaTime,'MM월dd일 HH시mm분')}"></td>
+				<td th:text="${qaboard.user_no}"></td>
+				<td th:text="${qaboard.nickname}"></td>
+				<td th:text="${qaboard.views}"></td>
+			</tr>
+		</tbody>
+		</table>
+
+</body>
+</html>
