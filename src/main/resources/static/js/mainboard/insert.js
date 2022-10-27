@@ -1,3 +1,4 @@
+
 function goBack() {	//이전 페이지로 돌아가는 함수
 	window.history.back();
 }

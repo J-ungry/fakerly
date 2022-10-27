@@ -12,6 +12,7 @@
 		<result column="mainboard_title" property="mainboardTitle"/>
 		<result column="mainboard_contents" property="mainboardContents"/>
 		<result column="mainboard_view" property="mainboardView"/>
+		<result column="mainboard_img" property="mainboardImg"/>
 		<result column="mainboard_link" property="mainboardLink"/>
 		<result column="mainboard_time" property="mainboardTime"/>
 
@@ -74,12 +75,20 @@
 		(#{userNo},#{keywordNo},#{mainboardTitle},#{mainboardContents},#{mainboardView},#{mainboardImg},#{mainboardLink})
 	</insert>
 	
-	<!-- View 업데이트 아직 미구현 -->
-	<!--  <update id="viewUpdate" parameterType="int">
+	<update id="viewUpdate" parameterType="int">
 		UPDATE mainboard SET
-		mainboardView=mainboardView+1
+		mainboard_view=mainboard_view+1
 		WHERE mainboard_no=#{mainboardNo}
-	</update> -->
+	</update>
+	<update id="update" parameterType="MainBoardDto">
+		UPDATE mainboard SET
+		mainboard_title=#{mainboardTitle},
+		mainboard_contents=#{mainboardContents},
+		mainboard_img=#{mainboardImg},
+		mainboard_link=#{mainboardLink},
+		keyword_no=#{keywordNo}
+		WHERE mainboard_no=#{mainboardNo}
+	</update>
 	
 	<delete id="delete">
 		DELETE FROM mainboard

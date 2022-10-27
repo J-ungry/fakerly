@@ -10,25 +10,29 @@
 </head>
 <body>
 	<header th:include="headerNav"></header>
-	<!-- 게시판 몇 글자 수 더보기 기능 참고: https://moollang.tistory.com/8 -->
-	<main>	<!-- *주의* 게시판 데이터 넣을 때 반복문: class 이용 -->
-
-		<div id="container" style="background-color: #f7f7f7; border: 1px solid">
+	<!-- 
+		메인 게시판 조회 수, 이미지 업로드 구현완료 
+		/mainboard Intercepter preHandle 컨트롤러 가기 전에 로그인 확인할 수 있도록 구현했습니다.
+		쓰실 분은 InterceptorConfig에서 설정하고 쓰시면 됩니다.
+		spring.servlet.multipart.location 이미지 경로 설정해서 해당하는 위치에 폴더가 없으면 오류가 날겁니다.
+		static에 폴더이름 fakerlyImg 입니다.
+	-->
+	<main>
+		<div id="container" style="background-color: #f7f7f7; border: 1px solid #fff">
 			<div class="w-50 p-3 mt-5" id="mainboardInsert">
-					<div id=userProfile>
-						<img src="/img/profile.png">
-					</div>
-					<!-- userNo=${session.loginUser?.user_no} 여기 ? 오타아닙니다. ? 지우면 에러나요! -->
-					<a th:href="@{/mainboard/insert(userNo=${session.loginUser?.user_no})}" id=insertPlaceholder class="w-100">
-						<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
-					</a>
-
-
+				<div id=userProfile>
+					<img src="/img/profile.png">
+				</div>
+				<!-- userNo=${session.loginUser?.user_no} 여기 ? 오타아닙니다. ? 지우면 에러나요! -->
+				<a th:href="@{/mainboard/insert(userNo=${session.loginUser?.user_no})}" id=insertPlaceholder class="w-100">
+					<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
+				</a>
 			</div>
-			<div class="post-container w-50 p-3 h-25" th:each="main : ${mainList}" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
+			<!-- <div class="post-container">에는 게시판만 넣어주세요. 반복문입니다. -->
+			<div class="post-container w-50 p-3 h-25" th:each="main : ${mainList}" style="margin-top: 50px;">	
 				<div class="boardInfo d-flex justify-content-between">
 					<div class="boardProfile d-flex align-self-center">
-						<a href="#">	<!-- 작성자 프로필 -->
+						<a href="#">	<!-- 작성자 프로필: user에서 프로필이미지 저장 된다면 그 프로필 이미지로 교체 -->
 							<img class="align-middle" src="/img/profile.png">
 						</a>
 						<div class="userInfo d-flex flex-column align-self-center">
@@ -59,13 +63,17 @@
 						</div>	<!-- 더보기 기능 how??? -->
 					</div>
 					<div class="boardFile w-75">
-						<div class="boardLink">	<!-- 이미지와 기능은 추가 안하면 안보임 -->
+						<!-- 링크 -->
+						<div class="boardLink">
 							<span th:if="${not #strings.isEmpty(main.mainboardLink)}" th:text="${main.mainboardLink}"></span>
 							<span th:unless="${not #strings.isEmpty(main.mainboardLink)}" th:text="|< ${main.userName}님이 추가한 링크가 없습니다. >|"></span>
 						</div>
-						<div class="boardImg">
-							<img src="/img/exampleImg.jpg" style="width: 100px; height: 100px;">
-						</div>
+						<!-- 이미지 -->
+						<th:block th:if="${main.mainboardImg!=null}">
+							<div class="boardImg">
+								<img th:src="@{/fakerlyImg/{file}(file=${main.mainboardImg})}" style="width: 100px; height: 100px;">
+							</div>
+						</th:block>
 					</div>
 				</div>
 				<div class="boardData">	<!-- 게시글 좋아요 수, 조회 수 -->
@@ -89,7 +97,7 @@
 							</a>
 						</div>
 						<div class="boardComment">
-							<a href="@{/mainboard/detail(mainboardNo=${main.mainboardNo})}">
+							<a th:href="@{/mainboard/detail(mainboardNo=${main.mainboardNo})}">
 								<img src="/img/mainboardComments.png">	<!-- 댓글창 가는 버튼 -->
 							</a>
 						</div>
@@ -97,26 +105,44 @@
 					<div>
 						<div class="d-flex">
 							<div class="me-2">
-								<a type="button" class="btn btn-outline-info btn-sm">
+								<!-- 게시글 수정버튼 -->
+								<a th:href="@{/mainboard/update(mainboardNo=${main.mainboardNo})}" class="btn btn-outline-secondary btn-sm">
 									수정
 								</a>
 							</div>
-							<div>	<!-- 삭제버튼 -->
-								<a th:href="@{/mainboard/delete(mainboardNo=${main.mainboardNo})}" class="btn btn-outline-danger btn-sm">
+							<div>
+								<!-- 삭제 모달 호출 -->
+								<button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
 									삭제
-								</a>
+								</button>
+								
+								<!-- 삭제 확인용 Modal -->
+								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+								        		<h1 class="modal-title fs-5" id="exampleModalLabel">게시글 삭제</h1>
+								        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								      		</div>
+								      		<div class="modal-body">
+								        		게시글을 삭제하시겠습니까?
+								      		</div>
+								      		<div class="modal-footer">
+								        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+								        			취소
+								        		</button>
+								        		<a th:href="@{/mainboard/delete(mainboardNo=${main.mainboardNo})}" class="btn btn-outline-danger btn-sm">
+								        			삭제
+								        		</a>
+								      		</div>
+								    	</div>
+								  	</div>
+								</div>
 							</div>
 						</div>
-					<div class="boardComment">
-						<a
-							th:href="@{/mainboard/detail(mainboardNo=${main.mainboardNo})}">
-							<img src="/img/mainboardComments.png">
-						</a>
-
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</main>
 	<aside th:include="side"></aside>
