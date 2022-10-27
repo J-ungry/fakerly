@@ -36,28 +36,39 @@ public class MainReplyController {
 			@SessionAttribute(required=false) UserDto loginUser
 			) {
 		
-		System.out.println("dkdkdk"+reply);
+		System.out.println(reply);
 		int insert=0;
 		insert=replyMapper.insert(reply);
-		System.out.println("됐냐? : "+insert);
-//		String msg="";
-//		int insert=0;
-//		try {
-//			insert=replyMapper.insert(reply);
-//			System.out.println(reply);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		if(insert>0) {
-//			msg="댓글등록성공";
-//			session.setAttribute("msg", msg);
-//			System.out.println("뇽뇽뇽"+reply);
-//			return "redirect:/mainboard/main";
-//		}else {
-//			msg="댓글등록실패";
-//			session.setAttribute("msg", msg);
-//			return "redirect:/mainboard/main";
-//		}
-		return "redirect:/mainboard/main";
+		String msg="";
+		try {
+			insert=replyMapper.insert(reply);
+			System.out.println(reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(insert>0) {
+			msg="댓글등록성공";
+			session.setAttribute("msg", msg);
+			System.out.println("뇽뇽뇽"+reply);
+			return "redirect:/mainboard/detail="+reply.getMainboard_no();
+		}else {
+			msg="댓글등록실패";
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/detail="+reply.getMainboard_no();
+		}
+	}
+	
+	
+	// 로그인한 유저만 수정 버튼을 생성하여 따로 처리 필요없음.
+	@PostMapping("/update")
+	public String update(
+			MainReplyDto reply,
+			HttpSession session,
+			@SessionAttribute(required=false) UserDto loginUser
+			) {
+		System.out.println(reply);
+		
+		return "";
 	}
 }
+

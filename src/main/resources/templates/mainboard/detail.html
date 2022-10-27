@@ -70,17 +70,17 @@
 			<!-- 수업 폼 테스트 -->
 			<form name="replyInsertForm"
 				th:if="${session.loginUser!=null}"
-				class="bg-light px-3 py-2" action="/reply/insert" method="post">
+				 action="/reply/insert" method="post">
 				<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
 				<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
 				<h3>댓글 작성 (<span th:text="${session.loginUser.nickname}"></span>)</h3>
 				<input type="hidden" name="boardNo" th:value="${mainboard.mainboardNo}"> 
-				<p class="form-floating">
-					<textarea class="form-control" name="contents" id="replyContents" placeholder="내용"></textarea>
+				<p >
+					<textarea name="contents" id="replyContents" placeholder="내용"></textarea>
 					<label for="replyContents">내용</label>
 				</p>
-				<div class="input-group">
-					<button class="btn btn-outline-primary">등록</button>
+				<div>
+					<button>등록</button>
 				</div>
 			</form>
 			

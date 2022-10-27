@@ -12,15 +12,17 @@
 3. depth -> 이용해서 대댓글의 순서 구분(이건 커리문으로 넣어야되나?)
  -->
 
-			
+		<form method="post">
+		
+		
+		</form>
 		<h1>댓글내용</h1>
   		<div th:each="reply_up:${mainboard.replyList}" id="replydiv">
 			
 			<div th:if="${reply_up.hierarchy==0}">
 				<h3>댓글</h3>
 				<span th:text="${reply_up.main_reply_no}"></span>
-				
-				
+								
 				<div th:each="reply_down:${mainboard.replyList}" th:if="${reply_up.main_reply_no==reply_down.group_no}">
 					<h3>대댓글</h3>
 					<p th:text="${reply_down.depth}"></p>
@@ -30,7 +32,11 @@
 			
 			
 			
-		
+	
+			
+  		</div>
+  		
+	
 			
 			<!-- 
 			
@@ -51,36 +57,3 @@
 			<span th:text="${reply.reply_time}"></span>
 			<span th:text="${reply.user_no}"></span>
 			 -->
-			
-  		</div>
-  		
-  	
-  	<!-- 
-  	<div href="#" class="list-group-item list-group-item-action py-3" aria-current="true">
-	    <div class="d-flex w-100 justify-content-between">
-	      <h5 class="mb-1" th:text="${reply.title}"></h5>
-	      <small th:text="${#dates.format(reply.postTime,'HH:mm:ss yyyy-MM-dd')}"></small>
-	    </div>
-	    <div class="mb-1 d-flex justify-content-between align-items-center	">
-		    <span th:text="${reply.userId}"></span>
-			<div>
-				<button class="rounded-pill btn btn-outline-danger btn-sm">
-					<i class="bi bi-hand-thumbs-up"></i>
-					<th:block th:text="${reply.likes}"></th:block>
-				</button>
-				<button class="rounded-pill btn btn-outline-primary btn-sm"> 
-					<i class="bi bi-hand-thumbs-down"></i>
-					<th:block th:text="${reply.bads}"></th:block>
-				</button>
-			</div>
-			<a th:href="@{/reply/update.do(replyNo=${reply.replyNo)">수정하기</a>
-	    </div>
-	    <div class="mb-1 row">
-	     	<img th:if="${reply.imgPath!=null}" alt="" class="col-2"
-	     	th.src="@{/img/{file}(file=${reply.imgPath})}">
-	     	<span class="col-10" th:text="${reply.contents}"></span>
-	     </div>
- 	</div>
-	 
-  	 -->
-  	
