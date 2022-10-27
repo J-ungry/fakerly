@@ -63,9 +63,10 @@
   		attend=#{attend},
   		state=#{state}
   		WHERE side_board_no=#{sideBoardNo}
-  		
-  		
   </update>
+  <delete id="delete">
+  	DELETE FROM SIDEBOARD WHERE side_board_no=#{sideBoardNo}
+  </delete>
   
 
   </mapper>

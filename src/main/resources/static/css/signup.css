@@ -49,7 +49,7 @@ body{
     padding: 0;
 }
 
-.signupForms>div{
+.signupForms>div:not(.listDiv){
     position:absolute;
     top:60%;
     left:50%;
@@ -201,6 +201,10 @@ body{
     color: #fff;
 }
 
-.userInfo button{
+.signupForms>button{
     visibility: hidden;
+}
+
+#userInfo3>h1{
+	margin-bottom: 0;
 }

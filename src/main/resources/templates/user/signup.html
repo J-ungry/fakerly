@@ -5,6 +5,7 @@
     <title>회원가입</title>
     <link rel="stylesheet" href="/css/signup.css">
     <script src="/js/signup.js" defer="defer"></script>
+    <script src="/js/items.js" defer="defer"></script>
 </head>
 <body>
 <header th:include="/headerNav"></header>
@@ -93,14 +94,33 @@
     </div>
     
     <div class="signupForms userInfo" id="userInfo3">
-        <h1>키워드 선택</h1>
+        <h1 style="display: inline-block; margin-bottom:0;">키워드 선택</h1>
         <div class="userInfoForm" id="userInfo3Form">
             <h1>키워드 선택</h1>
-            <label>
-                <input type="text" name="keyword" placeholder="키워드">
-            </label>
-
+            
+            <!-- Button trigger modal -->
+			<button th:onclick="getList('keywordList', 1)" type="button" class="btn btn-outline-secondary listBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			  키워드 추가 +
+			</button>
         </div>
+            
+		<!-- Modal -->
+		<div class="modal fade listDiv" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		        <button type="button" class="btn-close listBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body" id="keywordList">
+		      	<ul class="list-group">
+		      		<!-- 키워드 목록 -->
+		      	</ul>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+			
         <button type="button" class="lBtn">이전</button>
         <button class="rBtn" type="submit" disabled="disabled" style="background-color: #ddd">완료</button>
     </div>
