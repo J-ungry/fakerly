@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.joongbu.fakerly.mapper.SideRoleMapper">
+  <resultMap type="SideRoleDto" id="SideRoleMap">
+  	<result column="side_board_no" property="sideBoardNo"/>
+  	<result column="side_role_no" property="sideRoleNo"></result>
+  </resultMap>
+  	
+	
+	<insert id="insert" parameterType="SideRoleDto">
+		INSERT INTO SIDE_ROLE (side_board_no,side_role_no) VALUE(#{sideBoardNo},#{sideRoleNo});
+	</insert>
+	<delete id="delete">
+		DELETE FROM SIDE_ROLE WHERE side_board_no=#{sideBoardNo}
+	</delete>
+  </mapper>
+  
+  

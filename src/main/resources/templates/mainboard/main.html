@@ -13,59 +13,71 @@
 	<!-- 게시판 몇 글자 수 더보기 기능 참고: https://moollang.tistory.com/8 -->
 	<main>	<!-- *주의* 게시판 데이터 넣을 때 반복문: class 이용 -->
 
+		<div id="container" style="background-color: #f7f7f7; border: 1px solid">
+			<div class="w-50 p-3 mt-5" id="mainboardInsert">
+					<div id=userProfile>
+						<img src="/img/profile.png">
+					</div>
+					<!-- userNo=${session.loginUser?.user_no} 여기 ? 오타아닙니다. ? 지우면 에러나요! -->
+					<a th:href="@{/mainboard/insert(userNo=${session.loginUser?.user_no})}" id=insertPlaceholder class="w-100">
+						<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
+					</a>
 
-		<div style="margin-top: 40px; background-color: #f7f7f7;">
+
+
+<!-- 		<div style="margin-top: 40px; background-color: #f7f7f7;">
 
 		<div id="container" style="border: 1px solid black; margin-top: 40px; background-color: #f7f7f7;">
 
-			<div class="w-50 p-3" id="mainboardInsert" style="margin-top: 50px;"> <!-- div 클릭 시 insert로 이동 -->
+			<div class="w-50 p-3" id="mainboardInsert" style="margin-top: 50px;"> div 클릭 시 insert로 이동
 				<div id=userProfile>
 					<img src="/img/profile.png">
 				</div>
 				<a th:href="@{/mainboard/insert(userNo=${session.loginUser.user_no})}" id=insertPlaceholder class="w-100">
 					<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
-				</a>
+				</a> -->
+
 			</div>
 			<div class="post-container w-50 p-3 h-25" th:each="main : ${mainList}" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
-				<div class="boardInfo">	<!-- 작성자 프로필 사진, 이름, 소속, 글 등록 시간, 팔로우버튼 -->
-					<div class="boardProfile d-flex flex-column align-self-center">
-						<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
+				<div class="boardInfo d-flex justify-content-between">
+					<div class="boardProfile d-flex align-self-center">
+						<a href="#">	<!-- 작성자 프로필 -->
 							<img class="align-middle" src="/img/profile.png">
 						</a>
-					</div>
-					<div class="userInfo d-flex flex-column align-self-center">
-						<div><span style="font-size: 14px" class="align-middle" th:text="${main.userName}"><strong></strong></span></div>
-						<div style="font-size: 9px; margin-top: 0; color: #d7d3cd">
-							<span th:text="${main.userCompany}"></span>
-							<span>·</span>
-							<span th:text="${#dates.format(main.mainboardTime,'yyyy-MM-dd HH:mm')}"></span>
+						<div class="userInfo d-flex flex-column align-self-center">
+							<div><span style="font-size: 14px" class="align-middle" th:text="${main.userName}"><strong></strong></span></div>
+							<div style="font-size: 9px; margin-top: 0; color: #d7d3cd">
+								<span th:text="${main.userCompany}"></span>	<!-- 작성자 소속 -->
+								<span>·</span>
+								<span th:text="${main.keywordName}"></span>	<!-- 게시글 키워드 -->
+								<span>·</span>
+								<span th:text="${#dates.format(main.mainboardTime,'yyyy-MM-dd HH:mm')}"></span>	<!-- 게시글 등록된 시간 -->
+							</div>
 						</div>
 					</div>
-					<div class="followBtn d-flex justify-content-end">
+					<div class="followBtn d-flex justify-content-end me-3">
 						<button class="h-50 mt-3" style="font-weight: 1000;">팔로우</button>
 					</div>
 				</div>
-				<div class="boardMain">	<!-- 게시글의 제목, 내용, 링크, 이미지 -->
+				<div class="boardMain">	
 					<div class="boardTitle mt-2 ms-3">
 						<div>
+							<!-- 게시글 제목 -->
 							<span><strong th:text="${main.mainboardTitle}"></strong></span>
 						</div>
 					</div>
 					<div class="boardContents mt-2 ms-3">
 						<div>
 							<span th:text="${main.mainboardContents}"></span>
-							<span th:text="${main.mainboardNo}"></span>
 						</div>	<!-- 더보기 기능 how??? -->
 					</div>
 					<div class="boardFile w-75">
 						<div class="boardLink">	<!-- 이미지와 기능은 추가 안하면 안보임 -->
 							<span th:if="${not #strings.isEmpty(main.mainboardLink)}" th:text="${main.mainboardLink}"></span>
-							<span th:unless="${not #strings.isEmpty(main.mainboardLink)}" 
-							th:text="|< ${main.userName}님이 추가한 링크가 없습니다. >|"></span>
+							<span th:unless="${not #strings.isEmpty(main.mainboardLink)}" th:text="|< ${main.userName}님이 추가한 링크가 없습니다. >|"></span>
 						</div>
 						<div class="boardImg">
-							<img src="/img/exampleImg.jpg" 
-							style="width: 100px; height: 100px;">
+							<img src="/img/exampleImg.jpg" style="width: 100px; height: 100px;">
 						</div>
 					</div>
 				</div>
@@ -81,20 +93,36 @@
 						<span><strong th:text="${main.mainboardView}"></strong></span>
 					</div>
 				</div>
-				<div class="boardBtn">	<!-- 게시글 좋아요 버튼, 댓글 버튼 -->
-					<div class="boardPrefer">
-						<a class="btn" th:href="@{/mainboard/putLike(userNo=${session.loginUser.user_no},boardNo=${main.mainboardNo})}">
-							<img src="/img/mainboardPrefer.png" style="width: 13px; height: 13px;">
-							<span style="font-size: 13px; font-weight: bold;">좋아요</span>
-						</a>
+				<div class="boardBtn d-flex justify-content-between">
+					<div class="d-flex">
+						<div class="boardPrefer">
+							<a class="btn" th:href="@{/mainboard/putLike(userNo=${session.loginUser?.user_no},boardNo=${main.mainboardNo})}">
+								<img src="/img/mainboardPrefer.png" style="width: 13px; height: 13px;">
+								<span style="font-size: 13px; font-weight: bold;">좋아요</span>	<!-- 좋아요 버튼 -->
+							</a>
+						</div>
+						<div class="boardComment">
+							<a href="@{/mainboard/detail(mainboardNo=${main.mainboardNo})}">
+								<img src="/img/mainboardComments.png">	<!-- 댓글창 가는 버튼 -->
+							</a>
+						</div>
 					</div>
-					<div class="boardComment">
-						<a
-							th:href="@{/mainboard/detail(mainboardNo=${main.mainboardNo})}">
-							<img src="/img/mainboardComments.png">
-						</a>
+					<div>
+						<div class="d-flex">
+							<div class="me-2">
+								<a type="button" class="btn btn-outline-info btn-sm">
+									수정
+								</a>
+							</div>
+							<div>	<!-- 삭제버튼 -->
+								<a th:href="@{/mainboard/delete(mainboardNo=${main.mainboardNo})}" class="btn btn-outline-danger btn-sm">
+									삭제
+								</a>
+							</div>
+						</div>
+
 					</div>
-				</div>	
+				</div>
 			</div>
 
 		</div>

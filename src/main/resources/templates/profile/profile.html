@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>내 프로필</title>
+</head>
+<body>
+	<header th:include="/headerNav"></header>
+	<main class="container mx-auto mt-5"  style="max-width: 600px;">
+		<h1>Spring_board.user detail</h1>
+		<form action="/user/update.do" method="post" class="mt-5" >
+			<div class="mb-3 input-group">
+				<label class="input-group-text">프로필사진</label>
+				<input class="form-control" type="file" name="profileImg" th:value="${userDto.img}">
+			</div>
+			<div class="mb-3 input-group">  
+				<label class="input-group-text">이름</label>
+				<input class="form-control" type="text" name="name" th:value="${userDto.user_name}">
+			</div>
+			<div class="mb-3 input-group">
+				<label class="input-group-text">소속</label>
+				<input class="form-control" type="text" name="company" th:value="${userDto.company}">
+			</div>
+			<div class="mb-3 input-group">
+				<label class="input-group-text">팔로워 </label>
+				<input class="form-control" type="text" name="followee" th:value="${userDto.user_no}"> <!-- 질문 -->
+			</div>	
+			<div class="mb-3 input-group">
+				<label class="input-group-text">팔로잉 </label>
+				<input class="form-control" type="text" name="follower" th:value="${userDto.user_no}"> <!-- 질문 -->
+			</div>	
+			<div class="mb-3 input-group">
+				<label class="input-group-text">게시물 </label>
+				<input class="form-control" type="text" name="boardcount" th:value="${userDto.user_no}"> <!-- 질문 -->
+			</div>	
+		</form>
+	</main>
+	
+</body>
+</html>

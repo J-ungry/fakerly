@@ -13,9 +13,24 @@
   	<result column="link" property="link" />
   	<result column="time" property="time" />
   </resultMap>
-  <select id="list" resultMap="TempBoardMap">
+  <select id="templist" resultMap="TempBoardMap">
   
+ SELECT *,user_no userNO FROM tempboard 
+ 		ORDER BY temp_no DESC
+  
+  
+ <!-- SELECT t.*,u.user_name,u.company,
+		(SELECT COUNT(*) FROM tempboard_prefer tf WHERE tf.tempboard_no=m.tempboard_no)
+		FROM tempboard t INNER JOIN user u 
+		ON t.user_no=u.user_no ORDER BY t.tempboard_no DESC  -->
   </select>
+  <insert id="insert" parameterType="TempBoardDto" useGeneratedKeys="true" keyProperty="tempboardNo">
+		<!-- user_no와 keyword_no 작성자의 아이디와 키워드를 가져올 예정 -->
+		INSERT INTO tempboard 
+ 		(temp_no, user_no, title, keyword_no, contents, img, link) 
+ 		VALUES 
+ 		(#{tempNo}, #{userNo}, #{title}, #{keywordNo}, #{contents}, #{img}, #{link})
+	</insert>
   </mapper>
   
 <!--

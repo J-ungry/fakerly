@@ -9,6 +9,7 @@
 <title>사이드 프로젝트</title>
 </head>
 <body>
+<header th:include="headerNav"></header>
 	<h1>게시글 상세 </h1>
 	<div class="container">
 		<div class="content">
@@ -38,10 +39,12 @@
 		
 			좋아요:<span th:text="${side.likes}"></span>
 		</div>
-		<div>
-			<a th:href="@{/sideboard/update.do(sideBoardNo=${side.sideBoardNo})}">
-			수정하기
-			</a>
+		<div th:if="${session.loginUser!=null}">
+			<div th:if="${session.loginUser.user_no==side.user.user_no}"> <!-- 본인 게시글 인 경우에만 수정하기 나타 -->
+				<a th:href="@{/sideboard/update.do(sideBoardNo=${side.sideBoardNo})}">
+				수정하기
+				</a>
+			</div>
 		</div>
 	</div>
 </body>

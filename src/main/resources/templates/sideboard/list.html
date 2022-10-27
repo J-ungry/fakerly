@@ -9,6 +9,7 @@
 <title>사이드 프로젝트</title>
 </head>
 <body>
+<header th:include="headerNav"></header>
 
 <div class="container">
 		<h1 class="mt-5">Spring_board.board list</h1>
@@ -16,6 +17,7 @@
 			<a class="btn btn-outline-primary" href="/sideboard/insert.do">
 			글작성</a>
 		</p>
+
 
 	<div class="boards"><!-- 게시글 들어올 곳 -->
 		<div class="article" th:each="side:${sideList}" th:onclick="location.href='detail.do?sideBoardNo=[[${side.sideBoardNo}]]'"><!-- 게시글 한개 -->

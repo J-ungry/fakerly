@@ -17,5 +17,11 @@
   	WHERE side_board_no=#{sideBoardNo});
   </select>
   
+  <select id="getRoles" resultMap="RolesMap">
+  	SELECT * 
+  	FROM ROLES;
+  </select>
+  
+  
   </mapper>
   

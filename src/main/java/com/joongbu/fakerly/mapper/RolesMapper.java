@@ -8,4 +8,6 @@ import com.joongbu.fakerly.dto.RolesDto;
 @Mapper
 public interface RolesMapper {
 	List<RolesDto> list(int sideBoardNo);
+	List<RolesDto> getRoles();
+
 }
