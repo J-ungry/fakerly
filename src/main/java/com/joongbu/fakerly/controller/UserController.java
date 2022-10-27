@@ -81,7 +81,8 @@ public class UserController {
 				if (loginUser != null) {
 					// 비밀번호 비교
 					// Boolean bool = BCrypt.checkpw(pw, loginUser.getPw());
-					if (!pw.equals(loginUser.getPw())) {
+					System.out.println(BCrypt.checkpw(pw, loginUser.getPw()));
+					if (!BCrypt.checkpw(pw, loginUser.getPw())) {
 						msg = "비밀번호가 일치하지 않습니다.";
 						session.setAttribute("msg", msg);
 						return "redirect:/user/login.do";
