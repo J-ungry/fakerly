@@ -24,6 +24,19 @@
 					</a>
 
 
+
+<!-- 		<div style="margin-top: 40px; background-color: #f7f7f7;">
+
+		<div id="container" style="border: 1px solid black; margin-top: 40px; background-color: #f7f7f7;">
+
+			<div class="w-50 p-3" id="mainboardInsert" style="margin-top: 50px;"> div 클릭 시 insert로 이동
+				<div id=userProfile>
+					<img src="/img/profile.png">
+				</div>
+				<a th:href="@{/mainboard/insert(userNo=${session.loginUser.user_no})}" id=insertPlaceholder class="w-100">
+					<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
+				</a> -->
+
 			</div>
 			<div class="post-container w-50 p-3 h-25" th:each="main : ${mainList}" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
 				<div class="boardInfo d-flex justify-content-between">
@@ -107,11 +120,6 @@
 								</a>
 							</div>
 						</div>
-					<div class="boardComment">
-						<a
-							th:href="@{/mainboard/detail(mainboardNo=${main.mainboardNo})}">
-							<img src="/img/mainboardComments.png">
-						</a>
 
 					</div>
 				</div>
