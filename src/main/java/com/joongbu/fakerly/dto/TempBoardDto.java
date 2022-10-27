@@ -22,11 +22,11 @@ import lombok.Data;
 @Data
 public class TempBoardDto {
 	private int tempNo;
-	private int userId;
+	private int userNo;
 	private String title;
 	private int keywordNo;
 	private String contents;
 	//private Blob img;
 	private String link;
-	private Date dataTime;
+	private Date time;
 }
