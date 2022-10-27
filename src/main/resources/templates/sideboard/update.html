@@ -11,7 +11,7 @@
 <body>
 	<h1>게시글 수정 </h1>
 	<div class="container">
-	<div th:text="${side}"></div>
+
 	<form action="/sideboard/update.do" method="post">
 		<input type="hidden" name="sideBoardNo" th:value="${side.sideBoardNo}">
 		<input type="hidden" name="user_no" th:value="${side.user.user_no}">
@@ -52,11 +52,15 @@
 			</p>
 
 			모집역할:
-			<div th:each="role:${roles}">
-				<ul>
-					<li th:text="${role.roleName}"></li>
-				</ul>
+			<div th:each="role:${rolesList}">
+					<label>
+						<input
+						th:checked=${role.checked}	
+						 type="checkbox" name="roleNo" th:value=${role.sideRoleNo} th:text="${role.roleName}">
+					</label>
 			</div>
+
+
 
 		</div>
 		<div>

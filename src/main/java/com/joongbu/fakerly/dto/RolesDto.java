@@ -14,5 +14,5 @@ import lombok.Data;
 public class RolesDto {
 	private  int sideRoleNo;
 	private String roleName;
-	
+	private boolean checked;
 }

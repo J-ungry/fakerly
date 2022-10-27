@@ -28,7 +28,6 @@ import lombok.Data;
 //| age       | int         | NO   |     | NULL              |                   |
 //| img       | blob        | YES  |     | NULL              |                   |
 //+-----------+-------------+------+-----+-------------------+-------------------+
-
 @Data
 public class UserDto {
 	private int user_no;

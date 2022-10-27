@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"><!-- 개발할땐 css 배포할땐 min css -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>사이드 프로젝트</title>
+</head>
+<body>
+	<h1>게시글 작성 </h1>
+	<div class="container">
+
+	<form action="/sideboard/insert.do" method="post">
+		<div class="content">
+		<p>
+			<input type="radio" name="state" value=1>모집 중
+			<input type="radio" name="state" value=0>모집 완료
+		</p>
+<!-- 			<span th:if="${side.state == 1}">모집중</span>
+			<span th:if="${side.state == 0}">모집 완료</span> -->
+			<p>
+				<strong>작성자</strong>
+				<span th:text="${session.loginUser.user_name}"></span>
+			</p>
+			<p>제목:
+				<input name="title" placeholder="제목 입력">
+			</p>
+			<!-- <span th:text="${side.title}"></span> -->
+			<p>요약:
+				<input name="summ" placeholder="요약 내용 입력">
+			</p>
+			<p>소개:
+				<input name="intro" placeholder="소개 입력">
+			</p>
+			<p>
+			<input type="radio" name="purpose" value="수익창출">수익창출
+			<input type="radio" name="purpose" value="포트폴리오">포트폴리오
+			<input type="radio" name="purpose" value="재미">재미
+			<input type="radio" name="purpose" value="네트워킹">네트워킹
+			<input type="radio" name="purpose" value="직무역량강화">직무역량강화
+			</p>
+<!-- 			목적:<span th:text="${side.purpose}"></span> -->
+			<p>
+			<input type="radio" name="attend" value="매주 4시간 이하">매주 4시간 이하
+			<input type="radio" name="attend" value="매주 4-10시간">매주 4-10시간
+			<input type="radio" name="attend" value="매주 10시간 이상">매주 10시간 이상
+			</p>
+<!-- 			참여시간:<span th:text="${side.attend}"></span> -->
+			<p>
+				신청 링크:
+				<input type="text" name="sup" placeholder="신청 링크 입력">
+			</p>
+
+ 			모집역할:
+			<div th:each="role:${rolesList}">
+					<label>
+						<input
+						th:checked=${role.checked}	
+						 type="checkbox" name="roleNo" th:value=${role.sideRoleNo} th:text="${role.roleName}">
+					</label>
+			</div>
+
+			<div class="d-flex justify-content-end">
+				<button class="btn btn-outline-primary" type="reset">초기화</button>
+				<button class="btn btn-outline-warning mx-2">
+				등록
+				</button>
+
+			</div>
+			</div>
+	</form>
+	</div>
+</body>
+</html>
