@@ -27,7 +27,8 @@ public class QnaDto {
 	private Date qaTime;
 	private int views;
 	private int qa_resolve; 
-	private int user_no; //UserDto FK
-//	private UserDto user;
-	private String nickname;
+//	private int user_no; //UserDto FK
+	private UserDto user;
+	private int likes; //select count(*) from qna_like weher prefer=1 AND board_no=no
+//	private String nickname;
 }
