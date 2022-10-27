@@ -255,3 +255,19 @@ btns[5].onclick = function(){
     btns[3].style.visibility = "visible";
     btns[4].style.visibility = "visible";
 }
+
+function temp(){
+	divs.forEach(div =>div.style.width = "10%");
+	divs[3].style.width = "68%";
+
+	h1s.forEach(h1 =>h1.style.visibility = "visible");
+	h1s[3].style.visibility = "hidden";
+
+	forms.forEach(form =>form.style.visibility = "hidden");
+	forms[3].style.visibility = "visible";
+
+	btns.forEach(btn => btn.style.visibility = "hidden");
+    btns[5].style.visibility = "visible";
+    btns[6].style.visibility = "visible";
+}
+temp();
