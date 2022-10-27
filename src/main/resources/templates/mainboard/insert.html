@@ -20,16 +20,25 @@
 				<button>완료</button>
 			</div>
 		</div>
-		<div id="MainboardAddFile">
-			<img onclick="showLink()" name="mainboardLink" alt="linkImg" src="/img/mainboard_link.png">
-			<img onclick="showImg()" name="mainboardImg" alt="fileImg" src="/img/mainboard_picture.png">
+		<div id="MainboardAddFile" class="d-flex justify-content-between">
+			<div style="border: none;">
+				<img onclick="showLink()" name="mainboardLink" alt="linkImg" src="/img/mainboard_link.png">
+				<img onclick="showImg()" name="mainboardImg" alt="fileImg" src="/img/mainboard_picture.png">
+			</div> 
+			<div style="border: none;">
+				<select name="keywordNo" class="form-select form-select-sm ws-25" aria-label=".form-select-sm example">
+					<!-- 다른 분들은 value를 1~5로 하시면 됩니다. -->
+					<option value="2">HTML</option>
+					<option value="3">CSS</option>
+					<option value="4">JS</option>
+					<option value="5">Java</option>
+					<option value="6">AJAX</option>
+				</select>
+			</div>
 		</div>
-		<div id="Mainboard">	<!-- border 안 이어짐 -->
+		<div id="Mainboard">
 			<div id="MainboardTitle">
-
 				<input type="text" name="mainboardTitle" placeholder="제목을 입력하세요." maxlength="100">
-					<input type="text" name="mainboardTitle" placeholder="수정할 제목을 입력하세요.">
-
 			</div>
 			<div id="MainboardContents">
 				<div class="form-floating mb-2 mt-3" id="linkInputContainer" style="display: none;">
@@ -39,10 +48,16 @@
 				<div class="mb-3" id="fileInputContainer" style="display: none;">
 					<input class="form-control text text-muted" type="file" id="formFile" enctype="multipart/form-data">
 				</div>
-				<textarea name="mainboardContents"  placeholder="나누고 싶은 생각을 적어주세요.&#13;&#10;링크나 사진을 추가할 수도 있어요." maxlength="254"></textarea>
-						
+				<textarea name="mainboardContents" placeholder="나누고 싶은 생각을 적어주세요.&#13;&#10;링크나 사진을 추가할 수도 있어요." maxlength="254"></textarea>
 			</div>
 		</div>
 	</form>
+	<th:block th:if="${session.msg!=null}">
+		<script th:inline="javascript">
+		let msg=/*[[${session.msg}]]*/+"";
+		alert(msg);
+		/*[[${#session.removeAttribute('msg')}]]*/
+		</script>
+	</th:block>
 </body>
 </html>

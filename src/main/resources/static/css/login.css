@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
 @import
-	url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap")
-	;
+	url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
 * {
 	box-sizing: border-box;

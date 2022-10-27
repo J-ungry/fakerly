@@ -27,19 +27,13 @@ public class MainBoardController {
 	DataSource dataSource;
 	@Autowired
 	MainBoardMapper boardMapper;
-
-	
-//	@GetMapping("/main")	// /mainboard/main GET 요청 처리
-//	public String main() {
-//		return "/mainboard/main";
-//	}
 	
 	@GetMapping("/main")	// /mainboard/main GET 요청 처리
 	public String main(Model model) {
 		List<MainBoardDto> mainList=null;
 		try {
 			mainList=boardMapper.list();
-			System.out.println(mainList.get(0).getPrefer());
+			System.out.println(mainList.get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,22 +41,43 @@ public class MainBoardController {
 		return "/mainboard/main";
 	}
 	
-	
+	//게시글 등록 get
 	@GetMapping("/insert")
-	public void insert() {}
+	public String insert(	
+			@SessionAttribute(required=false) UserDto loginUser,
+			HttpSession session
+			) {
+		String msg="";
+		if(loginUser!=null) {
+			return "/mainboard/insert";
+		} else {
+			msg="로그인하셔야 게시글을 작성할 수 있습니다.";
+			session.setAttribute("msg", msg);
+			return "redirect:/user/login.do";
+		}
+	}
+	
+	//게시글 등록 post
 	@PostMapping("/insert")
 	public String insert(
 			MainBoardDto mainboard,
 			HttpSession session,
 			@SessionAttribute(required=true) UserDto loginUser
 			) {
-		System.out.println(mainboard);
 		String msg="";
 		int insert=0;
 		try {
 			if(loginUser!=null) {
-				insert=boardMapper.insert(mainboard);
-				System.out.println(mainboard);
+				if(mainboard.getMainboardTitle().isEmpty()) {
+					msg="게시글의 제목을 입력하세요.";
+					session.setAttribute("msg", msg);
+					return "redirect:/mainboard/insert?userNo"+loginUser.getUser_no();
+				} else if(mainboard.getMainboardContents().isEmpty()) {
+					msg="게시글의 내용을 입력하세요.";
+					return "redirect:/mainboard/insert?userNo"+loginUser.getUser_no();
+				} else {
+					insert=boardMapper.insert(mainboard);
+				}
 			} else {
 				msg="로그인 한 사용자만 글을 등록할 수 있습니다.";
 				session.setAttribute("msg", msg);
@@ -83,11 +98,10 @@ public class MainBoardController {
 	
 	@GetMapping("/detail")
 	public String detail(
-			@RequestParam(required=true)int mainboardNo,
+			@RequestParam(required=true) int mainboardNo,
 			Model model
 			) {
 		MainBoardDto mainboard=null;
-		
 		try {
 			mainboard=boardMapper.detailReply(mainboardNo);
 			System.out.println(mainboard);
@@ -103,9 +117,39 @@ public class MainBoardController {
 		}
 	}
 	
-	
+	//mainboard 게시글 삭제
+	@GetMapping("/delete")
+	public String delete(
+			@RequestParam(required=true) int mainboardNo,
+			@SessionAttribute(required=false) UserDto loginUser,
+			HttpSession session
+			) {
+		int delete=0;
+		String msg="";
+		try {
+			if(loginUser!=null) {
+				MainBoardDto mainboard=boardMapper.detail(mainboardNo);
+				if(mainboard.getUserNo()==loginUser.getUser_no()) {
+					delete=boardMapper.delete(mainboardNo);
+				} else {
+					msg="글쓴이만 삭제 할 수 있습니다.";
+				}
+			} else {
+				msg="로그인해야 게시글 삭제가 가능합니다.";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(delete>0) {
+			msg="삭제 성공";
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/main";
+		} else {
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/main";
+		}
+	}
 
-	
 	
 }
 
