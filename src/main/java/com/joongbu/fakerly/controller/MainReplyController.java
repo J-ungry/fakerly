@@ -86,6 +86,7 @@ public class MainReplyController {
 		System.out.println(reply);
 		try {
 			delete=replyMapper.delete(reply.getMain_reply_no());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

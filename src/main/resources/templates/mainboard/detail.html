@@ -45,7 +45,7 @@
 					<div class="boardFile w-75">
 						<div class="boardLink">	<!-- 이미지와 기능은 추가 안하면 안보임 -->
 							<div th:if="${mainboard.mainboardLink==null}">추가한 링크가 없습니다.</div>
-							<div th:unless="${mainboard.mainboardLink==null}" th:text="${main.mainboardLink}"></div>	
+							<div th:unless="${mainboard.mainboardLink==null}" th:text="${mainboard.mainboardLink}"></div>	
 						</div>
 						<div class="boardImg">
 							<img src="/img/exampleImg.jpg" 
