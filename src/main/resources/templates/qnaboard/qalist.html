@@ -10,11 +10,11 @@
 <title>QNA프로젝트</title>
 </head>
 <body>
-
+	<header th:include="headerNav"></header>
+	<main class="container mt-5">
 <div class="container">
-		<h1 class="mt-5">Spring_board.board list</h1>
 		<p class="d-flex justify-content-end">
-			<a class="btn btn-outline-primary" href="/sideboard/insert.do">
+			<a class="btn btn-outline-primary" href="/qnaboard/qainsert.do">
 			글작성</a>
 		</p>
 
@@ -29,19 +29,25 @@
 				<th>닉네임</th>
 				<th>조회수</th>
 				<th>좋아요</th>
+				<th>해결여부</th>
+				<th>게시판 번호</th>
+			
 			</tr>
 		</thead>
 		<tbody>
 			<tr class="link-secondary"
-				th:onclick="location.href='qadetail.do?qaNo=[[${qaboard.qaNo}]]'" 
-				th:each="qaboard:${qaList}">
-				<td th:text="${qaboard.qaNo}"></td>
-				<td th:text="${qaboard.title}"></td>
-				<td th:text="${#dates.format(qaboard.qaTime,'MM월dd일 HH시mm분')}"></td>
-				<td th:text="${qaboard.user.user_no}"></td>
-				<td th:text="${qaboard.user.nickname}"></td>
-				<td th:text="${qaboard.views}"></td>
-				<td th:text="${qaboard.likes}"></td>
+				th:onclick="location.href='qadetail.do?qaNo=[[${qnaboard.qaNo}]]'" 
+				th:each="qnaboard:${qaList}">
+				<td th:text="${qnaboard.qaNo}"></td>
+				<td th:text="${qnaboard.title}"></td>
+				<td th:text="${#dates.format(qnaboard.qaTime,'MM월dd일 HH시mm분')}"></td>
+				<td th:text="${qnaboard.user.user_no}"></td>
+				<td th:text="${qnaboard.user.nickname}"></td>
+				<td th:text="${qnaboard.views}"></td>
+				<td th:text="${qnaboard.likes}"></td>
+				<td th:text="${qnaboard.qa_resolve}"></td>
+				
+				<td th:text="${qnaboard.qa_side}"></td>
 			</tr>
 		</tbody>
 		</table>

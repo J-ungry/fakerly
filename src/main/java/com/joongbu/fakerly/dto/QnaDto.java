@@ -4,6 +4,7 @@ import java.util.Date;
 
 import lombok.Data;
 
+//mysql> desc qna;
 //+------------+--------------+------+-----+-------------------+-------------------+
 //| Field      | Type         | Null | Key | Default           | Extra             |
 //+------------+--------------+------+-----+-------------------+-------------------+
@@ -14,9 +15,10 @@ import lombok.Data;
 //| q_datetime | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
 //| views      | int          | NO   |     | 0                 |                   |
 //| qa_resolve | tinyint(1)   | NO   |     | 0                 |                   |
+//| qa_side    | int          | YES  |     | NULL              |                   |
 //| user_no    | int          | NO   | MUL | NULL              |                   |
 //+------------+--------------+------+-----+-------------------+-------------------+
-//8 rows in set (0.04 sec)
+//9 rows in set (0.00 sec)
 
 @Data
 public class QnaDto {
@@ -31,4 +33,6 @@ public class QnaDto {
 	private UserDto user;
 	private int likes; //select count(*) from qna_like weher prefer=1 AND board_no=no
 //	private String nickname;
+	private int qa_side;
+	private QnaRolesDto qroles;
 }

@@ -9,24 +9,7 @@
 	<main class="container mt-5">
 		<h1 class="mt-3">Spring_board.board insert form</h1>
 		<form action="/qnaboard/qainsert.do" method="post">
-			<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
-			<p>
-				<strong>글쓴이 : </strong>
-				<span th:text="${session.loginUser.userId}"></span>
-			</p>
-			<p class="form-floating">
-				<input class="form-control" placeholder="제목" name="title" id="qnaTitle">			
-				<label for="boardTitle">제목 : </label>
-			</p>
-			<p class="form-floating">
-				<textarea style="resize: none; height: 100px;"
-				class="form-control" id="qnaContents" name="contents" placeholder="내용"></textarea>
-				<label for="boardContents">내용 : </label>
-			</p>
-			<div class="d-flex justify-content-end">
-				<button class="btn btn-outline-warning me-2" type="reset">초기화</button>
-				<button class="btn btn-outline-primary">등록</button>
-			</div>
+		<p>작성페이지</p>
 		</form>
 	</main>
 </body>
