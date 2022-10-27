@@ -1,6 +1,6 @@
 package com.joongbu.fakerly.dto;
 
-import java.util.Date;
+import java.util.Date; 
 
 import lombok.Data;
 

@@ -14,7 +14,10 @@
 	<main>	<!-- *주의* 게시판 데이터 넣을 때 반복문: class 이용 -->
 
 
+		<div style="margin-top: 40px; background-color: #f7f7f7;">
+
 		<div id="container" style="border: 1px solid black; margin-top: 40px; background-color: #f7f7f7;">
+
 			<div class="w-50 p-3" id="mainboardInsert" style="margin-top: 50px;"> <!-- div 클릭 시 insert로 이동 -->
 				<div id=userProfile>
 					<img src="/img/profile.png">
@@ -86,10 +89,10 @@
 						</a>
 					</div>
 					<div class="boardComment">
-						<button
-							th:onclick="location.href='/mainboard/detail?mainboardNo=[[${main.mainboardNo}]]';">
+						<a
+							th:href="@{/mainboard/detail(mainboardNo=${main.mainboardNo})}">
 							<img src="/img/mainboardComments.png">
-						</button>
+						</a>
 					</div>
 				</div>	
 			</div>

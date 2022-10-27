@@ -20,17 +20,19 @@
 		INSERT INTO main_reply
 		(contents,hierarchy,depth,group_no,mainboard_no,user_no)
 		VALUES
-		(#{contents},#{hierarchy},#{depth},#{group_no},#{mainboard_no},#{user_no})
+		(#{contents},0,0,0,#{mainboard_no},#{user_no})
 	</insert>
 	<update id="update" parameterType="MainReplyDto">
 		UPDATE main_reply SET
 		contents=#{contents}
+		WHERE main_reply_no=#{reply_no}
 	</update>
 	<delete id="delete">
 		DELETE FROM main_reply WHERE main_reply_no=#{reply_no}
 	</delete>
 	<select id="list" resultMap="MainReplyMap">
 		SELECT * FROM main_reply
+			WHERE mainboard_no=#{mainboard_no}
 			ORDER BY main_reply_no DESC
 	</select>
 	<select id="detail" resultMap="MainReplyMap">
