@@ -12,6 +12,7 @@
 	<header th:include="headerNav"></header>
 	<!-- 게시판 몇 글자 수 더보기 기능 참고: https://moollang.tistory.com/8 -->
 	<main>	<!-- *주의* 게시판 데이터 넣을 때 반복문: class 이용 -->
+
 		<div id="container" style="background-color: #f7f7f7; border: 1px solid">
 			<div class="w-50 p-3 mt-5" id="mainboardInsert">
 					<div id=userProfile>
@@ -21,6 +22,8 @@
 					<a th:href="@{/mainboard/insert(userNo=${session.loginUser?.user_no})}" id=insertPlaceholder class="w-100">
 						<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
 					</a>
+
+
 			</div>
 			<div class="post-container w-50 p-3 h-25" th:each="main : ${mainList}" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
 				<div class="boardInfo d-flex justify-content-between">
@@ -104,6 +107,12 @@
 								</a>
 							</div>
 						</div>
+					<div class="boardComment">
+						<a
+							th:href="@{/mainboard/detail(mainboardNo=${main.mainboardNo})}">
+							<img src="/img/mainboardComments.png">
+						</a>
+
 					</div>
 				</div>
 			</div>
