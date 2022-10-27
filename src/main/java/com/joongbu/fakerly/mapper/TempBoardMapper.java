@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import com.joongbu.fakerly.dto.TempBoardDto;
 @Mapper
 public interface TempBoardMapper {
-	List<TempBoardDto> list();
+	List<TempBoardDto> templist();
 	int insert(TempBoardDto tempboard);
 }
