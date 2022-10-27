@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
   <meta charset="UTF-8" />
   <title>Document</title>
   <link rel="stylesheet" href="/css/login.css" />
   <script defer="defer" src="/js/userLogin.js"></script>
-
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
-
 <body>
-
+  <header th:include="headerNav"></header>
   <div class="contn">
     <!-- <div class="child-contn"> -->
-    <nav class="nav-contn">
-      <div class="logo"><a th:href="@{/}">로고</a></div>
-    </nav>
     <div class="main-contn">
       <h1><strong>로그인</strong></h1>
       <form action="/user/login.do" method="POST">
@@ -50,8 +44,5 @@
     </footer>
     <!-- </div> -->
   </div>
-
-	<h1>로그인폼</h1>
-
 </body>
 </html>

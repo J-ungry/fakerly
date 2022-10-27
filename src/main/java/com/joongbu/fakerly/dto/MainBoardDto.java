@@ -36,6 +36,7 @@ public class MainBoardDto {
 	private String userName;
 	private String userCompany;
 	private int prefer;
+	private String keywordName;
 
 	private List<MainReplyDto> replyList;
 

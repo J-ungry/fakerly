@@ -1,6 +1,7 @@
 package com.joongbu.fakerly.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.joongbu.fakerly.mapper.MainReplyMapper;
@@ -10,4 +11,5 @@ import com.joongbu.fakerly.mapper.MainReplyMapper;
 @Controller
 public class MainReplyController {
 	MainReplyMapper replyMapper;
+	
 }
