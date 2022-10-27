@@ -11,26 +11,34 @@
 		<result column="q_datetime" property="qaTime"/>		
 		<result column="views" property="views"/>
 		<result column="qa_resolve" property="qa_resolve"/>	
-		<result column="user_no" property="user_no"/>	
-		<result column="nickname" property="nickname"/>
+		<result column="likes" property="likes"/>
+		<association property="user" foreignColumn="user_no">
+  		<id column="user_no" property="user_no"/> 
+  		<result column="nickname" property="nickname"/>
+  		</association>
+		<!-- 		<result column="user_no" property="user_no"/>	
+		<result column="nickname" property="nickname"/>  -->
+
 
 	</resultMap>
 	<select id="qalist" resultMap="QnaMap">
-		select * from qna left join user on qna.user_no=user.user_no 
-		</select>
-	<select id ="qalistCount" resultType="int">
-		SELECT COUNT(*) FROM QNA
+		select * ,
+		(SELECT COUNT(*) FROM qna_like l where l.qa_no=q.qa_no) likes
+		FROM qna q
+		LEFT JOIN user using(user_no)
+
+		
 	</select>
+
 	
 	<select id="qadetail" resultMap="QnaMap">
-		select * from qna order by qa_no desc
+		select * ,
+		(SELECT COUNT(*) FROM qna_like l where l.qa_no=q.qa_no) likes
+		FROM qna q
+		LEFT JOIN user using(user_no)
+		WHERE qa_no=#{qaNo}
 	</select>
-	<select id="detailReplyPaging" resultMap="QnaMap">
-	
-	
-	
-	</select>
-	
+
 	
 	
 	<insert id="insert" parameterType="QnaDto"

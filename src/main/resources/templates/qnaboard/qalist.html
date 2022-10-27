@@ -1,11 +1,22 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"><!-- 개발할땐 css 배포할땐 min css -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
 <head>
 <meta charset="UTF-8">
 <title>QNA프로젝트</title>
 </head>
 <body>
+
+<div class="container">
+		<h1 class="mt-5">Spring_board.board list</h1>
+		<p class="d-flex justify-content-end">
+			<a class="btn btn-outline-primary" href="/sideboard/insert.do">
+			글작성</a>
+		</p>
 
 	<h1>QNA프로젝트</h1>
 		<table>
@@ -16,7 +27,8 @@
 				<th>게시일</th>
 				<th>글쓴이id</th>
 				<th>닉네임</th>
-				<th>views</th>
+				<th>조회수</th>
+				<th>좋아요</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,12 +38,24 @@
 				<td th:text="${qaboard.qaNo}"></td>
 				<td th:text="${qaboard.title}"></td>
 				<td th:text="${#dates.format(qaboard.qaTime,'MM월dd일 HH시mm분')}"></td>
-				<td th:text="${qaboard.user_no}"></td>
-				<td th:text="${qaboard.nickname}"></td>
+				<td th:text="${qaboard.user.user_no}"></td>
+				<td th:text="${qaboard.user.nickname}"></td>
 				<td th:text="${qaboard.views}"></td>
+				<td th:text="${qaboard.likes}"></td>
 			</tr>
 		</tbody>
 		</table>
+			<div class="sidebar">
+		<ul>
+
+			<li><a th:href="@{''(searchQnaRoleNo=)}">전체</a></li>
+			<li><a th:href="@{''(searchQnaRoleNo=1)}">개발</a></li>
+			<li><a th:href="@{''(searchQnaRoleNo=2)}">디자인</a></li>
+			<li><a th:href="@{''(searchQnaRoleNo=3)}">PM/PO/기획</a></li>
+			<li><a th:href="@{''(searchQnaRoleNo=4)}">기획</a></li>
+			
+		</ul>
+	</div>
 
 </body>
 </html>

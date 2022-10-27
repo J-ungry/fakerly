@@ -67,7 +67,7 @@ public class SideController {
 			) {
 		SideDto side=null;
 		List<RolesDto> roles=null;
-		try {
+	try {
 			side=sideMapper.detail(sideBoardNo);
 
 			roles = roleMapper.list(sideBoardNo);

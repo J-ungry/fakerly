@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.joongbu.fakerly.mapper.QrolesMapper">
+  
+  <resultMap type="QnaRolesDto" id="QnaRolesMap">
+  	<result column="qa_role_no" property="qroleNo"/>
+  	<result column="qa_name" property="qa_name"/>
+  </resultMap>
+  <select id="list" resultMap="QnaRolesMap">
+  	SELECT * 
+  	FROM qna_role
+  	WHERE qa_role_no 
+  	IN(SELECT qa_role_no 
+  	FROM qna_role 
+  	WHERE qa_no=#{qaNo});
+  </select>
+  
+  </mapper>
+  
