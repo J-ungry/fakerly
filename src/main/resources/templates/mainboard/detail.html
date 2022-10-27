@@ -67,7 +67,7 @@
 				</div>	
 			</div>
 			
-			<!-- 수업 폼 테스트 -->
+			<!-- 댓글 입력(상위계층 댓글) -->
 			<form name="replyInsertForm"
 				th:if="${session.loginUser!=null}"
 				 action="/reply/insert" method="post">
@@ -83,26 +83,6 @@
 					<button>등록</button>
 				</div>
 			</form>
-			
-			
-			
-			<!-- 댓글 입력(상위계층 댓글) -->
-			<form name="replyInsertForm" th:if="${session.loginUser!=null}" action="/reply/insert" method="post">
-				<h3>댓글 작성( <span th:text="${session.loginUser.nickname}"></span> )</h3>
-				<input type="hidden" name="board_no" th:value="${mainboard.mainboardNo}">
-				<p>
-					<label>내용</label>
-					<textarea name="contents" placeholder="내용 입력"></textarea>
-				</p>
-				<div>
-					<button type="button">등록</button>
-				</div>
-				<!-- 값 확인 줄. 완성되면 삭제 -->
-				<p th:text="${mainboard.mainboardNo}">
-				<p th:text="${session.loginUser}">
-			</form>
-			
-			
 			
 			<!-- 댓글 목록 출력 -->
 			<section>

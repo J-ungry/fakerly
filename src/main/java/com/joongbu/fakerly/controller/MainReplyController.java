@@ -5,12 +5,15 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.joongbu.fakerly.dto.MainBoardDto;
 import com.joongbu.fakerly.dto.MainReplyDto;
 import com.joongbu.fakerly.dto.UserDto;
 import com.joongbu.fakerly.mapper.MainBoardMapper;
@@ -39,7 +42,6 @@ public class MainReplyController {
 		
 		System.out.println(reply);
 		int insert=0;
-		insert=replyMapper.insert(reply);
 		String msg="";
 		try {
 			insert=replyMapper.insert(reply);
@@ -50,12 +52,11 @@ public class MainReplyController {
 		if(insert>0) {
 			msg="댓글등록성공";
 			session.setAttribute("msg", msg);
-			System.out.println("뇽뇽뇽"+reply);
-			return "redirect:/mainboard/detail="+reply.getMainboard_no();
+			return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
 		}else {
 			msg="댓글등록실패";
 			session.setAttribute("msg", msg);
-			return "redirect:/mainboard/detail="+reply.getMainboard_no();
+			return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
 		}
 	}
 	
@@ -69,7 +70,35 @@ public class MainReplyController {
 			) {
 		System.out.println(reply);
 		
-		return "";
+		return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
+	}
+	
+	//댓글 삭제 기능
+	@GetMapping("/delete")
+	public String delete(
+			MainReplyDto reply,
+			HttpSession session,
+			@SessionAttribute(required=false) UserDto loginUser,
+			Model model
+			) {
+		int delete=0;
+		String msg="";
+		System.out.println(reply);
+		try {
+			delete=replyMapper.delete(reply.getMain_reply_no());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(delete>0) {
+			msg="댓글삭제성공";
+			session.setAttribute("msg", msg);
+			System.out.println("reply.get 메인보드:"+reply.getMainboard_no());
+			return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
+		}else {
+			msg="댓글삭제실패";
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
+		}
 	}
 
 }

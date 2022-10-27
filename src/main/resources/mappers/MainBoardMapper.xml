@@ -32,6 +32,7 @@
 			<result column="r_group_no" property="group_no"/>
 			<result column="r_reply_time" property="reply_time"/>
 			<result column="r_user_no" property="user_no"/>
+			<result column="r_mainboard_no" property="mainboard_no"/>
 		</collection>
 
 	</resultMap>
@@ -60,12 +61,15 @@
 			r.depth r_depth,
 			r.group_no r_group_no,
 			r.reply_time r_reply_time,
-			r.user_no r_user_no
+			r.user_no r_user_no,
+			r.mainboard_no r_mainboard_no,
+			u.user_name,
+			u.company 
 			FROM mainboard b
+			LEFT JOIN user u USING(user_no) 
 			LEFT JOIN main_reply r USING(mainboard_no)
 			WHERE mainboard_no=#{mainboardNo}
 	</select>
-	
 	
 	<insert id="insert" parameterType="MainBoardDto" useGeneratedKeys="true" keyProperty="mainboardNo">
 		INSERT INTO mainboard

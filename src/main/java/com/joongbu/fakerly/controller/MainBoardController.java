@@ -104,7 +104,7 @@ public class MainBoardController {
 		MainBoardDto mainboard=null;
 		try {
 			mainboard=boardMapper.detailReply(mainboardNo);
-			System.out.println(mainboard);
+			System.out.println("나는야 퉁퉁이"+mainboard);
 			//boardMapper.viewUpdate(mainboardNo);
 		} catch (Exception e) {
 			e.printStackTrace();

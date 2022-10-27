@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"></html>
+<html xmlns:th="http://www.thymeleaf.org">
 <style>
-#replydiv{
+.replydiv{
 	border-style: solid;
 	border-width: 2px;
+}
+.rereplydiv{
+	width:400px;
+	border-style: solid;
+	border-width: 2px;
+	margin : 5px;
 }
 </style>
 <!-- 
@@ -12,20 +18,64 @@
 3. depth -> 이용해서 대댓글의 순서 구분(이건 커리문으로 넣어야되나?)
  -->
 
-		<form method="post">
-		
-		
-		</form>
 		<h1>댓글내용</h1>
-  		<div th:each="reply_up:${mainboard.replyList}" id="replydiv">
+  		<div th:each="reply_up:${mainboard.replyList}" class="replydiv">
 			
 			<div th:if="${reply_up.hierarchy==0}">
 				<h3>댓글</h3>
-				<span th:text="${reply_up.main_reply_no}"></span>
-								
-				<div th:each="reply_down:${mainboard.replyList}" th:if="${reply_up.main_reply_no==reply_down.group_no}">
+				<div class="boardProfile d-flex flex-column align-self-center">
+					<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
+						<img class="align-middle" src="/img/profile.png" style="width : 100px; height : 100px">
+					</a>
+				</div>
+				<div>
+					<p>작성자 : 
+						<span th:text="${mainboard.userName}"></span>
+					</p>
+					<p>소속 : 
+						<span th:text="${mainboard.userCompany}"></span>
+					</p>
+					
+				</div>
+				<div>내용 : 
+					<p th:text="${reply_up.contents}"></p>
+				</div>
+				<div th:if="${session.loginUser.user_no==reply_up.user_no}">
+					<button>수정</button>			
+				</div>
+				<div th:if="${session.loginUser.user_no==reply_up.user_no}">
+					<a th:href="@{/reply/delete(main_reply_no=${reply_up.main_reply_no})}" class="btn btn-outline-danger btn-sm">
+						삭제
+					</a>			
+				</div>
+				<div th:each="reply_down:${mainboard.replyList}" th:if="${reply_up.main_reply_no==reply_down.group_no}" class="rereplydiv">
 					<h3>대댓글</h3>
-					<p th:text="${reply_down.depth}"></p>
+					<div class="boardProfile d-flex flex-column align-self-center">
+						<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
+							<img class="align-middle" src="/img/profile.png" style="width : 100px; height : 100px">
+						</a>
+					</div>
+					<div>
+						<p>작성자 : 
+							<span th:text="${mainboard.userName}"></span>
+						</p>
+						<p>소속 : 
+							<span th:text="${mainboard.userCompany}"></span>
+						</p>
+						
+					</div>
+					<div>내용 : 
+						<p th:text="${reply_down.contents}"></p>
+					</div>
+					
+					<div th:if="${session.loginUser.user_no==reply_down.user_no}">
+						<button>수정</button>			
+					</div>
+					<div th:if="${session.loginUser.user_no==reply_down.user_no}">
+						<a th:href="@{/reply/delete(main_reply_no=${reply_down.main_reply_no}),mainboard_no=${reply_down.mainboard_no}}" class="btn btn-outline-danger btn-sm">
+							삭제
+						</a>			
+					</div>
 				</div>
 			</div>
 				
@@ -57,3 +107,4 @@
 			<span th:text="${reply.reply_time}"></span>
 			<span th:text="${reply.user_no}"></span>
 			 -->
+</html>
