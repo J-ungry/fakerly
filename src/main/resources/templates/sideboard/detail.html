@@ -38,6 +38,16 @@
 			</div>
 		
 			좋아요:<span th:text="${side.likes}"></span>
+			<form action="/sideboard/like.do">
+				<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
+				<input type="hidden" name="side_board_no" th:value="${side.sideBoardNo}">
+				<button>좋아요</button>
+			</form>
+			<form action="/sideboard/unlike.do">
+				<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
+				<input type="hidden" name="side_board_no" th:value="${side.sideBoardNo}">
+				<button>좋아요 취소</button>
+			</form>
 		</div>
 		<div th:if="${session.loginUser!=null}">
 			<div th:if="${session.loginUser.user_no==side.user.user_no}"> <!-- 본인 게시글 인 경우에만 수정하기 나타 -->

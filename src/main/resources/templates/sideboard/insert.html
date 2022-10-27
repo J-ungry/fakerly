@@ -13,6 +13,7 @@
 	<div class="container">
 
 	<form action="/sideboard/insert.do" method="post">
+		<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
 		<div class="content">
 		<p>
 			<input type="radio" name="state" value=1>모집 중

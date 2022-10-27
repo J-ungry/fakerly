@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.joongbu.fakerly.dto.RolesDto;
 import com.joongbu.fakerly.dto.SideDto;
+import com.joongbu.fakerly.dto.SidePreferDto;
 import com.joongbu.fakerly.dto.SideRoleDto;
 import com.joongbu.fakerly.dto.UserDto;
 import com.joongbu.fakerly.mapper.RolesMapper;
@@ -185,13 +186,50 @@ public class SideController {
 		
 
 	}
-//	@PostMapping("/insert.do")
-//	public String insert(
-//			SideDto side,
-//			@SessionAttribute(required=false) UserDto loginUser,
-//			HttpSession session
-//			) {
-//		
-//	}
-	
+	@PostMapping("/insert.do") //insert 버튼 누르면 실행되는 쿼리 
+	//input시 role 과 sideboard 에 동시에 내용이 들어가야한다 
+	public String insert(
+			SideDto side,
+			@SessionAttribute(required=false) UserDto loginUser,
+			HttpSession session,
+			int[] roleNo
+			) {
+		System.out.println(Arrays.toString(roleNo));
+		int insert=0;
+		String msg="";
+		SideRoleDto sideRole = null;
+		side.setUser(loginUser);
+		try {
+			if(loginUser!=null) {
+				insert = sideMapper.insert(side); //userGenerated 로 인해 sideBoardNo 가 넘어와져있음
+				if(roleNo!=null) {
+					sideRole = new SideRoleDto();
+					for(int no:roleNo) {
+						
+						sideRole.setSideBoardNo(side.getSideBoardNo());
+						sideRole.setSideRoleNo(no);
+						
+						sideRoleMapper.insert(sideRole);
+						
+					}
+				}
+			}else {
+				msg="로그인 한 유저만 게시글 작성 가능";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("side : "+side);
+		return "redirect:/sideboard/detail.do?sideBoardNo="+side.getSideBoardNo();
+	}
+	@GetMapping("/like.do")
+	public String like(
+			SidePreferDto sidePrefer,
+			@SessionAttribute(required=false) UserDto loginUser
+			) {
+		System.out.println("side:"+sidePrefer);
+		return "";
+	}
 }
