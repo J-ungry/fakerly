@@ -84,6 +84,9 @@ public class SideController {
 		List<RolesDto> roles=null;
 		List<RolesDto> rolesList=null; //select * from roles;
 		try {
+
+
+
 			side=sideMapper.detail(sideBoardNo);
 			roles = roleMapper.list(sideBoardNo);
 			rolesList = roleMapper.getRoles();
@@ -99,8 +102,6 @@ public class SideController {
 		}
 		model.addAttribute("side",side);
 		model.addAttribute("rolesList", rolesList);
-		System.out.println(side);
-		System.out.println("work update");
 		return "/sideboard/update";
 	}
 	
@@ -115,7 +116,6 @@ public class SideController {
 		int delete=0; // side_role 삭제용 
 		int update=0; //  전체 내용 Update 용 
 		SideRoleDto sideRole = null;
-		System.out.println(Arrays.toString(roleNo));
 		try {
 			if(loginUser==null) { //로그인세션 없는 경우 
 				msg="로그인 하세요";

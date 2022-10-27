@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"></html>
-
+<style>
+#replydiv{
+	border-style: solid;
+	border-width: 2px;
+}
+</style>
 <!-- 
 1. hierarchy -> 일반 댓글인것만 div 출력 (댓글 : 0, 대댓 : 1)
 2. group_no -> 대댓글인 것만 if 문으로 값 넣기 (댓글 : null, 대댓 : 부모 reply_no)
@@ -8,12 +13,35 @@
  -->
 
 			
-  		<div th:each="reply:${mainboard.replyList}">
-			<h1>댓글내용</h1>
-			<div th:if="${reply.hierarchy==0}">댓글!!!!!!
-				<span th:text="${reply.contents}">댓글내용 : </span>
-				<div th:unless="${reply.hierarchy==1}">대대대대대대댓글!!!!!!</div>
+		<h1>댓글내용</h1>
+  		<div th:each="reply_up:${mainboard.replyList}" id="replydiv">
+			
+			<div th:if="${reply_up.hierarchy==0}">
+				<h3>댓글</h3>
+				<span th:text="${reply_up.main_reply_no}"></span>
+				
+				
+				<div th:each="reply_down:${mainboard.replyList}" th:if="${reply_up.main_reply_no==reply_down.group_no}">
+					<h3>대댓글</h3>
+					<p th:text="${reply_down.depth}"></p>
+				</div>
 			</div>
+				
+			
+			
+			
+		
+			
+			<!-- 
+			
+				<span th:text="${reply.contents}">댓글내용 : </span>
+				<span></span>
+				
+			</div>
+			<div th:unless="${reply.hierarchy==1}">대대대대대대댓글!!!!!!
+					<span th:text="${reply.contents}">대댓글내용 : </span>
+				</div>
+			
 			
 			<span th:text="${reply.main_reply_no}"></span>
 			<span th:text="${reply.contents}"></span>
@@ -22,6 +50,8 @@
 			<span th:text="${reply.group_no}"></span>
 			<span th:text="${reply.reply_time}"></span>
 			<span th:text="${reply.user_no}"></span>
+			 -->
+			
   		</div>
   		
   	

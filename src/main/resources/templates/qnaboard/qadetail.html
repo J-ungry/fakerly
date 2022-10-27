@@ -9,13 +9,16 @@
 	<main class="container mt-5">
 		<h1 class="mt-3">Qna.board detail</h1>
 		<div>
+		<thead>QNADetail페이지</thead>
+		
+		
 		<p>
 				<strong>no : </strong>
 				<span th:text="${qnaboard.qaNo}"></span>
 			</p>
 			<p>
 				<strong>글쓴이 : </strong>
-				<span th:text="${qnaboard.user_no}"></span>
+				<span th:text="${qnaboard.user.user_no}"></span>
 			</p>
 			<p>
 				<strong>제목 : </strong>
@@ -29,6 +32,12 @@
 				<strong>조회수 : </strong>
 				<span th:text="${qnaboard.views}"></span>
 			</p>
+			<div>
+		<a th:href="@{/qnaboard/update.do(qaNo=${qnaboard.qaNo})}">
+			수정하기
+			</a>
+		</div>
+			
 		</div>
 	</main>
 </body>
