@@ -100,7 +100,8 @@ input:focus {
 	width: 100%;
 	padding: 11px 23px;
 	background-color: #ED6653;
-	margin-bottom: 16px;
+	margin-top : 16px;
+	margin-bottom: 8px;
 	color: #ffffff;
 	font-size: 16px;
 	border: none;

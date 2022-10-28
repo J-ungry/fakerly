@@ -11,8 +11,10 @@ public interface QnaMapper {
 	List<QnaDto> qalist();
 	QnaDto qadetail(int qaNo);
 //	int insert(QnaDto qna);
-	int update(QnaDto qna);
 //	int delete(int qaNo);
+//	int update(QnaDto qna);
+	int qaupdate(QnaDto qna);
+	int qadelete(int qaNo);
+	int qainsert(QnaDto qna);
 }
-
 

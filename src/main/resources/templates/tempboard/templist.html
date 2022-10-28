@@ -18,7 +18,8 @@
 				<tr th:each="temp:${tempList}">
 					<td>
 						<a 
-						th:text="${temp.userNo}"></a>
+						th:text="${temp.tempNo}"
+						th:href="@{/tempboard/detail.do(tempNo=${temp.tempNo})}"></a>
 					</td>
 					<td th:text="${temp.title}"></td>
 					<td th:text="${temp.contents}"></td>

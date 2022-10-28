@@ -33,9 +33,13 @@
   	SELECT s.* ,
   	(SELECT COUNT(*) FROM SIDEBOARD_PREFER f WHERE f.side_board_no=s.side_board_no) likes
   	FROM SIDEBOARD s 
-  	<if test="searchRoleNo!=null and !searchRoleNo.equals('')">
-  	 	where side_board_no in(select side_board_no from side_role where side_role_no=#{searchRoleNo})
-  	</if>
+  	<where>
+	  	<if test="searchRoleNo!=null and !searchRoleNo.equals('')">
+	  	 	 side_board_no in(select side_board_no from side_role where side_role_no=#{searchRoleNo})
+	  	</if>
+  	
+  	</where>
+  	ORDER BY s.side_board_no DESC
   </select>
 
   
@@ -67,6 +71,13 @@
   <delete id="delete">
   	DELETE FROM SIDEBOARD WHERE side_board_no=#{sideBoardNo}
   </delete>
+  
+  <insert id="insert" parameterType="SideDto" useGeneratedKeys="true" keyProperty="sideBoardNo">
+  	INSERT INTO SIDEBOARD 
+  	(title,summ,intro,purpose,sup,attend,state,user_no) 
+  	value 
+  	(#{title},#{summ},#{intro},#{purpose},#{sup},#{attend},#{state},#{user.user_no});
+  </insert>
   
 
   </mapper>

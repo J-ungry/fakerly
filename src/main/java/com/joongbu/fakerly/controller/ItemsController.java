@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,7 +38,7 @@ public class ItemsController {
 	
 	@Data
 	class CheckStatus{
-		private int status;//{status : 0:등록실패,1:성공,-1:로그인하세요,-2: 글쓴이만 수정 가능}
+		private int status;
 	}
 	
 	@GetMapping("/insertUserKeyword.do")
@@ -55,5 +56,37 @@ public class ItemsController {
 		checkStatus.setStatus(insert);
 		
 		return checkStatus;
+	}
+	
+	@GetMapping("/deleteUserKeyword.do")
+	public @ResponseBody CheckStatus deleteUserKeyword(int userNo, int keywordNo) {
+		
+		CheckStatus checkStatus = new CheckStatus();
+		int delete = 0;
+		
+		try {
+			delete = itemsMapper.deleteUserKeyword(userNo, keywordNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		checkStatus.setStatus(delete);
+		
+		return checkStatus;
+	}
+	
+	@GetMapping("/listUserKeyword.do")
+	public void listUserKeyword(int userNo, Model model) {
+		
+		List<KeywordDto> userKeywordList = null;
+		
+		try {
+			userKeywordList = itemsMapper.userKeywordList(userNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("userKeywordList",userKeywordList);
+		model.addAttribute("userNo",userNo);
 	}
 }

@@ -12,12 +12,12 @@ import lombok.Data;
 | mainboard_no       | int          | NO   | PRI | NULL              | auto_increment    |
 | user_no            | int          | NO   | MUL | NULL              |                   |
 | mainboard_title    | varchar(100) | NO   |     | NULL              |                   |
-| keyword_no         | int          | NO   | MUL | NULL              |                   |
 | mainboard_contents | varchar(255) | NO   |     | NULL              |                   |
 | mainboard_view     | int          | YES  |     | NULL              |                   |
-| mainboard_img      | blob         | YES  |     | NULL              |                   |
+| mainboard_img      | varchar(255) | YES  |     | NULL              |                   |
 | mainboard_link     | varchar(255) | YES  |     | NULL              |                   |
 | mainboard_time     | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| keyword_no         | int          | YES  |     | NULL              |                   |
 +--------------------+--------------+------+-----+-------------------+-------------------+
 * */
 
@@ -29,7 +29,7 @@ public class MainBoardDto {
 	private String mainboardTitle;
 	private String mainboardContents;
 	private int mainboardView;
-	private byte[] mainboardImg;
+	private String mainboardImg;
 	private String mainboardLink;
 	private Date mainboardTime;
 

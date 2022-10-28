@@ -81,7 +81,8 @@ public class UserController {
 				if (loginUser != null) {
 					// 비밀번호 비교
 					// Boolean bool = BCrypt.checkpw(pw, loginUser.getPw());
-					if (!pw.equals(loginUser.getPw())) {
+					System.out.println(BCrypt.checkpw(pw, loginUser.getPw()));
+					if (!BCrypt.checkpw(pw, loginUser.getPw())) {
 						msg = "비밀번호가 일치하지 않습니다.";
 						session.setAttribute("msg", msg);
 						return "redirect:/user/login.do";
@@ -281,6 +282,7 @@ public class UserController {
 	public String insert(UserDto user) {
 		
 		int insert = 0;
+		int update = 0;
 		System.out.println(user);
 		
 		//calc age
@@ -294,6 +296,12 @@ public class UserController {
 		
 		try {
 			insert = userMapper.insert(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			update = userMapper.updateUserKeyword();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
