@@ -12,10 +12,14 @@
 		<result column="views" property="views"/>
 		<result column="qa_resolve" property="qa_resolve"/>	
 		<result column="likes" property="likes"/>
+		<result column="qa_side" property="qa_side"/>
 		<association property="user" foreignColumn="user_no">
   		<id column="user_no" property="user_no"/> 
   		<result column="nickname" property="nickname"/>
   		</association>
+		<!--   		<association property="qroles" foreignColumn="qa_no">
+  		<id column="qa_name" property="qa_name"/> 
+  		</association> -->
 		<!-- 		<result column="user_no" property="user_no"/>	
 		<result column="nickname" property="nickname"/>  -->
 
@@ -41,22 +45,24 @@
 
 	
 	
-	<insert id="insert" parameterType="QnaDto"
+	<insert id="qainsert" parameterType="QnaDto"
 	useGeneratedKeys="true" keyProperty="qaNo">
 		INSERT INTO QNA
-			(title, contents, code, qa_resolve, user_no)
+			(title, contents, code, qa_resolve,user_no)
 			VALUES
 			(#{title},#{contents},#{code},#{qa_resolve},#{user_no})	
 	</insert>  
-	<update id="update" parameterType="QnaDto">
+	
+	<update id="qaupdate" parameterType="QnaDto">
 		UPDATE QNA SET
 			title=#{title},
 			contents=#{contents},
 			code=#{code},
-			qa_resolve=#{qa_resolve}
+			qa_resolve=#{qa_resolve},
+			qa_side=#{qa_side}
 			WHERE qa_no=#{qaNo}
 	</update>
-	<delete id="delete">
+	<delete id="qadelete">
 		DELETE FROM QNA
 			WHERE qa_no=#{qaNo}
 	</delete>

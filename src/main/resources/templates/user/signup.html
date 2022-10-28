@@ -77,14 +77,6 @@
             </label>
             
             <label>
-                <input type="text" name="skill" placeholder="스킬">
-            </label>
-            
-            <label>
-                <input type="text" name="license" placeholder="자격증">
-            </label>
-            
-            <label>
                 <textarea type="text" name="aboutme" placeholder="자기소개"></textarea>
             </label>
 
@@ -96,13 +88,43 @@
     <div class="signupForms userInfo" id="userInfo3">
         <h1 style="display: inline-block; margin-bottom:0;">키워드 선택</h1>
         <div class="userInfoForm" id="userInfo3Form">
-            <h1>키워드 선택</h1>
+            <h1 style="margin-bottom:0px">키워드 선택</h1>
             
+			
+			<div id="selecedKeyword" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #000;">
+				<!-- 유저 키워드 목록 -->			
+			</div>
             <!-- Button trigger modal -->
 			<button th:onclick="getList('keywordList', 1)" type="button" class="btn btn-outline-secondary listBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
 			  키워드 추가 +
 			</button>
         </div>
+        
+        <div class="userInfoForm">
+            <!-- <label>
+                <input type="text" name="skill" placeholder="스킬">
+            </label> -->
+            <h1 style="margin-bottom:0px">스킬 선택</h1>
+            
+			
+			<div id="selecedKeyword" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #000;">
+				<!-- 유저 키워드 목록 -->			
+			</div>
+            <!-- Button trigger modal -->
+			<button th:onclick="getList('keywordList', 1)" type="button" class="btn btn-outline-secondary listBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			  스킬 추가 +
+			</button>
+        </div>
+        
+        <div class="userInfoForm">
+            <label>
+                <input type="text" name="license" placeholder="자격증">
+            </label>
+        </div>
+        
+        
+            
+            
             
 		<!-- Modal -->
 		<div class="modal fade listDiv" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

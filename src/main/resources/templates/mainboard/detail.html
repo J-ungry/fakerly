@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header th:include="/headerNav"></header>
+	<header th:include="headerNav"></header>
 	<main>
 		<div class="post-container w-50 p-3 h-25" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
 				<div class="boardInfo">	<!-- 작성자 프로필 사진, 이름, 소속, 글 등록 시간, 팔로우버튼 -->
@@ -45,7 +45,7 @@
 					<div class="boardFile w-75">
 						<div class="boardLink">	<!-- 이미지와 기능은 추가 안하면 안보임 -->
 							<div th:if="${mainboard.mainboardLink==null}">추가한 링크가 없습니다.</div>
-							<div th:unless="${mainboard.mainboardLink==null}" th:text="${main.mainboardLink}"></div>	
+							<div th:unless="${mainboard.mainboardLink==null}" th:text="${mainboard.mainboardLink}"></div>	
 						</div>
 						<div class="boardImg">
 							<img src="/img/exampleImg.jpg" 
@@ -67,42 +67,22 @@
 				</div>	
 			</div>
 			
-			<!-- 수업 폼 테스트 -->
+			<!-- 댓글 입력(상위계층 댓글) -->
 			<form name="replyInsertForm"
 				th:if="${session.loginUser!=null}"
-				class="bg-light px-3 py-2" action="/reply/insert" method="post">
+				 action="/reply/insert" method="post">
 				<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
 				<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
 				<h3>댓글 작성 (<span th:text="${session.loginUser.nickname}"></span>)</h3>
 				<input type="hidden" name="boardNo" th:value="${mainboard.mainboardNo}"> 
-				<p class="form-floating">
-					<textarea class="form-control" name="contents" id="replyContents" placeholder="내용"></textarea>
+				<p >
+					<textarea name="contents" id="replyContents" placeholder="내용"></textarea>
 					<label for="replyContents">내용</label>
 				</p>
-				<div class="input-group">
-					<button class="btn btn-outline-primary">등록</button>
-				</div>
-			</form>
-			
-			
-			
-			<!-- 댓글 입력(상위계층 댓글) -->
-			<form name="replyInsertForm" th:if="${session.loginUser!=null}" action="/reply/insert" method="post">
-				<h3>댓글 작성( <span th:text="${session.loginUser.nickname}"></span> )</h3>
-				<input type="hidden" name="board_no" th:value="${mainboard.mainboardNo}">
-				<p>
-					<label>내용</label>
-					<textarea name="contents" placeholder="내용 입력"></textarea>
-				</p>
 				<div>
-					<button type="button">등록</button>
+					<button>등록</button>
 				</div>
-				<!-- 값 확인 줄. 완성되면 삭제 -->
-				<p th:text="${mainboard.mainboardNo}">
-				<p th:text="${session.loginUser}">
 			</form>
-			
-			
 			
 			<!-- 댓글 목록 출력 -->
 			<section>

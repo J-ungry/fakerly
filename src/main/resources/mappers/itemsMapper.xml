@@ -21,4 +21,14 @@
 		values 
 		(#{userNo},#{keywordNo})
 	</insert>
+	
+	<delete id="deleteUserKeyword">
+		delete from user_keyword 
+		where user_no=#{userNo} and keyword_no=#{keywordNo}
+	</delete>
+	
+	<select id="userKeywordList" resultMap="KeywordMap">
+		select * from keyword 
+		where keyword_no in (select keyword_no from user_keyword where user_no=#{userNo})
+	</select>
 </mapper>

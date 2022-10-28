@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>qnaboardetail</title>
 </head>
 <body>
 	<header th:include="headerNav"></header>
 	<main class="container mt-5">
 		<h1 class="mt-3">Qna.board detail</h1>
 		<div>
-		<thead>QNADetail페이지</thead>
 		
 		
 		<p>
@@ -18,22 +17,42 @@
 			</p>
 			<p>
 				<strong>글쓴이 : </strong>
-				<span th:text="${qnaboard.user.user_no}"></span>
+				<span th:text="${qnaboard.user.nickname}"></span>
 			</p>
 			<p>
-				<strong>제목 : </strong>
-				<span th:text="${qnaboard.title}"></span>
-			</p>
-			<p>
-				<strong>게시일 : </strong>
-				<span th:text="${qnaboard.qaTime}"></span>
+				<strong>해결여부 : </strong>
+				<span th:text="${qnaboard.qa_resolve}"></span>
 			</p>
 			<p>
 				<strong>조회수 : </strong>
 				<span th:text="${qnaboard.views}"></span>
 			</p>
+			<p>
+				<strong>게시일 : </strong>
+			
+				<td th:text="${#dates.format(qnaboard.qaTime,'MM월dd일 HH시mm분')}"></td>
+			
+			</p>
+			
+			<p>
+				<strong>게시판 번호 : </strong>
+			
+				<span th:text="${qnaboard.qa_side}"></span>
+			</p>
+			<p>
+				<strong>제목 : </strong>
+				<span th:text="${qnaboard.title}"></span>
+			</p>
+			
+			<p>
+				<strong>내용 : 
+				<span th:text="${qnaboard.contents}"></span>
+				</strong>
+			</p>
+
+
 			<div>
-		<a th:href="@{/qnaboard/update.do(qaNo=${qnaboard.qaNo})}">
+		<a th:href="@{/qnaboard/qaupdate.do(qaNo=${qnaboard.qaNo})}">
 			수정하기
 			</a>
 		</div>

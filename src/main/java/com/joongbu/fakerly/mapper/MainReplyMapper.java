@@ -11,5 +11,5 @@ public interface MainReplyMapper {
 	MainReplyDto detail(int reply_no);
 	int insert(MainReplyDto main_reply);
 	int update(MainReplyDto main_reply);
-	int delete(int main_reply_no);
+	int delete(int reply);
 }
