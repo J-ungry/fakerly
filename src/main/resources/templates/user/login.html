@@ -4,11 +4,10 @@
   <meta charset="UTF-8" />
   <title>Document</title>
   <link rel="stylesheet" href="/css/login.css" />
-  <script defer="defer" src="/js/userLogin.js"></script>
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<meta charset="UTF-8">
-<script defer="defer" src="/js/login.js"></script>
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+  <script defer="defer" src="/js/login.js"></script>
+  <title>Insert title here</title>
 </head>
 <body>
   <header th:include="headerNav"></header>
@@ -18,11 +17,9 @@
       <form action="/user/login.do" method="POST">
         <div>
           <label for="email">이메일</label>
-
           <input type="email" id="email" name="email" 
-          class="" placeholder="이메일 입력" value=""/>
-          <p></p>
-
+          class="emailLoginInput" placeholder="이메일 입력" value=""/>
+			<p id="emailChkLogin"></p>
         </div>
         <div>
           <label for="password">비밀번호</label>
