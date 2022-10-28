@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.joongbu.fakerly.dto.QnaDto;
 import com.joongbu.fakerly.dto.QnaRolesDto;
 import com.joongbu.fakerly.mapper.QnaMapper;
+import com.joongbu.fakerly.dto.UserDto;
 
 @Controller
 @RequestMapping("/qnaboard")
@@ -62,6 +63,7 @@ public class QnaController {
 		model.addAttribute("qnaboard",qadetail);
 		return "/qnaboard/qadetail";
 	}
+	
 	@GetMapping("/qaupdate.do")
 	public String qaupdate(
 		@RequestParam(required=true)int qaNo,
@@ -80,6 +82,7 @@ public class QnaController {
 		model.addAttribute("qnaboard",qadetail);
 		return "/qnaboard/qaupdate";
 	}
+	
 	@PostMapping("/qaupdate.do")
 	public String qaupdate(
 			QnaDto qna) {
@@ -96,6 +99,8 @@ public class QnaController {
 			return "redirect:/qnaboard/qaupdate.do?qaNo="+qna.getQaNo();
 		}
 	}
+	
+
 	@GetMapping("/qadelete.do")
 	public String qadelete(
 			@RequestParam(required = true) int qaNo
@@ -117,43 +122,50 @@ public class QnaController {
 		
 	}
 	
-//	@GetMapping("/qainsert.do")
-//	public String qainsert(
-//			QnaDto qna,
-//			Model model
-//			) {
-//		List<QnaDto> qainsertList=null;
-//		try {
-//			qainsertList=qnaMapper.qainsert(qna);
-//			System.out.println("QADINSERT GET");
-//			System.out.println(qainsertList);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return "redirect:/qnaboard/qainsert.do";
-//		
-//	}
-//	
-//	@PostMapping("/qainsert.do")
-//	public String qainsert(
-//			QnaDto qna)
-//
-//	{
-//		int qainsert =0;
-//		try {
-//			System.out.println("QAINSERT POST");
-////			qainsert=qnaMapper.qainsert(qna);
-//			System.out.println(qainsert);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		if(qainsert>0) {
-//			return "redirect:/qnaboard/detail.do?qaNo="+qna.getQaNo();
-//		}else {
-//			System.out.println("게시글 작성 실패");
-//		}
-//		return "redirect:/qnaboard/qainsert.do";
-//	}
+	@GetMapping("/qainsert.do")
+	public String qainsert(
+
+		@SessionAttribute(required = false) UserDto loginUser,
+		HttpSession session
+			)	{
+		String msg="";
+	if(loginUser!=null) {
+		return "/qnaboard/qainsert";
+	}else {
+		msg="로그인하셔야 게시글을 작성할 수 있습니다.";
+		session.setAttribute("msg", msg);
+		return "redirect:/user/login.do";
+	}
+	}
+	
+	@PostMapping("/qainsert.do")
+	public String qainsert(
+			QnaDto qna,
+			@SessionAttribute(required = false) UserDto loginUser,
+			HttpSession session
+			) {
+		int qainsert=0;
+		String msg="";
+		try {
+			if(loginUser!=null) {
+				qna.setUser(loginUser);
+				qainsert=qnaMapper.qainsert(qna);
+				System.out.println(qainsert);
+		} 
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(qainsert>0) {
+			msg="게시글 작성 성공";
+			session.setAttribute("msg", msg);
+			return "redirect:/qnaboard/qadetail.do?qaNo="+qna.getQaNo();			
+		}else {
+			System.out.println(qainsert);
+			System.out.println(loginUser);
+			msg="게시글 작성 실패(db오류)";
+		}
+		session.setAttribute("msg", msg);
+		return "redirect:/qnaboard/qainsert.do";
+}
 	
 }
