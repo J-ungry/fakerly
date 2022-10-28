@@ -7,16 +7,48 @@
 <body>
 <h1>게시글 수정 </h1>
 	<div>
-	<form>
-		<thead>
-			<tr>
-				<th>질문 제목 수정</th>
-				<th>질문 내용 수정</th>
-				<th>질문 코드 수정</th>
-				<th>해결 미해결 선택</th>
-			</tr>
-		</thead>
-	
+	<form action="/qnaboard/qaupdate.do" method="post">
+		<input type="hidden" name="qaNo" th:value="${qnaboard.qaNo}">
+		<input type="hidden" name="user_no" th:value="${qnaboard.user.user_no}">
+
+
+		<p>
+				<strong>no : </strong>
+				<span th:text="${qnaboard.qaNo}"></span>
+			</p>
+			<p>
+				<strong>글쓴이 : </strong>
+				<span th:text="${qnaboard.user.nickname}"></span>
+			</p>
+			<p>해결 미해결 선택:
+			<input type="radio" name="qa_resolve" value="0" th:checked="${qnaboard.qa_resolve=='0'}">미해결
+			<input type="radio" name="qa_resolve" value="1" th:checked="${qnaboard.qa_resolve=='1'}">해결
+			</p>
+			<p> 게시판 선택:
+			<input type="radio" name="qa_side" value="1" th:checked="${qnaboard.qa_side=='1'}">개발
+			<input type="radio" name="qa_side" value="2" th:checked="${qnaboard.qa_side=='2'}">디자인
+			<input type="radio" name="qa_side" value="3" th:checked="${qnaboard.qa_side=='3'}">PM/PO/기획
+			<input type="radio" name="qa_side" value="4" th:checked="${qnaboard.qa_side=='4'}">마케팅
+			
+			</p>
+			<p>질문 제목 수정:
+				<input name="title" th:value="${qnaboard.title}" placeholder="제목 입력">
+			</p>
+			<p>질문 내용 수정:
+				<input name="contents" th:value="${qnaboard.contents}" placeholder="내용 입력">
+			</p>
+			<p>질문 제목 수정:
+				<input name="code" th:value="${qnaboard.code}" placeholder="코드 입력">
+			</p>
+
+
+		<div>
+			<button>
+			수정하기
+			</button>
+			<a th:href="@{/qnaboard/qadelete.do(qaNo=${qnaboard.qaNo})}">삭제</a>
+			
+		</div>
 	</form>
 	
 	</div>
