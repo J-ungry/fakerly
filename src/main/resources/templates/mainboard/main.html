@@ -42,8 +42,24 @@
 				<a th:href="@{/mainboard/insert(userNo=${session.loginUser?.user_no})}" id=insertPlaceholder class="w-100">
 					<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
 				</a>
-
 			</div>
+			<!-- 게시글 검색 찾기 구현 예정 -->
+			<form class="d-flex mt-3 w-50" style="margin: 0 auto;" action="/mainboard/search" method="post">
+				<div class="me-3">
+					<select name="searchConcept" class="form-select form-select-sm p-2" aria-label=".form-select-sm example" style="cursor: pointer;">
+						<option value="제목">제목</option>
+						<option value="내용">내용</option>
+						<option value="작성자명">작성자명</option>
+						<option value="키워드">키워드</option>
+					</select>
+				</div>
+				<div class="input-group d-flex align-items-center">
+	  				<input name="searching" type="text" class="form-control" placeholder="원하시는 게시글을 검색해서 찾아보세요!" aria-label="Recipient's username" aria-describedby="button-addon2">
+	  				<button class="btn btn-outline-info" type="submit" id="button-addon2">검색</button>
+	  				<a href="/mainboard/main" class="btn btn-outline-info align-middle" type="button" id="button-addon2">전체 게시글</a>
+				</div>
+			</form>
+			
 			<!-- <div class="post-container">에는 게시판만 넣어주세요. 반복문입니다. -->
 			<div class="post-container w-50 p-3 h-25" th:each="main : ${mainList}" style="margin-top: 50px;">	
 				<div class="boardInfo d-flex justify-content-between">
