@@ -12,7 +12,7 @@ import lombok.Data;
 | temp_no    | int          | NO   | PRI | NULL              | auto_increment    |
 | user_no    | int          | NO   | MUL | NULL              |                   |                                      
 | title      | varchar(100) | NO   |     | NULL              |                   |         
-| keyword_no | int          | NO   | MUL | NULL              |                   |       
+| keyword_no | int          | YES  | MUL | NULL              |                   |       
 | contents   | varchar(255) | NO   |     | NULL              |                   |       
 | img        | blob         | YES  |     | NULL              |                   |       
 | link       | varchar(255) | YES  |     | NULL              |                   |       

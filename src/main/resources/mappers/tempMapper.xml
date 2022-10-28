@@ -15,8 +15,8 @@
   </resultMap>
   <select id="templist" resultMap="TempBoardMap">
   
- SELECT *,user_no userNO FROM tempboard 
- 		ORDER BY temp_no DESC
+ SELECT *,user_no userNo FROM tempboard 
+ 		<!-- ORDER BY temp_no DESC -->
   
   
  <!-- SELECT t.*,u.user_name,u.company,
@@ -31,6 +31,13 @@
  		VALUES 
  		(#{tempNo}, #{userNo}, #{title}, #{keywordNo}, #{contents}, #{img}, #{link})
 	</insert>
+	
+	<select id="detail" resultMap="TempBoardMap">
+		SELECT * 
+		FROM tempboard t 
+		LEFT JOIN user using(user_no) 
+		WHERE temp_no=#{tempNo}
+	</select>
   </mapper>
   
 <!--
