@@ -10,11 +10,9 @@ import com.joongbu.fakerly.dto.QnaDto;
 public interface QnaMapper {
 	List<QnaDto> qalist();
 	QnaDto qadetail(int qaNo);
-//	int insert(QnaDto qna);
-//	int delete(int qaNo);
-//	int update(QnaDto qna);
+	int qainsert(QnaDto qna);
 	int qaupdate(QnaDto qna);
 	int qadelete(int qaNo);
-	int qainsert(QnaDto qna);
-}
 
+
+}
