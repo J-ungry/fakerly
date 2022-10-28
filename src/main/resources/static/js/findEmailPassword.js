@@ -23,3 +23,19 @@ phoneP.onblur = function(e) {
 		phoneNbChkP.textContent = "";
 	}
 }
+
+
+const emailFindInput = document.querySelector(".emailFindInput");
+const emailChkLogin = document.querySelector("#emailChkfindE");
+
+const emailValue = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);
+
+emailFindInput.onblur = function(e) {
+	console.log("커서가 밖을 나갔습니다.");
+	if (!emailValue.test(emailFindInput.value)) {
+		console.log("이메일 양식에 맞게 입력해주세요.");
+		emailChkfindE.textContent = "이메일 양식에 맞게 입력해주세요.";
+	} else {
+		emailChkfindE.textContent = "";
+	}
+}
