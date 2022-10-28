@@ -53,7 +53,7 @@ body {
 /* 가운데 하얀색 배경 부분 */
 .main-contn {
 	width: 768px;
-	height: 84%;
+	height: 100%;
 	margin: 0 auto;
 	/* border: 1px dotted red; */
 	padding: 60px 200px 48px 200px;
