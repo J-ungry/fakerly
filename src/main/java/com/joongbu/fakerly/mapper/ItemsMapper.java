@@ -11,4 +11,6 @@ public interface ItemsMapper {
 
 	List<KeywordDto> keywordList(int userNo);
 	int insertUserKeyword(int userNo, int keywordNo);
+	int deleteUserKeyword(int userNo, int keywordNo);
+	List<KeywordDto> userKeywordList(int userNo);
 }

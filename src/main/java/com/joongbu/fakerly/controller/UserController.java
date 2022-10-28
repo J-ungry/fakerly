@@ -281,6 +281,7 @@ public class UserController {
 	public String insert(UserDto user) {
 		
 		int insert = 0;
+		int update = 0;
 		System.out.println(user);
 		
 		//calc age
@@ -294,6 +295,12 @@ public class UserController {
 		
 		try {
 			insert = userMapper.insert(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			update = userMapper.updateUserKeyword();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
