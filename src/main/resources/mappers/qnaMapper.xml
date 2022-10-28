@@ -17,6 +17,14 @@
   		<id column="user_no" property="user_no"/> 
   		<result column="nickname" property="nickname"/>
   		</association>
+  		
+  		<!-- collection.select : board 출력할때 select를 한번 더 호출(==join) -->
+		<!-- fetchType="lazy"(게으른 연산) : toString,equals,get... 
+								호출이 없으면 collection.select를 하지 않는다. -->
+  		<collection property="qaImgList"
+			select="com.joongbu.fakerly.mapper.QnaImgMapper.qaImgList"
+			column="qa_no" fetchType="lazy">
+		</collection>
 		<!--   		<association property="qroles" foreignColumn="qa_no">
   		<id column="qa_name" property="qa_name"/> 
   		</association> -->

@@ -6,16 +6,23 @@
   <mapper namespace="com.joongbu.fakerly.mapper.QnaImgMapper">
   <resultMap type="QnaImgDto" id="QnaImgMap">
   	<id column="qa_img_no" property="qaImgNo"/>
+  	<result column="qa_no" property="qaNo"/>
   	<result column="img_path" property="img_path"></result>
-  	<association property="qna" foreignColumn="qaNo">
-  		<id column="qaNo" property="qaNo"/>
-	</association>
-  </resultMap>
 
-	<insert id="insert" parameterType="SideRoleDto">
-		INSERT INTO SIDE_ROLE (side_board_no,side_role_no) VALUE(#{sideBoardNo},#{sideRoleNo});
+
+  </resultMap>
+	<select id="qaImgList" resultMap="QnaImgMap">
+		SELECT * FROM qna_img
+			WHERE qa_no=${qaNo}
+	</select>
+	
+	
+	<insert id="qainsert" parameterType="QnaImgDto">
+	
+		INSERT INTO qna_img
+		(qa_no,img_path) VALUE (#{qaNo},#{img_path});
 	</insert>
-	<delete id="delete">
-		DELETE FROM SIDE_ROLE WHERE side_board_no=#{sideBoardNo}
+	<delete id="qadelete">
+		DELETE FROM  qna_img(qa_img_no) WHERE qa_img_no=#{qaImgNo};
 	</delete>
   </mapper>

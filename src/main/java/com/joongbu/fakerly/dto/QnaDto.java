@@ -1,6 +1,7 @@
 package com.joongbu.fakerly.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -35,4 +36,5 @@ public class QnaDto {
 //	private String nickname;
 	private int qa_side;
 	private QnaRolesDto qroles;
+	private List<QnaImgDto> qaImgList;
 }
