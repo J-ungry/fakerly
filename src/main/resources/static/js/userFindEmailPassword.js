@@ -23,3 +23,4 @@ phoneP.onblur = function(e) {
 		phoneNbChkP.textContent = "";
 	}
 }
+
