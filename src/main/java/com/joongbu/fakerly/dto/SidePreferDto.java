@@ -14,7 +14,7 @@ import lombok.Data;
 @Data
 public class SidePreferDto {
 	
-	private int sideBoardPreferNo;
-	private int sideBoardNo;
-	private int UserNo;
+	private int side_board_prefer_no;
+	private int side_board_no;
+	private int user_no;
 }

@@ -78,13 +78,14 @@ public class TempController {
 	@PostMapping("/insert.do")
 	public String insert(
 			TempBoardDto tempboard,
-			@SessionAttribute(required = false) UserDto user,
+			@SessionAttribute(required = false) UserDto loginUser,
 			HttpSession session
 			) {
 		int insert=0;
 		String msg="";
 		try {
-			if(userNo!=null) {
+			if(loginUser!=null) {
+
 				insert=tempboardMapper.insert(tempboard);
 			}
 		} catch (Exception e) {

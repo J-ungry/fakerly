@@ -10,7 +10,11 @@
   		(side_board_no,user_no) value(#{side_board_no},#{user_no});
   	</insert>
   	
-  	<delete id="dislike">
+  	<delete id="unlike">
   		DELETE FROM SIDEBOARD_PREFER WHERE side_board_no=#{side_board_no} and user_no=#{user_no}
   	</delete>
+  	
+  	<select id="check" resultType="SidePreferDto"> <!-- 미리 좋아요 누른 이력 있는지 확인  -->
+  		SELECT * FROM SIDEBOARD_PREFER WHERE side_board_no=#{side_board_no} and user_no=#{user_no}
+  	</select>
   </mapper>

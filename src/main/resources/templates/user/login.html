@@ -4,29 +4,26 @@
   <meta charset="UTF-8" />
   <title>Document</title>
   <link rel="stylesheet" href="/css/login.css" />
-  <script defer="defer" src="/js/userLogin.js"></script>
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<meta charset="UTF-8">
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+  <script defer="defer" src="/js/login.js"></script>
+  <title>Insert title here</title>
 </head>
 <body>
   <header th:include="headerNav"></header>
   <div class="contn">
-    <!-- <div class="child-contn"> -->
     <div class="main-contn">
       <h1><strong>로그인</strong></h1>
       <form action="/user/login.do" method="POST">
-        <div>
+		 <div>
           <label for="email">이메일</label>
-
           <input type="email" id="email" name="email" 
-          class="" placeholder="이메일 입력" value="123@gmail.com"/>
-          <p></p>
-
+          class="emailLoginInput" placeholder="이메일 입력" value=""/>
+			<p id="emailChkLogin"></p>
         </div>
         <div>
           <label for="password">비밀번호</label>
-          <input type="password" id="pw" name="pw" class="" placeholder="비밀번호 입력" value="123"/>
+          <input type="password" id="pw" name="pw" class="" placeholder="비밀번호 입력" value=""/>
         </div>
         <div>
           <button type="submit" class="login-btn">로그인</button>
@@ -39,10 +36,6 @@
         </div>
       </div>
     </div>
-    <footer>
-      <div>푸터</div>
-    </footer>
-    <!-- </div> -->
   </div>
 </body>
 </html>
