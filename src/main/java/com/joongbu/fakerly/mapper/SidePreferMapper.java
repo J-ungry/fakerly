@@ -7,6 +7,7 @@ import com.joongbu.fakerly.dto.SidePreferDto;
 @Mapper
 public interface SidePreferMapper {
 	
-	int like(SidePreferDto sidePrefer);
-	int dislike(SidePreferDto sidePrefer);
+	int like(int user_no,int side_board_no);
+	int unlike(int user_no,int side_board_no);
+	SidePreferDto check(int user_no,int side_board_no);
 }

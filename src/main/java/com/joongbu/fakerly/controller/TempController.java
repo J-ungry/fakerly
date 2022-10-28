@@ -84,7 +84,7 @@ public class TempController {
 		int insert=0;
 		String msg="";
 		try {
-			if(userNo!=null) {
+			if(user!=null) {
 				insert=tempboardMapper.insert(tempboard);
 			}
 		} catch (Exception e) {
