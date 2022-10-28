@@ -21,6 +21,7 @@
 		(contents,hierarchy,depth,group_no,mainboard_no,user_no)
 		VALUES
 		(#{contents},0,0,0,#{mainboard_no},#{user_no})
+		<!-- (윗)댓글은 컬럼값 직접 -->
 	</insert>
 	<update id="update" parameterType="MainReplyDto">
 		UPDATE main_reply SET
@@ -31,9 +32,10 @@
 		DELETE FROM main_reply WHERE main_reply_no=#{reply_no}
 	</delete>
 	<select id="list" resultMap="MainReplyMap">
-		SELECT * FROM main_reply
+		SELECT *
+			FROM main_reply 
 			WHERE mainboard_no=#{mainboard_no}
-			ORDER BY main_reply_no DESC
+			ORDER BY main_reply_no
 	</select>
 	<select id="detail" resultMap="MainReplyMap">
 		SELECT * FROM main_reply WHERE main_reply_no=#{reply_no}

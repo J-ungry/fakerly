@@ -110,8 +110,10 @@ public class MainBoardController {
 		MainBoardDto mainboard=null;
 		try {
 			mainboard=boardMapper.detailReply(mainboardNo);
+
 			System.out.println(mainboard);
 			boardMapper.viewUpdate(mainboardNo);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
