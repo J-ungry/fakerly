@@ -21,4 +21,6 @@ public interface UserMapper {
 	int insert(UserDto user);
 
 	UserDto checkNickname(String nickname);
+
+	int updateUserKeyword();
 }

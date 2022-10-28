@@ -26,5 +26,10 @@
   		select * from user 
   		where nickname=#{nickname}
   	</select>
+  	<update id="updateUserKeyword">
+  		update user_keyword 
+  		set user_no=(select last_insert_id()) 
+  		where user_no=1
+  	</update>
 </mapper>
 
