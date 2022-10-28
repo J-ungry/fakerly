@@ -12,6 +12,7 @@
   	<result column="img" property="img" />
   	<result column="link" property="link" />
   	<result column="time" property="time" />
+  	
   </resultMap>
   <select id="templist" resultMap="TempBoardMap">
   
@@ -38,6 +39,12 @@
 		LEFT JOIN user using(user_no) 
 		WHERE temp_no=#{tempNo}
 	</select>
+	<update id="update" parameterType="TempBoardDto">
+		UPDATE tempboard SET
+			title=#{title},
+			contents=#{contents}
+			WHERE temp_no=#{tempdNo}	
+	</update>
   </mapper>
   
 <!--

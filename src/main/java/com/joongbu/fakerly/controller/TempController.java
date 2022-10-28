@@ -1,5 +1,6 @@
 package com.joongbu.fakerly.controller;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,21 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+
 import com.joongbu.fakerly.dto.TempBoardDto;
 import com.joongbu.fakerly.dto.UserDto;
 import com.joongbu.fakerly.mapper.TempBoardMapper;
-
+		
 @RequestMapping("/tempboard")
 @Controller
 public class TempController {
 	@Autowired
-	TempBoardMapper tempboardMapper;
+	TempBoardMapper tempMapper;
 	@GetMapping("/templist.do")
 	public String templist(Model model){
 		System.out.println("work!");
 		List<TempBoardDto> tempList=null;
 		try {
-			tempList=tempboardMapper.templist();
+			tempList=tempMapper.templist();
 			System.out.println(tempList);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,12 +49,13 @@ public class TempController {
 			) {
 		TempBoardDto tempboard =null;
 		try {
-			tempboard=tempboardMapper.detail(tempNo);
+			tempboard=tempMapper.detail(tempNo);
 			System.out.println("detail!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(tempboard!=null) {
+			System.out.println("detail!!!!");
 			model.addAttribute("tempboard" ,tempboard);
 			return "/tempboard/detail";
 		}else {
@@ -62,43 +65,88 @@ public class TempController {
 	}
 	@GetMapping("/insert.do")
 	public String insert(
-			@SessionAttribute(required = false)UserDto loginUser,
-			HttpSession session
-			) {
-		String msg="";
-		if(loginUser!=null) {
-			return"tempboard/insert";
-		}else {
-			msg="ERROR";
-			System.out.println("HEllo");
-			session.setAttribute("msg", msg);
-			return "redirect:/user/login.do";
-		}
-	}
+		TempBoardDto tempboard,
+		@SessionAttribute(required = false) UserDto loginUser,
+		HttpSession session,
+		Model model
+		) {
+	String msg="";
+	if(loginUser!=null) {
+		model.addAttribute("tempboard", tempboard);
+		return "/tempboard/insert";
+	}else {
+		msg="로그인 하셔야 게시글 작성이 가능합니다";
+		session.setAttribute("msg", msg);
+		return "redirect:/tempboard/list.do";
+	}	
+}
 	@PostMapping("/insert.do")
 	public String insert(
 			TempBoardDto tempboard,
-			@SessionAttribute(required = false) UserDto user,
+			@SessionAttribute(required=true) UserDto loginUser,
 			HttpSession session
 			) {
-		int insert=0;
 		String msg="";
+		int insert=0;
 		try {
-			if(userNo!=null) {
-				insert=tempboardMapper.insert(tempboard);
+			if(loginUser!=null) {
+				insert=tempMapper.insert(tempboard);
+			}else {
+				msg="로그인 필요";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(insert>0) {
-			msg="임시 저장 성공";
+			msg="임시보관성공";
 			session.setAttribute("msg", msg);
+			System.out.println("성공");
 			return "redirect:/tempboard/detail.do?tempNo="+tempboard.getTempNo();
 		}else {
-				msg="게시글 작성 실패(db 오류)";
-			session.setAttribute("msg", msg);
-			return "redirect:/mainboard/main.do";
-			}
+			msg="임시보관실패";
 		}
+			session.setAttribute("msg", msg);
+			return "redirect:/tempboard/insert.do";
 	}
+}
+
+/*public String insert(
+@SessionAttribute(required = false)UserDto loginUser,
+HttpSession session
+) {
+String msg="";
+if(loginUser!=null) {
+return"tempboard/insert";
+}else {
+msg="ERROR";
+System.out.println("HEllo");
+session.setAttribute("msg", msg);
+return "redirect:/user/login.do";
+}
+}
+@PostMapping("/insert.do")
+public String insert(
+TempBoardDto tempboard,
+@SessionAttribute(required = false) UserDto user,
+HttpSession session
+) {
+int insert=0;
+String msg="";
+try {
+if(tempboard!=null) {
+	insert=tempboardMapper.insert(tempboard);
+}
+} catch (Exception e) {
+e.printStackTrace();
+}
+if(insert>0) {
+msg="임시 저장 성공";
+session.setAttribute("msg", msg);
+return "redirect:/tempboard/detail.do?tempNo="+tempboard.getTempNo();
+}else {
+	msg="게시글 작성 실패(db 오류)";
+session.setAttribute("msg", msg);
+return "redirect:/mainboard/main.do";
+}
+}*/
 
