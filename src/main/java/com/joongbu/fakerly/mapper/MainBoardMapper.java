@@ -16,4 +16,9 @@ public interface MainBoardMapper {
 	int update(MainBoardDto mainboard);
 	int viewUpdate(int mainboardNo); 
 	int delete(int mainboardNo);
+	
+	List<MainBoardDto> searchTitle(String mainboardTitle);
+	List<MainBoardDto> searchContents(String mainboardContents);
+	List<MainBoardDto> searchName(String userName);
+	List<MainBoardDto> searchKeyword(String keywordName);
 }

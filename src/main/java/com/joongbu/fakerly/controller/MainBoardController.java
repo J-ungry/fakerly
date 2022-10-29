@@ -123,7 +123,7 @@ public class MainBoardController {
 		}
 	}
 	
-	//mainboard 게시글 삭제
+	//mainboard 게시글 삭제 
 	@GetMapping("/delete")
 	public String delete(
 			@RequestParam(required=true) int mainboardNo,
@@ -142,6 +142,9 @@ public class MainBoardController {
 				}
 			} else {
 				msg="글쓴이만 삭제 할 수 있습니다.";
+				session.setAttribute("msg", msg);
+				return "redirect:/mainboard/main";
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -230,16 +233,61 @@ public class MainBoardController {
 	}
 	
 	@PostMapping("/search")
-	public String search(
+	public String search(	//'키워드','작성자명' 아직 미구현
+ 			Model model,
+			HttpSession session,
 			@RequestParam(required=false) String searchConcept,	//검색 카테고리
 			@RequestParam(required=false) String searching		//사용자가 입력한 검색내용
 			) {
-		System.out.println(searchConcept);
-		System.out.println(searching);
+		String msg="";
+		List<MainBoardDto> searchList=null;
+		switch(searchConcept) {
+		case "제목":	//"제목" 카테고리로 검색할 경우
+			try {
+				searchList=boardMapper.searchTitle(searching);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
+			session.setAttribute("msg", msg);
+			model.addAttribute("searchList", searchList);
+			return "/mainboard/searchTitle";
+		
+		case "내용":	//"내용" 카테고리로 검색할 경우
+			try {
+				searchList=boardMapper.searchContents(searching);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
+			session.setAttribute("msg", msg);
+			model.addAttribute("searchList", searchList);
+			return "/mainboard/searchContents";
+		
+		case "작성자명":	//"작성자명" 카테고리로 검색할 경우
+			try {
+				searchList=boardMapper.searchName(searching);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
+			session.setAttribute("msg", msg);
+			model.addAttribute("searchList", searchList);
+			return "/mainboard/searchName";
+			
+		case "키워드":	//"키워드" 카테고리로 검색할 경우
+			try {
+				searchList=boardMapper.searchKeyword(searching);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
+			session.setAttribute("msg", msg);
+			model.addAttribute("searchList", searchList);
+			return "/mainboard/searchKeyword";
+		}
 		return "/mainboard/main";
 	}
-	
-	
 }
 
 

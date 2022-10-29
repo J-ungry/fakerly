@@ -23,4 +23,6 @@ public interface UserMapper {
 	UserDto checkNickname(String nickname);
 
 	int updateUserKeyword();
+	
+	
 }

@@ -4,16 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
-<script defer="defer" src="/js/mainboard/main.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>메인 게시판</title>
 </head>
-<body>
-	<!-- 
-		검색 기능 구현완료
-		(추가예정: 검색 특정 단어 하이라이트 효과, 검색 시 게시판 Ajax로 교체, 좋아요 기능, 이미지 Ajax로 교체, 프로필)
-	 -->
+<body style="background-color: #f7f7f7;">
+	<!-- 작성자명으로 검색했을 때 결과입니다. -->
 	<header th:include="headerNav"></header>
 	<main>
 		<div id="container" style="background-color: #f7f7f7; border: 1px solid #fff">
@@ -21,14 +17,12 @@
 				<div id=userProfile>
 					<img src="/img/profile.png">
 				</div>
-				<!-- userNo=${session.loginUser?.user_no} 여기 ? 오타아닙니다. ? 지우면 에러나요! -->
 				<a th:href="@{/mainboard/insert(userNo=${session.loginUser?.user_no})}" id=insertPlaceholder class="w-100">
 					<span style="font-size: 14px; font-weight: bold;">나누고 싶은 생각이 있으신가요?</span>
 				</a>
 			</div>
-			<!-- 게시글 검색 찾기 구현 예정 -->
-			<form class="d-flex mt-3 w-50" style="margin: 0 auto;" action="/mainboard/search" method="post" name="searchMainBoard">
-				<div class="me-1">
+			<form class="d-flex mt-3 w-50" style="margin: 0 auto;" action="/mainboard/search" method="post">
+				<div class="me-3">
 					<select name="searchConcept" class="form-select form-select-sm p-2" aria-label=".form-select-sm example" style="cursor: pointer;">
 						<option value="제목">제목</option>
 						<option value="내용">내용</option>
@@ -42,16 +36,15 @@
 	  				<a href="/mainboard/main" class="btn btn-outline-info align-middle" type="button" id="button-addon2">전체 게시글</a>
 				</div>
 			</form>
-			
 			<!-- <div class="post-container">에는 게시판만 넣어주세요. 반복문입니다. -->
-			<div id="postList" class="post-container w-50 p-3 h-25" th:each="main : ${mainList}" style="margin-top: 50px;">	
+			<div class="post-container w-50 p-3 h-25" th:each="main : ${searchList}" style="margin-top: 50px;">
 				<div class="boardInfo d-flex justify-content-between">
 					<div class="boardProfile d-flex align-self-center">
 						<a href="#">	<!-- 작성자 프로필: user에서 프로필이미지 저장 된다면 그 프로필 이미지로 교체 -->
 							<img class="align-middle" src="/img/profile.png">
 						</a>
 						<div class="userInfo d-flex flex-column align-self-center">
-							<div><span style="font-size: 14px" class="align-middle" th:text="${main.userName}"><strong></strong></span></div>
+							<div><span style="font-size: 14px; box-shadow: inset 0 -20px 0 #bfffa1;" class="align-middle" th:text="${main.userName}"><strong></strong></span></div>
 							<div style="font-size: 9px; margin-top: 0; color: #d7d3cd">
 								<span th:text="${main.userCompany}"></span>	<!-- 작성자 소속 -->
 								<span>·</span>
