@@ -1,11 +1,15 @@
 package com.joongbu.fakerly.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.UUID;
 
+import javax.mail.MessagingException;
+import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -151,7 +155,7 @@ public class UserController {
 			HttpSession session, 
 			RedirectAttributes redirAtt,
 			Model model
-			) {
+			) throws MessagingException, IOException {
 				System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
 				Enumeration params = req.getParameterNames();
 				System.out.print("Parameter> ");
@@ -210,9 +214,24 @@ public class UserController {
 							String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 							uuid = uuid.substring(0, 13);
 
-							String emailSubject = "[Fakerly] 임시 비밀번호가 발급되었습니다.";
-							String emailbody = uuid + "\n" + "로그인하러 가기" + "\n" + "http://localhost:8081/user/login.do";
-							senderService.sendEmail(userEmail, emailSubject, emailbody);
+							// String emailSubject = "[Fakerly] 임시 비밀번호가 발급되었습니다.";
+							// String emailbody = uuid + "\n" + "로그인하러 가기" + "\n" +
+							// "http://localhost:8081/user/login.do";
+							// emailbody += "\n<a href='http://localhost:8081/user/login.do'>Fakerly 로그인하러
+							// 가기</a>";
+							// senderService.sendEmail(userEmail, emailSubject, emailbody);
+
+							HashMap<String, String> emailValues = new HashMap<String, String>();
+							System.out.println(findUserPassword.getUser_name());
+							emailValues.put("userName", findUserPassword.getUser_name());
+							emailValues.put("tempPassword", uuid);
+
+							String emailTitle = "[Fakerly] 임시 비밀번호가 발급되었습니다.";
+							senderService.sendEmail(emailTitle, findUserPassword.getEmail(), "tempPassword",
+									emailValues);
+							System.out.println("이메일 전송 완료");
+
+							// DB에 임시 비밀번호 저장
 							userMapper.giveTempPassword(userEmail, uuid);
 							
 							String[] emailArr = userEmail.split("@|\\.");
