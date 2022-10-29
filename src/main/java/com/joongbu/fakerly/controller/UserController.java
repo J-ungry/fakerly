@@ -99,6 +99,7 @@ public class UserController {
 							return "redirect:/user/login.do";
 						} else {
 							session.setAttribute("loginUser", loginUser);
+							session.setAttribute("loginStatus", true);
 							System.out.println(session.getAttribute("loginUser"));
 							msg = "로그인 성공!";
 							session.setAttribute("msg", msg);
@@ -106,19 +107,13 @@ public class UserController {
 						}
 					} else {
 						// 임시 패스워드
-
-						System.out.println("pw : " + pw);
-						System.out.println(pw.getClass().getName());
-						System.out.println("loginUser.getPw() : " + loginUser.getPw());
-						System.out.println(loginUser.getPw().getClass().getName());
-						System.out.println(pw != loginUser.getPw());
-
 						if (!pw.equals(loginUser.getPw())) {
 							msg = "비밀번호가 일치하지 않습니다.";
 							session.setAttribute("msg", msg);
 							return "redirect:/user/login.do";
 						} else {
 							session.setAttribute("loginUser", loginUser);
+							session.setAttribute("loginStatus", true);
 							System.out.println(session.getAttribute("loginUser"));
 							msg = "로그인 성공!";
 							session.setAttribute("msg", msg);
