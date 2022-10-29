@@ -99,7 +99,6 @@ public class UserController {
 							return "redirect:/user/login.do";
 						} else {
 							session.setAttribute("loginUser", loginUser);
-							session.setAttribute("loginStatus", true);
 							System.out.println(session.getAttribute("loginUser"));
 							msg = "로그인 성공!";
 							session.setAttribute("msg", msg);
@@ -113,7 +112,6 @@ public class UserController {
 							return "redirect:/user/login.do";
 						} else {
 							session.setAttribute("loginUser", loginUser);
-							session.setAttribute("loginStatus", true);
 							System.out.println(session.getAttribute("loginUser"));
 							msg = "로그인 성공!";
 							session.setAttribute("msg", msg);
