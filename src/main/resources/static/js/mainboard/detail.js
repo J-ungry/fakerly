@@ -1,33 +1,46 @@
 const replyInserForm=document.forms["replyInserForm"];
 
-if(replyInserForm!=null){
-	replyInserForm.addEventListener("submit",async(e)=>{
-		e.preventDefault();
-		let boardNo=replyInserForm.boardNo.value;
-		let url=replyInserForm.action;
-		let data=new FormData(replyInserForm); 
-		//multipart/form-data일대 파라미터를 blob으로 처리
-		let resp=await fetch(url,{body:data,method:"post"});
+
+
+
+
+function readReplyUpdateForm(reply_no) {
+	const replyNode=document.getElementById("reply_no"+reply_no);
+	const replyupdate=document.getElementById("reply_update"+reply_no);
+
+	if(replyupdate.style.display=="none"){
+		console.log('댓글 수정폼 나타나라 얍')
+		replyupdate.style.display="block";
+		replyNode.style.display="none";
 		
-	});
+	}else{
+		console.log('댓글 수정폼 사라져라 얍')
+		replyNode.style.display="block";
+		replyupdate.style.display="none";
+	}
+
+	
+	
+	
+	
+	
 }
 
-async function readReplyUpdateForm(replyNo){
-	console('asdasd')
-	let url="/reply/update?replyNo="+replyNo;
-	const replyLiNode=document.getElementById("replyLi"+replyNo);
-	let resp=await fetch(url);
-	if(resp.status==200){
-		let textHtml=await resp.text();
-		replyLiNode.innerHTML=textHtml;
-	}else if(resp.status==400){
-		alert("로그인한 유저만 수정 가능");
-	}else if(resp.status==401){
-		alert("글쓴 유저만 수정 가능");
-	}else if(reps.status==500){
-		alert("수정 폼 불러오기 실패(db 에러)");
-	}
+function readRereplyUpdateForm(rereply_no){
+	const rereplyNode=document.getElementById("rereply_no"+rereply_no)
+	const rereplyupdate=document.getElementById("rereply_update"+rereply_no)
+	
+	if(rereplyupdate.style.display=="none"){
+		console.log('대댓글 수정폼 나타나라 얍')
+		rereplyNode.style.display="none";
+		rereplyupdate.style.display="block";
+	}else{
+		console.log('대댓글 수정폼 사라져라 얍')
+		rereplyNode.style.display="block";
+		rereplyupdate.style.display="none";
+	}	
 }
+
 
 
 async function deleteReply(replyNo,boardNo){

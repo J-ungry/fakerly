@@ -10,33 +10,6 @@ main {
 	box-sizing: border-box;
 }
 
-main #mainboardInsert {
-	margin: 0 auto;
-	display: flex;
-	border: 1px solid #dbdbdb;
-	background-color: #fff;
-	padding: 25px;
-}
-
-main #mainboardInsert #userProfile img {
-	margin-top: 10px;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-}
-
-main #mainboardInsert #insertPlaceholder {
-	margin-left: 15px;
-	padding: 15px;
-	width: 600px;
-	background-color: #f7f7f7;
-	border-radius: 10px;
-	text-decoration: none;
-}
-
-main #mainboardInsert #insertPlaceholder span {
-	color: #b6b6b8;
-}
 
 main .post-container {
 	border: 1px solid #dbdbdb;
@@ -94,12 +67,23 @@ main .post-container .boardMain .boardFile {
 	margin-top: 160px;
 	margin-bottom: 30px;
 	width: 700px;
+	display:flex;
 	background-color: #f7f7f7;
-	display: flex;
-	justify-content: space-between;
 	margin-left: auto;
 	margin-right: auto;
+	flex-direction: column;
 }	
+
+main .post-container .boardMain .boardFile .boardLink{
+	margin-bottom: 20px;
+	text-align: center;
+	
+}
+
+
+main .post-container .boardMain .boardFile .boardImg{
+	text-align: center;
+}
 
 main .post-container .boardData {
 	box-sizing: border-box;

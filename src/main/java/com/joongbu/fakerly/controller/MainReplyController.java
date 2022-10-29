@@ -40,7 +40,7 @@ public class MainReplyController {
 			@SessionAttribute(required=false) UserDto loginUser
 			) {
 		
-		System.out.println(reply);
+		System.out.println("댓글 등록 : "+reply);
 		int insert=0;
 		String msg="";
 		try {
@@ -66,11 +66,29 @@ public class MainReplyController {
 	public String update(
 			MainReplyDto reply,
 			HttpSession session,
-			@SessionAttribute(required=false) UserDto loginUser
+			Model model
 			) {
-		System.out.println(reply);
+		System.out.println("update.form 출력이다 그지 깽깽이들아"+reply);
+		int update=0;
+		String msg="";
+		try {
+			update=replyMapper.update(reply);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(update>0) {
+			msg="댓글수정 성공";
+			session.setAttribute("msg",msg);
+			model.addAttribute("reply",reply);
+			return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
+		}else {
+			msg="댓글수정 실패";
+			session.setAttribute("msg",msg);
+			model.addAttribute("reply",reply);
+			return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
+		}
 		
-		return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
+		
 	}
 	
 	//댓글 삭제 기능
@@ -78,12 +96,11 @@ public class MainReplyController {
 	public String delete(
 			MainReplyDto reply,
 			HttpSession session,
-			@SessionAttribute(required=false) UserDto loginUser,
-			Model model
+			@SessionAttribute(required=false) UserDto loginUser
 			) {
 		int delete=0;
 		String msg="";
-		System.out.println(reply);
+		System.out.println("삭제 후 reply : "+reply);
 		try {
 			delete=replyMapper.delete(reply.getMain_reply_no());
 			

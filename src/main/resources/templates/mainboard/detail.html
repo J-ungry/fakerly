@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/css/mainboard/main.css">
+<link rel="stylesheet" href="/css/mainboard/detail.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
@@ -11,7 +11,7 @@
 <body>
 	<header th:include="headerNav"></header>
 	<main>
-		<div class="post-container w-50 p-3 h-25" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
+		<div class="post-container w-50 p-3" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
 				<div class="boardInfo">	<!-- 작성자 프로필 사진, 이름, 소속, 글 등록 시간, 팔로우버튼 -->
 					<div class="boardProfile d-flex flex-column align-self-center">
 						<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
@@ -73,8 +73,11 @@
 				 action="/reply/insert" method="post">
 				<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
 				<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
+				<input type="hidden" name="hierarchy" value=0>
+				<input type="hidden" name="depth" value=0>
+				<input type="hidden" name="group_no" value=0>
+				
 				<h3>댓글 작성 (<span th:text="${session.loginUser.nickname}"></span>)</h3>
-				<input type="hidden" name="boardNo" th:value="${mainboard.mainboardNo}"> 
 				<p >
 					<textarea name="contents" id="replyContents" placeholder="내용"></textarea>
 					<label for="replyContents">내용</label>
@@ -139,3 +142,7 @@ mainboardView
 mainboardLink
 mainboardTime
  -->
+
+ 
+ 
+ 

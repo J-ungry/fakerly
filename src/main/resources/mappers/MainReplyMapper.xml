@@ -20,13 +20,13 @@
 		INSERT INTO main_reply
 		(contents,hierarchy,depth,group_no,mainboard_no,user_no)
 		VALUES
-		(#{contents},0,0,0,#{mainboard_no},#{user_no})
+		(#{contents},#{hierarchy},#{depth},#{group_no},#{mainboard_no},#{user_no})
 		<!-- (윗)댓글은 컬럼값 직접 -->
 	</insert>
 	<update id="update" parameterType="MainReplyDto">
 		UPDATE main_reply SET
 		contents=#{contents}
-		WHERE main_reply_no=#{reply_no}
+		WHERE main_reply_no=#{main_reply_no}
 	</update>
 	<delete id="delete">
 		DELETE FROM main_reply WHERE main_reply_no=#{reply_no}
@@ -40,5 +40,6 @@
 	<select id="detail" resultMap="MainReplyMap">
 		SELECT * FROM main_reply WHERE main_reply_no=#{reply_no}
 	</select>
+	
 </mapper>
   
