@@ -23,7 +23,7 @@ public class IndexController {
 		return "redirect:https://mail.google.com";
 	}
 
-	@GetMapping("naverMail")
+	@GetMapping("/naverMail")
 	public String goNaverMail() {
 		return "redirect:https://mail.naver.com";
 	}

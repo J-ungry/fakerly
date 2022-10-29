@@ -1,6 +1,7 @@
 package com.joongbu.fakerly.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -140,75 +142,99 @@ public class UserController {
 
 	// 이메일/비밀번호 찾기 시도
 	@PostMapping("/findEmailPassword.do")
-	public String findEmailPassword(HttpServletRequest req, String fEmail, @RequestParam(required = true) String fName,
-			@RequestParam(required = true) String fPhone, @RequestParam(required = true) String fBirth,
-			HttpSession session, RedirectAttributes redirAtt) {
-		System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
-		Enumeration params = req.getParameterNames();
-		System.out.print("Parameter> ");
-		while (params.hasMoreElements()) {
-			String name = (String) params.nextElement();
-			System.out.print(name + " : " + req.getParameter(name) + "\t");
-		}
-		System.out.println();
-
-		UserDto findUserEmail = null;
-		UserDto findUserPassword = null;
-		SimpleDateFormat tranSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String redirEmailSuccess = "redirect:/user/findEmailSuccess.do";
-		String redirPasswordSuccess = "redirect:/user/findPasswordSuccess.do";
-		String redirFail = "redirect:/user/findEmailPasswordFail.do";
-
-		if (fEmail == null) { // 이메일 찾기
-			try {
-				findUserEmail = userMapper.findUserEmail(fPhone);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			if (findUserEmail != null) {
-				System.out.println(findUserEmail);
-				if (!fName.equals(findUserEmail.getUser_name())) {
-					return redirFail;
-				} else if (!fBirth.equals(tranSimpleDateFormat.format(findUserEmail.getBirth()))) {
-					return redirFail;
-				} else {
-					redirAtt.addFlashAttribute("email", findUserEmail.getEmail());
-					return redirEmailSuccess;
+	public String findEmailPassword(
+			HttpServletRequest req, 
+			String fEmail, 
+			@RequestParam(required = true) String fName,
+			@RequestParam(required = true) String fPhone, 
+			@RequestParam(required = true) String fBirth,
+			HttpSession session, 
+			RedirectAttributes redirAtt,
+			Model model
+			) {
+				System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
+				Enumeration params = req.getParameterNames();
+				System.out.print("Parameter> ");
+				while (params.hasMoreElements()) {
+					String name = (String) params.nextElement();
+					System.out.print(name + " : " + req.getParameter(name) + "\t");
 				}
-			} else {
-				return redirFail;
-			}
-		} else { // 비밀번호 찾기
-			try {
-				findUserPassword = userMapper.findUserPassword(fEmail);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			if (findUserPassword != null) {
-				if (!fName.equals(findUserPassword.getUser_name())) {
-					return redirFail;
-				} else if (!fPhone.equals(findUserPassword.getPhone())) {
-					return redirFail;
-				} else if (!fBirth.equals(tranSimpleDateFormat.format(findUserPassword.getBirth()))) {
-					return redirFail;
-				} else {
-					// redirAtt.addFlashAttribute("pw", findUserPassword.getPw().substring(0, 3) +
-					// "****");
+				System.out.println();
 
-					String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-					uuid = uuid.substring(0, 13);
-					String emailSubject = "[Fakerly] 임시 비밀번호가 발급되었습니다.";
-					String emailbody = uuid + "\n" + "로그인하러 가기" + "\n" + "http://localhost:8081/user/login.do";
-					senderService.sendEmail(findUserPassword.getEmail(), emailSubject, emailbody);
-					userMapper.giveTempPassword(findUserPassword.getEmail(), uuid);
-					// redirAtt.addFlashAttribute("pw", uuid);
-					return redirPasswordSuccess;
+				UserDto findUserEmail = null;
+				UserDto findUserPassword = null;
+				SimpleDateFormat tranSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String redirEmailSuccess = "redirect:/user/findEmailSuccess.do";
+				String redirPasswordSuccess = "redirect:/user/findPasswordSuccess.do";
+				String redirFail = "redirect:/user/findEmailPasswordFail.do";
+
+				if (fEmail == null) { // 이메일 찾기
+					try {
+						findUserEmail = userMapper.findUserEmail(fPhone);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if (findUserEmail != null) {
+						System.out.println(findUserEmail);
+						if (!fName.equals(findUserEmail.getUser_name())) {
+							return redirFail;
+						} else if (!fBirth.equals(tranSimpleDateFormat.format(findUserEmail.getBirth()))) {
+							return redirFail;
+						} else {
+							redirAtt.addFlashAttribute("email", findUserEmail.getEmail());
+							return redirEmailSuccess;
+						}
+					} else {
+						return redirFail;
+					}
+				} else { // 비밀번호 찾기
+					try {
+						findUserPassword = userMapper.findUserPassword(fEmail);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if (findUserPassword != null) {
+						if (!fName.equals(findUserPassword.getUser_name())) {
+							return redirFail;
+						} else if (!fPhone.equals(findUserPassword.getPhone())) {
+							return redirFail;
+						} else if (!fBirth.equals(tranSimpleDateFormat.format(findUserPassword.getBirth()))) {
+							return redirFail;
+						} else {
+							// redirAtt.addFlashAttribute("pw", findUserPassword.getPw().substring(0, 3) +
+							// "****");
+							// redirAtt.addFlashAttribute("pw", uuid);
+
+							String userEmail = findUserPassword.getEmail();
+
+							String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+							uuid = uuid.substring(0, 13);
+
+							String emailSubject = "[Fakerly] 임시 비밀번호가 발급되었습니다.";
+							String emailbody = uuid + "\n" + "로그인하러 가기" + "\n" + "http://localhost:8081/user/login.do";
+							senderService.sendEmail(userEmail, emailSubject, emailbody);
+							userMapper.giveTempPassword(userEmail, uuid);
+							
+							String[] emailArr = userEmail.split("@|\\.");
+							System.out.println(Arrays.toString(emailArr));
+							System.out.println(emailArr[1]);
+							switch (emailArr[1]) {
+							case "gmail":
+								model.addAttribute("domain", "gmail");
+								break;
+							case "naver":
+								model.addAttribute("domain", "naver");
+								break;
+							}
+
+							// return redirPasswordSuccess;
+							return "/user/findPasswordSuccess";
+						}
+					} else {
+						return redirFail;
+					}
 				}
-			} else {
-				return redirFail;
 			}
-		}
-	}
 
 	// 이메일 찾기 성공
 	@GetMapping("/findEmailSuccess.do")
