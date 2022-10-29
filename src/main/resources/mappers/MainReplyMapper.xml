@@ -18,9 +18,9 @@
 
 	<insert id="insert" parameterType="MainReplyDto">
 		INSERT INTO main_reply
-		(contents,hierarchy,depth,group_no,mainboard_no,user_no)
+		(contents,hierarchy,group_no,mainboard_no,user_no)
 		VALUES
-		(#{contents},#{hierarchy},#{depth},#{group_no},#{mainboard_no},#{user_no})
+		(#{contents},#{hierarchy},#{group_no},#{mainboard_no},#{user_no})
 		<!-- (윗)댓글은 컬럼값 직접 -->
 	</insert>
 	<update id="update" parameterType="MainReplyDto">

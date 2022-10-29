@@ -29,7 +29,6 @@
 			<id column="main_reply_no" property="main_reply_no"/>
 			<result column="r_contents" property="contents"/>
 			<result column="r_hierarchy" property="hierarchy"/>
-			<result column="r_depth" property="depth"/>
 			<result column="r_group_no" property="group_no"/>
 			<result column="r_reply_time" property="reply_time"/>
 			<result column="r_user_no" property="user_no"/>
@@ -59,7 +58,6 @@
 			r.main_reply_no,
 			r.contents r_contents,
 			r.hierarchy r_hierarchy,
-			r.depth r_depth,
 			r.group_no r_group_no,
 			r.reply_time r_reply_time,
 			r.user_no r_user_no,

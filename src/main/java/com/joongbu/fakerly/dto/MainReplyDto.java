@@ -24,7 +24,6 @@ public class MainReplyDto {
 	private int main_reply_no;
 	private String contents;
 	private int hierarchy;
-	private int depth;
 	private int group_no;
 	private Date reply_time;
 	private int mainboard_no;

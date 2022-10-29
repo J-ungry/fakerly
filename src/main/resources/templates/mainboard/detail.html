@@ -68,29 +68,43 @@
 			</div>
 			
 			<!-- 댓글 입력(상위계층 댓글) -->
-			<form name="replyInsertForm"
-				th:if="${session.loginUser!=null}"
-				 action="/reply/insert" method="post">
-				<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
-				<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
-				<input type="hidden" name="hierarchy" value=0>
-				<input type="hidden" name="depth" value=0>
-				<input type="hidden" name="group_no" value=0>
-				
-				<h3>댓글 작성 (<span th:text="${session.loginUser.nickname}"></span>)</h3>
-				<p >
-					<textarea name="contents" id="replyContents" placeholder="내용"></textarea>
-					<label for="replyContents">내용</label>
-				</p>
-				<div>
-					<button>등록</button>
+			<div class="reply w-50 p-3">
+				<div class="reply-insert">
+					<form name="replyInsertForm"
+						th:if="${session.loginUser!=null}"
+						 action="/reply/insert" method="post">
+						<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
+						<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
+						<input type="hidden" name="hierarchy" value=0>
+						<input type="hidden" name="depth" value=0>
+						<input type="hidden" name="group_no" value=0>
+						
+						
+						<div class="reply-info">
+							<div class="replyProfile d-flex flex-column align-self-center">
+								<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
+									<img class="align-middle" src="/img/profile.png">
+								</a>
+							</div>
+							<div class="reply-contents">
+								<textarea class="tw-flex-1 tw-border-none tw-outline-none tw-h-6 tw-max-h-20 tw-resize-none tw-p-0 tw-text-sm tw-placeholder-gray-500 false" name="contents" id="replyContents" placeholder="게시글에 대한 이야기를 나눠보세요"></textarea>
+								
+							</div>
+						</div>
+						<div>
+							<button class="btn btn-sm btn-coral-600">
+								<labal>등록</labal>
+							</button>
+						</div>
+					</form>
 				</div>
-			</form>
+				
+				<!-- 댓글 목록 출력 -->
+				<section>
+					<th:block th:include="/main_reply/list" th.with="replyList=${mainboard.replyList},mainboardNo=${mainboard.mainboardNo}">
+				</section>
 			
-			<!-- 댓글 목록 출력 -->
-			<section>
-				<th:block th:include="/main_reply/list" th.with="replyList=${mainboard.replyList},mainboardNo=${mainboard.mainboardNo}">
-			</section>
+			</div>
 			
 	</main>
 		
@@ -143,6 +157,4 @@ mainboardLink
 mainboardTime
  -->
 
- 
- 
  

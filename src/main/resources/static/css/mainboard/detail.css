@@ -6,15 +6,14 @@ main {
 	height: 100vh;
 }
 
-#container {
-	box-sizing: border-box;
-}
+
 
 
 main .post-container {
 	border: 1px solid #dbdbdb;
 	margin: 0 auto;
 	background-color: #fff;
+	margin-bottom: 20px;
 }
 
 main .post-container .boardInfo {
@@ -126,6 +125,50 @@ main .post-container .boardBtn .boardComment img {
 	height: 30px;
 }
 
+main .reply{
+	border: 1px solid #dbdbdb;
+	margin: 0 auto;
+	
+}
+
+main .reply .reply-insert{
+	border: 1px solid #dbdbdb;
+	margin-bottom:10px;
+	background-color: #fff;
+}
+
+
+main .reply .reply-insert .reply-info{
+	display:flex;
+}
+
+main .reply .reply-insert .reply-contents{
+	width:100%;
+}
+main .reply .reply-insert .reply-contents textarea{
+	border: none;
+	margin:auto;
+	width:100%;
+}
+
+
+main .reply .reply-insert .reply-info .replyProfile img{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin: 20px;
+}
+
+main .reply .reply-insert div .btn{
+	display:flex;
+	margin-left: auto;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	color:#fff;
+	background-color: #e993a0;
+	border: 1px solid #dbdbdb;
+}
 
 
 

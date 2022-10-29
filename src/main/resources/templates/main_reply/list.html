@@ -1,49 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/mainreply/list.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="/js/mainboard/detail.js"></script>
-<style>
-.replydiv{
-	border-style: solid;
-	border-width: 2px;
-}
-.rereplydiv{
-	width:400px;
-	border-style: solid;
-	border-width: 2px;
-	margin : 5px;
-}
-</style>
+
+
 <!-- 
 1. hierarchy -> 일반 댓글인것만 div 출력 (댓글 : 0, 대댓 : 1)
 2. group_no -> 대댓글인 것만 if 문으로 값 넣기 (댓글 : null, 대댓 : 부모 reply_no)
 3. depth -> 이용해서 대댓글의 순서 구분(이건 커리문으로 넣어야되나?)
  -->
 
-		<h1>댓글내용</h1>
+		
   		<div th:each="reply_up:${mainboard.replyList}" class="replydiv" th:if="${reply_up.hierarchy==0}">
 			
-			<div>
+			<div class="reply">
 				<!-- 기본 출력 댓글 --> 
 				<div th:id="'reply_no'+${reply_up.main_reply_no}">
-					<h3>댓글</h3>	
-					<div class="boardProfile d-flex flex-column align-self-center">
-						<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
-							<img class="align-middle" src="/img/profile.png" style="width : 100px; height : 100px">
-						</a>
+					<div class="replyProfile tw-mb-2 tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-between">
+						<div class="d-flex flex-column align-self-center">
+							<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
+								<img class="align-middle" src="/img/profile.png">
+							</a>
+						</div>
+						<div class="reply-info">
+							<p th:text="${mainboard.userName}"></p>
+							<p style="color: #d7d3cd">
+								<span th:text="${mainboard.userCompany}"></span>
+								 . 
+								<span th:text="${#dates.format(reply_up.reply_time, 'yyyy-MM-dd HH:mm')}"></span>
+							</p>
+							
+						</div>
 					</div>
-					<div>
-						<p>작성자 : 
-							<span th:text="${mainboard.userName}"></span>
-						</p>
-						<p>소속 : 
-							<span th:text="${mainboard.userCompany}"></span>
-						</p>
-						
-					</div>
-					<div>내용 : 
+					<div class="reply-contents">
 						<p th:text="${reply_up.contents}"></p>
 					</div>
-					<div th:if="${session.loginUser.user_no==reply_up.user_no}" th:id="${reply_up.main_reply_no}">
+					<div th:if="${session.loginUser.user_no==reply_up.user_no}" 
+						th:id="${reply_up.main_reply_no}"
+						class="reply-update">
 						<button th:onclick="readReplyUpdateForm([[${reply_up.main_reply_no}]])"
 							class="btn btn-outline-secondary btn-sm" type="button">
 							수정하기
@@ -53,119 +48,121 @@
 				</div>
 				
 						<!-- 수정 댓글 출력 -->
-					<form action="/reply/update" method="post">
-						<input type="hidden" name="main_reply_no" th:value="${reply_up.main_reply_no}">
-						<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
-						<div th:id="'reply_update'+${reply_up.main_reply_no}" style="display: none;">
-							<h3>댓글(수정)</h3>	
-							<div class="boardProfile d-flex flex-column align-self-center">
+				<form action="/reply/update" method="post">
+					<input type="hidden" name="main_reply_no" th:value="${reply_up.main_reply_no}">
+					<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
+					<div th:id="'reply_update'+${reply_up.main_reply_no}" style="display: none;">
+						<div class="replyProfile tw-mb-2 tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-between">
+							<div class="d-flex flex-column align-self-center">
 								<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
-									<img class="align-middle" src="/img/profile.png" style="width : 100px; height : 100px">
+									<img class="align-middle" src="/img/profile.png">
 								</a>
 							</div>
-							<div>
-								<p>작성자 : 
-									<span th:text="${mainboard.userName}"></span>
-								</p>
-								<p>소속 : 
+							<div class="reply-info">
+								<p th:text="${mainboard.userName}"></p>
+								<p style="color: #d7d3cd">
 									<span th:text="${mainboard.userCompany}"></span>
+									 . 
+									<span th:text="${#dates.format(reply_up.reply_time, 'yyyy-MM-dd HH:mm')}"></span>
 								</p>
 								
 							</div>
-							<div>내용 : 
-								<input name="contents" id="replyContents" th:value="${reply_up.contents}"></input>
-							</div>
-							<div th:if="${session.loginUser.user_no==reply_up.user_no}" th:id="${reply_up.main_reply_no}">
-								<button th:onclick="readReplyUpdateForm([[${reply_up.main_reply_no}]])"
-									class="btn btn-outline-secondary btn-sm" type="button">
-									취소
-								</button>
-								<button>
-									수정하기
-								</button>
-								<div th:if="${session.loginUser.user_no==reply_up.user_no}"
-									th:id="'replyLi'+${reply_up.main_reply_no}">
-									<a th:href="@{/reply/delete(main_reply_no=${reply_up.main_reply_no},mainboard_no=${mainboard.mainboardNo})}" class="btn btn-outline-danger btn-sm">
-										삭제
-									</a>			
-								</div>
-						</div> 
-					</form>
+						</div>
+						<input class="reply-update-contents w-50" name="contents" id="replyContents" th:value="${reply_up.contents}"></input>
+						<div class="reply-updateform-btn" th:if="${session.loginUser.user_no==reply_up.user_no}" th:id="${reply_up.main_reply_no}">
+							<button th:onclick="readReplyUpdateForm([[${reply_up.main_reply_no}]])"
+								class="btn btn-outline-secondary btn-sm" type="button">
+								취소
+							</button>
+							<button class="btn btn-outline-danger btn-sm">
+								수정하기
+							</button>
+							<a th:href="@{/reply/delete(main_reply_no=${reply_up.main_reply_no},mainboard_no=${mainboard.mainboardNo})}" class="btn btn-outline-danger btn-sm">
+								삭제
+							</a>			
+					</div> 
+				</form>
 					
 				
 				</div>
+				<!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 -->
+				<!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 -->
+				<!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 -->
 				
-				<div th:each="reply_down:${mainboard.replyList}" th:if="${reply_up.main_reply_no==reply_down.group_no}" class="rereplydiv">
-					<!-- 기본 대댓글 출력 -->
-					<div th:id="'rereply_no'+${reply_down.main_reply_no}">
-						<h3>대댓글</h3>
-						<div class="boardProfile d-flex flex-column align-self-center">
-							<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
-								<img class="align-middle" src="/img/profile.png" style="width : 100px; height : 100px">
-							</a>
-						</div>
-						<div>
-							<p>작성자 : 
-								<span th:text="${mainboard.userName}"></span>
-							</p>
-							<p>소속 : 
-								<span th:text="${mainboard.userCompany}"></span>
-							</p>
-							
-						</div>
-						<div>내용 : 
-							<p th:text="${reply_down.contents}"></p>
-						</div>
-						
-						
-						<button th:onclick="readRereplyUpdateForm([[${reply_down.main_reply_no}]])"
-							th:id="${reply_down.main_reply_no}"
-							class="btn btn-outline-secondary btn-sm" type="button">
-							수정하기
-						</button>
-					</div>
-					
-					<!-- 대댓글 수정 폼 출력 -->
-					<form action="/reply/update" method="post">
-						<input type="hidden" name="main_reply_no" th:value="${reply_down.main_reply_no}">
-						<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
-						<div th:id="'rereply_update'+${reply_down.main_reply_no}" style="display: none;">
-							<h3>대댓글(수정)</h3>	
-							<div class="boardProfile d-flex flex-column align-self-center">
-								<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
-									<img class="align-middle" src="/img/profile.png" style="width : 100px; height : 100px">
-								</a>
+				<div th:each="reply_down:${mainboard.replyList}" 
+					th:if="${reply_up.main_reply_no==reply_down.group_no}" 
+					class="rereplydiv">
+					<div class="rereply">
+						<!-- 기본 출력 댓글 --> 
+						<div th:id="'reply_no'+${reply_down.main_reply_no}">
+							<div class="rereplyProfile tw-mb-2 tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-between">
+								<div class="d-flex flex-column align-self-center">
+									<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
+										<img class="align-middle" src="/img/profile.png">
+									</a>
+								</div>
+								<div class="rereply-info">
+									<p th:text="${mainboard.userName}"></p>
+									<p style="color: #d7d3cd">
+										<span th:text="${mainboard.userCompany}"></span>
+										 . 
+										<span th:text="${#dates.format(reply_down.reply_time, 'yyyy-MM-dd HH:mm')}"></span>
+									</p>
+									
+								</div>
 							</div>
-							<div>
-								<p>작성자 : 
-									<span th:text="${mainboard.userName}"></span>
-								</p>
-								<p>소속 : 
-									<span th:text="${mainboard.userCompany}"></span>
-								</p>
+							<div class="rereply-contents">
+								<p th:text="${reply_down.contents}"></p>
 							</div>
-							<div>내용 : 
-								<input name="contents" id="replyContents" th:value="${reply_down.contents}"></input>
-							</div>
-							
-							
-							<div th:if="${session.loginUser.user_no==reply_down.user_no}" th:id="${reply_down.main_reply_no}">
-								<button th:onclick="readRereplyUpdateForm([[${reply_down.main_reply_no}]])"
+							<div th:if="${session.loginUser.user_no==reply_down.user_no}" 
+								th:id="${reply_down.main_reply_no}"
+								class="rereply-update">
+								<button th:onclick="readReplyUpdateForm([[${reply_down.main_reply_no}]])"
 									class="btn btn-outline-secondary btn-sm" type="button">
-									취소
-								</button>
-								<button>
 									수정하기
 								</button>
-								<div th:if="${session.loginUser.user_no==reply_down.user_no}"
-									th:id="'replyLi'+${reply_down.main_reply_no}">
+								
+							</div>
+						</div>
+						
+								<!-- 수정 댓글 출력 -->
+						<form action="/reply/update" method="post">
+							<input type="hidden" name="main_reply_no" th:value="${reply_up.main_reply_no}">
+							<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
+							<div th:id="'reply_update'+${reply_down.main_reply_no}" style="display: none;">
+								<div class="rereplyProfile tw-mb-2 tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-between">
+									<div class="d-flex flex-column align-self-center">
+										<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
+											<img class="align-middle" src="/img/profile.png">
+										</a>
+									</div>
+									<div class="rereply-info">
+										<p th:text="${mainboard.userName}"></p>
+										<p style="color: #d7d3cd">
+											<span th:text="${mainboard.userCompany}"></span>
+											 . 
+											<span th:text="${#dates.format(reply_down.reply_time, 'yyyy-MM-dd HH:mm')}"></span>
+										</p>
+										
+									</div>
+								</div>
+								<input class="rereply-update-contents w-50" name="contents" id="replyContents" th:value="${reply_down.contents}"></input>
+								<div class="rereply-updateform-btn" th:if="${session.loginUser.user_no==reply_down.user_no}" th:id="${reply_down.main_reply_no}">
+									<button th:onclick="readReplyUpdateForm([[${reply_down.main_reply_no}]])"
+										class="btn btn-outline-secondary btn-sm" type="button">
+										취소
+									</button>
+									<button class="btn btn-outline-danger btn-sm">
+										수정하기
+									</button>
 									<a th:href="@{/reply/delete(main_reply_no=${reply_down.main_reply_no},mainboard_no=${mainboard.mainboardNo})}" class="btn btn-outline-danger btn-sm">
 										삭제
 									</a>			
-								</div>
-							</div>
-						</div>
-					</form>
+							</div> 
+						</form>
+						
+					
+					</div>
 					
 					
 					
@@ -175,14 +172,16 @@
 			
 				<!-- 답글 남기는 폼 -->
 				
-				
-				  <a class="btn btn-primary" data-bs-toggle="collapse" th:href="${'#collapse'+reply_up.main_reply_no}" th:if="${reply_up.hierarchy==0}">
+				<div class="insert-reply">
+				  <a class="btn btn-outline-secondary btn-sm" data-bs-toggle="collapse" th:href="${'#collapse'+reply_up.main_reply_no}" th:if="${reply_up.hierarchy==0}">
 				    답글 남기기
 				  </a>
+				</div>
+				
 				
 				
 				<div class="collapse" th:id="'collapse'+${reply_up.main_reply_no}">
-					<div class="card card-body">
+					<div class="rereply-insert card-body">
 						<form name="rereplyInsertForm"
 							th:if="${session.loginUser!=null}"
 							 action="/reply/insert" method="post">
@@ -192,20 +191,25 @@
 							<input type="hidden" name="depth" value=2>
 							<input type="hidden" name="group_no" th:value="${reply_up.main_reply_no}">
 							
-							<h3>댓글 작성 (<span th:text="${session.loginUser.nickname}"></span>)</h3>
-							<p >
-								<textarea name="contents" id="replyContents" placeholder="내용"></textarea>
-								<label for="replyContents">내용</label>
-							</p>
-							<div>
-								<button>등록</button>
+							<div class="rereply-insert-info">
+								<div class="replyProfile d-flex flex-column align-self-center">
+									<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
+										<img class="align-middle" src="/img/profile.png">
+									</a>
+								</div>
+								<div class="rereply-insert-contents">
+									<textarea class="tw-flex-1 tw-border-none tw-outline-none tw-h-6 tw-max-h-20 tw-resize-none tw-p-0 tw-text-sm tw-placeholder-gray-500 false" name="contents" id="replyContents" placeholder="게시글에 대한 이야기를 나눠보세요"></textarea>
+									
+								</div>
+							</div>
+							<div class="div-btn">
+								<button class="btn btn-sm btn-coral-600">
+									<labal>등록</labal>
+								</button>
 							</div>
 						</form>
 					</div>
 				</div>
-			
-			
-	
 			
   		</div>
   		
