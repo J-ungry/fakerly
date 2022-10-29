@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+		
+	<th:block th:each="license:${userLicenseList}">
+		<div style="background-color: lightgray; display: inline-block; border-radius: 8px; padding: 8px 10px; margin-bottom:3px; color:white;" 
+			th:text="${license.licenseName}">
+		</div>
+		<button type="button" class="btn-close" aria-label="Close" th:onclick="deleteUserLicense([[${userNo}]],[[${license.licenseNo}]])"></button>
+	</th:block>
+
+</html>

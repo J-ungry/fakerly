@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+		
+	<th:block th:each="skill:${userSkillList}">
+		<div style="background-color: yellowgreen; display: inline-block; border-radius: 8px; padding: 8px 10px; margin-bottom:3px; color:white;" 
+			th:text="${skill.skillName}">
+		</div>
+		<button type="button" class="btn-close" aria-label="Close" th:onclick="deleteUserSkill([[${userNo}]],[[${skill.skillNo}]])"></button>
+	</th:block>
+
+</html>

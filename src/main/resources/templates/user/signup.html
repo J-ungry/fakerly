@@ -87,56 +87,96 @@
     
     <div class="signupForms userInfo" id="userInfo3">
         <h1 style="display: inline-block; margin-bottom:0;">키워드 선택</h1>
-        <div class="userInfoForm" id="userInfo3Form">
-            <h1 style="margin-bottom:0px">키워드 선택</h1>
-            
-			
-			<div id="selecedKeyword" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #000;">
-				<!-- 유저 키워드 목록 -->			
-			</div>
-            <!-- Button trigger modal -->
-			<button th:onclick="getList('keywordList', 1)" type="button" class="btn btn-outline-secondary listBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-			  키워드 추가 +
-			</button>
+        <div id="userInfo3Form" class="userInfoForm">
+        
+	        <div style="border-bottom: 3px solid #000; padding-bottom: 20px;">
+	            <h1 style="margin-bottom:0px; padding-bottom:0px;">키워드 선택</h1>
+	            
+				
+				<div id="selecedKeyword" style="padding-top: 10px; border-top: 1px solid #000;">
+					<!-- 유저 키워드 목록 -->			
+				</div>
+	            <!-- Button trigger modal -->
+				<button th:onclick="getKeywordList('keywordList', 1)" type="button" class="btn btn-outline-secondary listBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				  키워드 추가 +
+				</button>
+	        </div>
+	        
+	        <div style="border-bottom: 3px solid #000; padding-bottom: 20px;">
+	            <h1 style="margin-bottom:0px; padding-bottom:0px;">스킬 선택</h1>
+	            
+				
+				<div id="selecedSkill" style="padding-top: 10px; border-top: 1px solid #000;">
+					<!-- 유저 스킬 목록 -->			
+				</div>
+	            <!-- Button trigger modal -->
+				<button th:onclick="getSkillList('skillList', 1)" type="button" class="btn btn-outline-secondary listBtn" data-bs-toggle="modal" data-bs-target="#skillModal">
+				  스킬 추가 +
+				</button>
+	        </div>
+	        
+	        <div>
+	            <h1 style="margin-bottom:0px; padding-bottom:0px;">자격증 선택</h1>
+	            
+				
+				<div id="selecedLicense" style="padding-top: 10px; border-top: 1px solid #000;">
+					<!-- 유저 자격증 목록 -->			
+				</div>
+	            <!-- Button trigger modal -->
+				<button th:onclick="getLicenseList('licenseList', 1)" type="button" class="btn btn-outline-secondary listBtn" data-bs-toggle="modal" data-bs-target="#licenseModal">
+				  자격증 추가 +
+				</button>
+	        </div>
+        
         </div>
-        
-        <div class="userInfoForm">
-            <!-- <label>
-                <input type="text" name="skill" placeholder="스킬">
-            </label> -->
-            <h1 style="margin-bottom:0px">스킬 선택</h1>
-            
-			
-			<div id="selecedKeyword" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #000;">
-				<!-- 유저 키워드 목록 -->			
-			</div>
-            <!-- Button trigger modal -->
-			<button th:onclick="getList('keywordList', 1)" type="button" class="btn btn-outline-secondary listBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-			  스킬 추가 +
-			</button>
-        </div>
-        
-        <div class="userInfoForm">
-            <label>
-                <input type="text" name="license" placeholder="자격증">
-            </label>
-        </div>
-        
-        
             
             
             
-		<!-- Modal -->
+		<!-- 키워드 Modal -->
 		<div class="modal fade listDiv" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		        <h5 class="modal-title" id="exampleModalLabel">키워드 목록</h5>
 		        <button type="button" class="btn-close listBtn" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body" id="keywordList">
 		      	<ul class="list-group">
 		      		<!-- 키워드 목록 -->
+		      	</ul>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- 스킬 Modal -->
+		<div class="modal fade listDiv" id="skillModal" tabindex="-1" aria-labelledby="skillModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="skillModalLabel">스킬 목록</h5>
+		        <button type="button" class="btn-close listBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body" id="skillList">
+		      	<ul class="list-group">
+		      		<!-- 스킬 목록 -->
+		      	</ul>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- 자격증 Modal -->
+		<div class="modal fade listDiv" id="licenseModal" tabindex="-1" aria-labelledby="licenseModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="licenseModalLabel">자격증 목록</h5>
+		        <button type="button" class="btn-close listBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body" id="licenseList">
+		      	<ul class="list-group">
+		      		<!-- 자격증 목록 -->
 		      	</ul>
 		      </div>
 		    </div>

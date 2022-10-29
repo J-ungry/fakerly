@@ -31,5 +31,15 @@
   		set user_no=(select last_insert_id()) 
   		where user_no=1
   	</update>
+  	<update id="updateUserSkill">
+  		update user_skill 
+  		set user_no=(select last_insert_id()) 
+  		where user_no=1
+  	</update>
+  	<update id="updateUserLicense">
+  		update user_license 
+  		set user_no=(select last_insert_id()) 
+  		where user_no=1
+  	</update>
 </mapper>
 
