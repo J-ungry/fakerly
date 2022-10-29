@@ -10,4 +10,14 @@ public class IndexController {
 	public String index() {
 		return "redirect:/user/login.do";
 	}
+	
+	@GetMapping("/gmail")
+	public String goGmail() {
+		return "redirect:https://mail.google.com";
+	}
+	
+	@GetMapping("naverMail")
+	public String goNaverMail() {
+		return "redirect:https://mail.naver.com";
+	}
 }
