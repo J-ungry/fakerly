@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-
+import com.joongbu.fakerly.dto.MainBoardDto;
 import com.joongbu.fakerly.dto.TempBoardDto;
 import com.joongbu.fakerly.dto.UserDto;
 import com.joongbu.fakerly.mapper.TempBoardMapper;
@@ -77,22 +77,28 @@ public class TempController {
 	}else {
 		msg="로그인 하셔야 게시글 작성이 가능합니다";
 		session.setAttribute("msg", msg);
-		return "redirect:/tempboard/list.do";
+		return "/user/login.do";
 	}	
 }
 	@PostMapping("/insert.do")
 	public String insert(
 			TempBoardDto tempboard,
+			MainBoardDto mainboard,
 			@SessionAttribute(required=true) UserDto loginUser,
 			HttpSession session
 			) {
 		String msg="";
 		int insert=0;
 		try {
-			if(loginUser!=null) {
-				insert=tempMapper.insert(tempboard);
+			if(mainboard.getMainboardTitle().isEmpty()) {
+				msg="제목을 입력해주세요.";
+				session.setAttribute("msg", msg);
+				return "redirect:/mainboard/insert?userNo"+loginUser.getUser_no();
+			}else if(mainboard.getMainboardContents().isEmpty()) {
+				msg="게시글을 입력해주세요";
+				return "redirect:/tempboard/insert?userNo"+loginUser.getUser_no();
 			}else {
-				msg="로그인 필요";
+				insert=tempMapper.insert(tempboard);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,12 +107,12 @@ public class TempController {
 			msg="임시보관성공";
 			session.setAttribute("msg", msg);
 			System.out.println("성공");
-			return "redirect:/tempboard/detail.do?tempNo="+tempboard.getTempNo();
+			return "redirect:/tempboard/list.do?tempNo="+tempboard.getUserNo();
 		}else {
 			msg="임시보관실패";
-		}
 			session.setAttribute("msg", msg);
-			return "redirect:/tempboard/insert.do";
+			return "/mainboard/main";
+		}
 	}
 }
 

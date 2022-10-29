@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.joongbu.fakerly.dto.RolesDto;
@@ -21,7 +22,11 @@ import com.joongbu.fakerly.dto.SideRoleDto;
 import com.joongbu.fakerly.dto.UserDto;
 import com.joongbu.fakerly.mapper.RolesMapper;
 import com.joongbu.fakerly.mapper.SideMapper;
+import com.joongbu.fakerly.mapper.SidePreferMapper;
 import com.joongbu.fakerly.mapper.SideRoleMapper;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @RequestMapping("/sideboard")
 @Controller
@@ -34,6 +39,9 @@ public class SideController {
 	
 	@Autowired
 	SideRoleMapper sideRoleMapper;
+	
+	@Autowired
+	SidePreferMapper sidePreferMapper;
 	
 	@GetMapping("/list.do") //목록 출력하기 
 	public String list(
@@ -54,23 +62,44 @@ public class SideController {
 		return "/sideboard/list";
 	}
 	
+	@Getter@Setter
+	class CheckPrefer{ //좋아요 확인을 위한 class 
+		private int check;
+		private SidePreferDto sidePrefer;
+	}
+	
 	@GetMapping("/detail.do")
 	public String detail(
 			@RequestParam(required=true) int sideBoardNo, 
+			@SessionAttribute(required=true) UserDto loginUser, // 로그인 유저 정보 가져오
 			Model model
 			){
 		SideDto side = null;
 		List<RolesDto> roles = null;
+		CheckPrefer checkPrefer = null; //좋아요 확인을 위한 class 
+		SidePreferDto sidePrefer = null; //checkPrefer 에 넣어줄 sidePrefer
 		try {
+			checkPrefer = new CheckPrefer();
+			
 			side = sideMapper.detail(sideBoardNo);
 			roles = roleMapper.list(sideBoardNo);
-			System.out.println("work detail");
+			System.out.println("loginUserno"+loginUser.getUser_no()+"sideBoardNo"+sideBoardNo);
+			sidePrefer = sidePreferMapper.check(loginUser.getUser_no(),sideBoardNo);
+			System.out.println("sidePrefer="+sidePrefer);
+			
+			if(sidePrefer!=null) { // 만약 좋아요 정보가 있는 경우 
+				checkPrefer.setCheck(1);
+				checkPrefer.setSidePrefer(sidePrefer);
+			}
 			
 		} catch(Exception e) {
 			e.printStackTrace();
+			checkPrefer.setCheck(-1);
+			
 		}
 		model.addAttribute("roles",roles);
 		model.addAttribute("side",side);
+		model.addAttribute("prefer",checkPrefer);
 		return "/sideboard/detail";
 	}
 	
@@ -224,12 +253,53 @@ public class SideController {
 		System.out.println("side : "+side);
 		return "redirect:/sideboard/detail.do?sideBoardNo="+side.getSideBoardNo();
 	}
+	
+	
 	@GetMapping("/like.do")
 	public String like(
-			SidePreferDto sidePrefer,
-			@SessionAttribute(required=false) UserDto loginUser
+			@RequestParam(required = false) int user_no,
+			@RequestParam(required = false) int side_board_no,
+			@SessionAttribute(required = false) UserDto loginUser,
+			HttpSession session
 			) {
-		System.out.println("side:"+sidePrefer);
-		return "";
+		String msg="";
+		try {
+			if(loginUser ==null) {
+				msg ="로그인 후 이용 가능합니다";
+				return "/user/login.do";
+			}
+			sidePreferMapper.like(user_no,side_board_no);
+			return "redirect:/sideboard/detail.do?sideBoardNo="+side_board_no;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		session.setAttribute("msg", msg);
+		return "/user/login.do";
 	}
+	
+	@GetMapping("/unlike.do")
+	public String unlike(
+			@RequestParam(required = false) int user_no,
+			@RequestParam(required = false) int side_board_no,
+			@SessionAttribute(required = false) UserDto loginUser,
+			HttpSession session
+			) {
+		String msg="";
+		try {
+			if(loginUser ==null) {
+				msg ="로그인 후 이용 가능합니다";
+				return "/user/login.do";
+			}
+			sidePreferMapper.unlike(user_no,side_board_no);
+			return "redirect:/sideboard/detail.do?sideBoardNo="+side_board_no;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		session.setAttribute("msg", msg);
+		return "/user/login.do";
+	}
+	
+
 }

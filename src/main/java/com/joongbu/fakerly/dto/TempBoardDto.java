@@ -29,4 +29,8 @@ public class TempBoardDto {
 	//private Blob img;
 	private String link;
 	private Date time;
+	
+	private String userName;
+	private String userCompany;
+	private String keywordName;
 }

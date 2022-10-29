@@ -7,9 +7,42 @@
 <body>
 	<header th:include="headerNav"></header>
 	<main class="container mt-5">
-		<h1 class="mt-3">Spring_board.board insert form</h1>
+		<h1 class="mt-3">QNA 글 작성 페이지</h1>
 		<form action="/qnaboard/qainsert.do" method="post">
-		<p>작성페이지</p>
+			<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
+		
+		<p>
+			<strong>작성자</strong>
+			<span th:text="${session.loginUser.user_name}"></span>
+		</p>
+		
+		<p>제목:
+		<input name="title" placeholder="제목 입력">
+		</p>
+		<p>내용:
+		<input name="contents" placeholder="내용 입력">
+		</p>
+		<p>코드:
+		<input name="code" placeholder="코드 입력">
+		</p>	
+			
+		<p>해결 미해결 선택:
+			<input type="radio" name="qa_resolve" value="0" >미해결
+			<input type="radio" name="qa_resolve" value="1" >해결
+		</p>
+		
+		<p> 게시판 선택:
+			<input type="radio" name="qa_side" value="1">개발
+			<input type="radio" name="qa_side" value="2">디자인
+			<input type="radio" name="qa_side" value="3">PM/PO/기획
+			<input type="radio" name="qa_side" value="4">마케팅
+		</p>
+
+
+		<div class="d-flex justify-content-end">
+			<button class="btn btn-outline-warning me-2" type="reset">초기화</button>
+			<button class="btn btn-outline-primary">등록</button>
+		</div>
 		</form>
 	</main>
 </body>

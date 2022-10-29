@@ -102,17 +102,15 @@ public class MainBoardController {
 	}
 	
 	@GetMapping("/detail")
-	public String detail(
+	public String detail(	//view가 두 번 더해짐
 			@RequestParam(required=true) int mainboardNo,
 			Model model
 			) {
 		System.out.println(mainboardNo);
 		MainBoardDto mainboard=null;
 		try {
-			mainboard=boardMapper.detailReply(mainboardNo);
-
-			System.out.println(mainboard);
 			boardMapper.viewUpdate(mainboardNo);
+			mainboard=boardMapper.detailReply(mainboardNo);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -165,7 +163,6 @@ public class MainBoardController {
 			@SessionAttribute(required=true) UserDto loginUser,
 			HttpSession session
 			) {
-		System.out.println("update get mapping");
 		MainBoardDto mainboard=null;
 		String msg="";
 		try {
@@ -178,9 +175,10 @@ public class MainBoardController {
 			model.addAttribute("mainboard", mainboard);
 			return "/mainboard/update";
 		} else if(mainboard.getUserNo()!=loginUser.getUser_no()) {
+			// return 시 메인게시판 깨짐 (redirect로 해결)
 			msg="글쓴이만 수정 가능합니다.";
 			session.setAttribute("msg", msg);
-			return "/mainboard/main";
+			return "redirect:/mainboard/main";
 		} else {
 			msg="알 수 없는 오류입니다. 다시 시도해주세요.";
 			session.setAttribute("msg", msg);
@@ -230,6 +228,17 @@ public class MainBoardController {
 			return "redirect:/mainboard/update?mainboardNo="+mainboard.getMainboardNo();
 		}
 	}
+	
+	@PostMapping("/search")
+	public String search(
+			@RequestParam(required=false) String searchConcept,	//검색 카테고리
+			@RequestParam(required=false) String searching		//사용자가 입력한 검색내용
+			) {
+		System.out.println(searchConcept);
+		System.out.println(searching);
+		return "/mainboard/main";
+	}
+	
 	
 }
 

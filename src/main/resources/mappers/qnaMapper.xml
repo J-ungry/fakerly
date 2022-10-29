@@ -44,13 +44,14 @@
 	</select>
 
 	
-	
+	<!--  useGeneratedKeys="true" keyProperty="qaNo" : 파라미터로 넘어온 QnaDto에 qaNo가 넘어온다. -->
+		
 	<insert id="qainsert" parameterType="QnaDto"
 	useGeneratedKeys="true" keyProperty="qaNo">
-		INSERT INTO QNA
-			(title, contents, code, qa_resolve,user_no)
+		INSERT INTO qna
+			(title, contents, code, qa_resolve,qa_side,user_no)
 			VALUES
-			(#{title},#{contents},#{code},#{qa_resolve},#{user_no})	
+			(#{title},#{contents},#{code},#{qa_resolve},#{qa_side},#{user.user_no})	
 	</insert>  
 	
 	<update id="qaupdate" parameterType="QnaDto">

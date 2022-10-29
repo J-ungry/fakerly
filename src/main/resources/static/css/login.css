@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 @import
-	url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+	url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap")
+	;
 
 * {
 	box-sizing: border-box;
@@ -53,7 +54,7 @@ body {
 /* 가운데 하얀색 배경 부분 */
 .main-contn {
 	width: 768px;
-	height: 84%;
+	height: 100%;
 	margin: 0 auto;
 	/* border: 1px dotted red; */
 	padding: 60px 200px 48px 200px;
@@ -100,7 +101,7 @@ input:focus {
 	width: 100%;
 	padding: 11px 23px;
 	background-color: #ED6653;
-	margin-top : 16px;
+	margin-top: 16px;
 	margin-bottom: 8px;
 	color: #ffffff;
 	font-size: 16px;
@@ -108,6 +109,11 @@ input:focus {
 	border-radius: 5px;
 	outline: none;
 	border-color: none;
+	transition: all 1s liner;
+}
+
+.login-btn:hover {
+	transform: scale(1.02);
 }
 
 .signup-btn {
@@ -124,6 +130,12 @@ input:focus {
 	border-radius: 5px;
 	outline: none;
 	border-color: none;
+	transition: all 1s liner;
+}
+
+.signup-btn:hover {
+	color: black;
+	transform: scale(1.01);
 }
 
 .find-e-p-subbtn {
@@ -172,10 +184,6 @@ input:focus {
 	text-align: center;
 }
 
-button:hover {
-	cursor: pointer;
-}
-
 /* 회원가입 | 이메일/비밀번호 찾기 */
 .login-triple-menu {
 	text-align: center;
@@ -199,23 +207,7 @@ button:hover {
 	text-decoration: underline;
 }
 
-/* ?a:hover,
-a:active {
-  text-decoration: none;
-  color: #fff;
-  background-color: #f59000;
-} */
-
-/* .logo-contn, .login-contn, footer 셋이서
-.child-contn의 height: 100%를 나눠 가짐 */
-footer {
-	height: 10%;
-	text-align: center;
-	border-top: 1px solid #dbdbdb;
-	background-color: #f7f7f7;
-}
-
-#phoneNbChkE, #phoneNbChkP {
+#phoneNbChkE, #phoneNbChkP, #emailChkLogin, #emailChkfindE {
 	text-align: center;
 	color: red;
 	margin-bottom: 8px;
