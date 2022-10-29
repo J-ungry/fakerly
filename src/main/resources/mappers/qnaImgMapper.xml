@@ -18,7 +18,6 @@
 	
 	
 	<insert id="qainsert" parameterType="QnaImgDto">
-	
 		INSERT INTO qna_img
 		(qa_no,img_path) VALUE (#{qaNo},#{img_path});
 	</insert>

@@ -24,6 +24,7 @@ public class QnaService {
 		for(String img_path:qaimgPaths) {
 			QnaImgDto qna_img=new QnaImgDto();
 			qna_img.setQaNo(qaimginsert);
+//			qna_img.setQaImgNo(qaimginsert);
 			qna_img.setImg_path(img_path);
 			qaimginsert+=QnaImgMapper.qainsert(qna_img);
 		}
