@@ -15,4 +15,3 @@ emailLoginInput.onblur = function(e) {
 		emailChkLogin.textContent = "";
 	}
 }
-
