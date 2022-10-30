@@ -158,8 +158,8 @@ public class UserController {
 				UserDto user = (UserDto) session.getAttribute("loginUser");
 				String msg = "";
 				if (originPw.equals(user.getPw())) {
-					if(newPw == chkNewPw) {
-						if(originPw == newPw) {
+					if(newPw.equals(chkNewPw)) {
+						if(!originPw.equals(newPw)) {
 							userMapper.modifyPassword(user.getEmail(), newPw);
 							msg = "비밀번호 변경 성공!";
 							session.setAttribute("msg", msg);
