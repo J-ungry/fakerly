@@ -48,7 +48,7 @@
 	padding:20px;
 }
 .input-board{
-	width:67%;
+	width:57%;
 	border: 1px solid #eee;
 	margin: auto;
 	display:flex;
@@ -76,7 +76,7 @@
 	color:#ccc;
 }
 .content-list{
-	width:70%;
+	width:60%;
 	
 	margin:auto;
 }
