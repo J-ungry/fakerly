@@ -66,8 +66,8 @@
 							<button class="btn check like-btn"><i class="bi bi-heartbreak"></i>  좋아요 취소</button>
 						</form> 
 					</th:block>
-					<div th:if="${session.loginUser!=null}" class="update btn">
-						<div th:if="${session.loginUser.user_no==side.user.user_no}"> <!-- 본인 게시글 인 경우에만 수정하기 나타 -->
+					<div th:if="${session.loginUser!=null}" >
+						<div th:if="${session.loginUser.user_no==side.user.user_no}" class="update btn"> <!-- 본인 게시글 인 경우에만 수정하기 나타나게 -->
 							<a class="update-a"th:href="@{/sideboard/update.do(sideBoardNo=${side.sideBoardNo})}">
 							수정하기
 							</a>
