@@ -332,6 +332,7 @@ public class MainBoardController {
 		UserDto user = new UserDto();
 		try {	
 			profileList= boardMapper.profileList(user_no);
+			System.out.println(profileList);
 			user = userMapper.profileUser(user_no);
 			if(profileList.size()==0) {
 				System.out.println("이거 비었는디요 ;;");
@@ -341,7 +342,6 @@ public class MainBoardController {
 			e.printStackTrace();
 		}
 		System.out.println(user);
-		System.out.println(profileList);
 		model.addAttribute("user",user);
 		model.addAttribute("profileList",profileList);
 		

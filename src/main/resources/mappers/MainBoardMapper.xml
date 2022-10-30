@@ -16,6 +16,7 @@
 		<result column="mainboard_time" property="mainboardTime"/>
 		<result column="user_name" property="userName"/>
 		<result column="company" property="userCompany"/>
+		<result column="prefer" property="prefer"/>
 		<!--  <collection property="preferList" ofType="MainBoardPreferDto">
 			<id column="mainboard_prefer_no" property="mainboardPreferNo"/>
 			<result column="mainboard_no" property="mainboardNo"/>
@@ -98,8 +99,10 @@
 	
 
 	<select id="profileList" resultMap="MainBoardMap">
-		SELECT * FROM mainboard
-		WHERE user_no=#{userNo}
+
+		select *,
+		(select count(*) from mainboard_prefer mp where mp.mainboard_no=m.mainboard_no) prefer
+		from mainboard m where user_no=#{userNo}
 	</select>
 
 	<!-- 주제로 검색 -->

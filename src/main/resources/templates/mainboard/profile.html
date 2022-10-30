@@ -9,5 +9,54 @@
 <header th:include="headerNav"></header>
 <div th:include="/sideboard/test"></div>
 <h1>유저 정보 페이지</h1>
+<p th:text=${user}>
+<p th:text=${profileList}>
+
+<div>
+	<img alt="" src=""> <!-- 요기에 유저 이미지 넣기 (일단 없으니까 대충넣기) -->
+	<div>
+		<p th:text="${user.user_name}">
+		<p th:text="${user.nickname}">
+	</div>
+	<div>
+		<i class="bi bi-mortarboard"></i>
+		<p th:text="${user.company}">
+	</div>
+</div>
+<div>
+	<div> <!-- 게시글 작성 part -->
+		<img alt="" src="">
+	</div>
+	<div th:each="profile:${profileList}"> <!-- 게시글 출력 part -->
+		<div>
+			<img alt="" src="">
+	 		<p th:text="${user.user_name}"></p>
+			<p th:text="${user.nickname}"></p>
+			<p th:text="${user.company}"></p>
+			<p th:text="${profile.mainboardTime}"></p>
+			
+		</div>
+		<p th:text="${profile.mainboardTitle}"></p>
+		<p th:text="${profile.mainboardContents}"></p>
+		<div>
+			<p th:if="${profile.mainboardLink ==''}">작성한 링크가 없습니다</p>
+			<p th:text="${profile.mainboardLink}"></p>
+		</div>
+		<div>
+			<p>좋아요 [[${profile.prefer}]]</p>
+			<p>조회 [[${profile.mainboardView}]]</p>
+		</div>
+		
+		<div>
+			<div>
+				<i class="bi bi-hand-thumbs-up"></i>
+				<p>좋아요</p>
+			</div>
+			<div>
+				<i class="bi bi-chat-left-dots"></i>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
