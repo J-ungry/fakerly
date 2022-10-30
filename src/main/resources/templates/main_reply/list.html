@@ -33,6 +33,10 @@
 						</div>
 					</div>
 					<div class="reply-contents">
+						<div class="reply-writer">
+							<span class="reply-writer-info" th:if="${reply_up.user_no==mainboard.userNo}">작성</span>
+							<span class="reply-writer-null" th:unless="${reply_up.user_no==mainboard.userNo}">없음</span>
+						</div>
 						<p th:text="${reply_up.contents}"></p>
 					</div>
 					<div th:if="${session.loginUser.user_no==reply_up.user_no}" 
@@ -113,6 +117,10 @@
 								</div>
 							</div>
 							<div class="rereply-contents">
+								<div class="rereply-writer">
+									<span class="rereply-writer-info" th:if="${reply_down.user_no==mainboard.userNo}">작성</span>
+									<span class="rereply-writer-null" th:unless="${reply_down.user_no==mainboard.userNo}">없음</span>
+								</div>
 								<p th:text="${reply_down.contents}"></p>
 							</div>
 							<div th:if="${session.loginUser.user_no==reply_down.user_no}" 
