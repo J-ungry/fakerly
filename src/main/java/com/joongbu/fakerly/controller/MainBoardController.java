@@ -115,7 +115,7 @@ public class MainBoardController {
 		try {
 			boardMapper.viewUpdate(mainboardNo);
 			mainboard=boardMapper.detailReply(mainboardNo);
-
+			System.out.println("count수 확인"+mainboard);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

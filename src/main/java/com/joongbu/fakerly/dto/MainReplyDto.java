@@ -11,7 +11,6 @@ import lombok.Data;
 | main_reply_no | int(11)      | NO   | PRI | NULL              | auto_increment |
 | contents      | varchar(255) | NO   |     | NULL              |                |
 | hierarchy     | int(11)      | NO   |     | NULL              |                |
-| depth         | int(11)      | NO   |     | NULL              |                |
 | group_no      | int(11)      | YES  |     | NULL              |                |
 | reply_time    | datetime     | NO   |     | CURRENT_TIMESTAMP |                |
 | mainboard_no  | int(11)      | NO   |     | NULL              |                |

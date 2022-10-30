@@ -8,7 +8,6 @@
 <!-- 
 1. hierarchy -> 일반 댓글인것만 div 출력 (댓글 : 0, 대댓 : 1)
 2. group_no -> 대댓글인 것만 if 문으로 값 넣기 (댓글 : null, 대댓 : 부모 reply_no)
-3. depth -> 이용해서 대댓글의 순서 구분(이건 커리문으로 넣어야되나?)
  -->
 
 		
@@ -40,7 +39,7 @@
 						th:id="${reply_up.main_reply_no}"
 						class="reply-update">
 						<button th:onclick="readReplyUpdateForm([[${reply_up.main_reply_no}]])"
-							class="btn btn-outline-secondary btn-sm" type="button">
+							class="btn btn-outline-dark btn-sm" type="button">
 							수정하기
 						</button>
 						
@@ -74,7 +73,7 @@
 								class="btn btn-outline-secondary btn-sm" type="button">
 								취소
 							</button>
-							<button class="btn btn-outline-danger btn-sm">
+							<button class="btn btn-outline-primary btn-sm">
 								수정하기
 							</button>
 							<a th:href="@{/reply/delete(main_reply_no=${reply_up.main_reply_no},mainboard_no=${mainboard.mainboardNo})}" class="btn btn-outline-danger btn-sm">
@@ -90,12 +89,14 @@
 				<!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 -->
 				
 				<div th:each="reply_down:${mainboard.replyList}" 
-					th:if="${reply_up.main_reply_no==reply_down.group_no}" 
-					class="rereplydiv">
+					th:if="${reply_up.main_reply_no==reply_down.group_no}">
 					<div class="rereply">
 						<!-- 기본 출력 댓글 --> 
 						<div th:id="'reply_no'+${reply_down.main_reply_no}">
 							<div class="rereplyProfile tw-mb-2 tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-between">
+								<div class="reply-division">
+																	
+								</div>
 								<div class="d-flex flex-column align-self-center">
 									<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
 										<img class="align-middle" src="/img/profile.png">
@@ -118,7 +119,7 @@
 								th:id="${reply_down.main_reply_no}"
 								class="rereply-update">
 								<button th:onclick="readReplyUpdateForm([[${reply_down.main_reply_no}]])"
-									class="btn btn-outline-secondary btn-sm" type="button">
+									class="btn btn-outline-dark btn-sm" type="button">
 									수정하기
 								</button>
 								
@@ -127,10 +128,13 @@
 						
 								<!-- 수정 댓글 출력 -->
 						<form action="/reply/update" method="post">
-							<input type="hidden" name="main_reply_no" th:value="${reply_up.main_reply_no}">
+							<input type="hidden" name="main_reply_no" th:value="${reply_down.main_reply_no}">
 							<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
 							<div th:id="'reply_update'+${reply_down.main_reply_no}" style="display: none;">
 								<div class="rereplyProfile tw-mb-2 tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-between">
+									<div class="reply-division">
+																	
+									</div>
 									<div class="d-flex flex-column align-self-center">
 										<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
 											<img class="align-middle" src="/img/profile.png">
@@ -152,7 +156,7 @@
 										class="btn btn-outline-secondary btn-sm" type="button">
 										취소
 									</button>
-									<button class="btn btn-outline-danger btn-sm">
+									<button class="btn btn-outline-primary btn-sm">
 										수정하기
 									</button>
 									<a th:href="@{/reply/delete(main_reply_no=${reply_down.main_reply_no},mainboard_no=${mainboard.mainboardNo})}" class="btn btn-outline-danger btn-sm">
@@ -160,14 +164,7 @@
 									</a>			
 							</div> 
 						</form>
-						
-					
 					</div>
-					
-					
-					
-					
-					
 				</div>
 			
 				<!-- 답글 남기는 폼 -->
@@ -188,7 +185,6 @@
 							<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
 							<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
 							<input type="hidden" name="hierarchy" value=1>
-							<input type="hidden" name="depth" value=2>
 							<input type="hidden" name="group_no" th:value="${reply_up.main_reply_no}">
 							
 							<div class="rereply-insert-info">
@@ -210,28 +206,5 @@
 						</form>
 					</div>
 				</div>
-			
   		</div>
-  		
-	
-			
-			<!-- 
-			
-				<span th:text="${reply.contents}">댓글내용 : </span>
-				<span></span>
-				
-			</div>
-			<div th:unless="${reply.hierarchy==1}">대대대대대대댓글!!!!!!
-					<span th:text="${reply.contents}">대댓글내용 : </span>
-				</div>
-			
-			
-			<span th:text="${reply.main_reply_no}"></span>
-			<span th:text="${reply.contents}"></span>
-			<span th:text="${reply.hierarchy}"></span>
-			<span th:text="${reply.depth}"></span>
-			<span th:text="${reply.group_no}"></span>
-			<span th:text="${reply.reply_time}"></span>
-			<span th:text="${reply.user_no}"></span>
-			 -->
 </html>

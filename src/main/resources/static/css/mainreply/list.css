@@ -72,6 +72,9 @@
 	margin: auto;
 }
 
+.rereply .rereplyProfile .reply-division{
+	width:10%;
+}
 
 .rereply .rereplyProfile img{
 	width: 30px;
@@ -89,7 +92,7 @@
 }
 
 .rereply .rereply-contents{
-	margin-left: 78px;
+	margin-left: 19%;
 }
 
 .rereply .rereply-update button{
@@ -101,7 +104,7 @@
 }
 
 .rereply .rereply-update-contents{
-	margin-left: 78px;
+	margin-left: 19%;
 }
 
 .rereply .rereply-updateform-btn{
@@ -141,6 +144,7 @@
 	border: none;
 	width:100%;
 	height:100%;
+	resize: none;
 }
 
 
@@ -160,6 +164,10 @@
 	color:#fff;
 	background-color: #e993a0;
 	border: 1px solid #dbdbdb;
+}
+
+.insert-reply{
+	margin-left: 13%;
 }
 
 
