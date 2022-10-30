@@ -47,12 +47,14 @@
 			<p>
 				<strong>내용 : 
 				<span th:text="${qnaboard.contents}"></span>
+				<br>
+				<span th:text="${qnaboard.code}"></span>
 				</strong>
 			</p>
 		<div>
 			<strong>여기 이미지 
 			<img th:each="qaImg:${qnaboard.qaImgList}"
-			th:src="@{/img/{file}(file=${qaImg.img_path})}">
+			th:src="@{/fakerlyImg/{file}(file=${qaImg.img_path})}">
 		</strong>
 		</div>
 		
@@ -62,6 +64,13 @@
 			수정하기
 			</a>
 		</div>
+		
+		<!-- 댓글 목록 출력 -->
+		<section>
+<strong>여기 댓글 </strong>
+		<th:block th:include="/qna_reply/list" 
+		th.with="replyList=${mainboard.replyList},qaNo=${qnaboard.qaNo}">
+		</section>
 			
 		</div>
 	</main>

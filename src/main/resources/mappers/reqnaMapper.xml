@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.joongbu.fakerly.mapper.ReQnaMapper">
+	<resultMap type="ReQnaDto" id="ReQnaMap">
+	<id column="qa_reply_no" property="rqaNo"/>
+	<id column="contents" property="contents"/>
+	<id column="q_datetime" property="rqaTime"/>
+	<id column="code" property="code"/>
+	<id column="qa_no" property="qaNo"/>
+	<id column="user_no" property="user_no"/>
+	</resultMap>
+		
+	<select id="list" resultMap="ReQnaMap">
+		SELECT * FROM qna_reply
+		where qa_no=#{qaNo}
+		order by qa_reply_no
+	</select>
+	
+	<insert id="insert" parameterType="ReQnaDto">
+		INSERT INTO qna_reply
+		(contents, code, user_no, qa_no)
+		VALUES
+		(#{contents},#{code},#{user_no},#{qaNo})
+		
+	</insert>
+	
+	  </mapper>

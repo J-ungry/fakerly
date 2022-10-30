@@ -37,4 +37,6 @@ public class QnaDto {
 	private int qa_side;
 	private QnaRolesDto qroles;
 	private List<QnaImgDto> qaImgList;
+
+	private List<ReQnaDto> replyList;
 }

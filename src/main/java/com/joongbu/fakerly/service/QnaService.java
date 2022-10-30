@@ -14,6 +14,7 @@ import com.joongbu.fakerly.mapper.QnaMapper;
 public class QnaService {
 	@Autowired
 	QnaMapper QnaMapper;
+	@Autowired
 	QnaImgMapper QnaImgMapper;
 	
 	public int registQnaAndQnaImgs(QnaDto qna, List<String>qaimgPaths) {
@@ -23,7 +24,7 @@ public class QnaService {
 		int qaimginsert=0;
 		for(String img_path:qaimgPaths) {
 			QnaImgDto qna_img=new QnaImgDto();
-			qna_img.setQaNo(qaimginsert);
+			qna_img.setQaNo(qna.getQaNo()); //qna 게시글 번호 넣어줘야댐
 //			qna_img.setQaImgNo(qaimginsert);
 			qna_img.setImg_path(img_path);
 			qaimginsert+=QnaImgMapper.qainsert(qna_img);
