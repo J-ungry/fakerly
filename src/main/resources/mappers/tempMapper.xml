@@ -14,11 +14,7 @@
   	<result column="time" property="time" />
   </resultMap>
   <select id="templist" resultMap="TempBoardMap">
-  
- SELECT *,user_no userNo FROM tempboard 
- 		<!-- ORDER BY temp_no DESC -->
-  
-  
+  	SELECT * FROM tempboard WHERE user_no=#{userNo} ORDER BY temp_no DESC
  <!-- SELECT t.*,u.user_name,u.company,
 		(SELECT COUNT(*) FROM tempboard_prefer tf WHERE tf.tempboard_no=m.tempboard_no)
 		FROM tempboard t INNER JOIN user u 

@@ -9,7 +9,7 @@ import com.joongbu.fakerly.dto.SideDto;
 import com.joongbu.fakerly.dto.TempBoardDto;
 @Mapper
 public interface TempBoardMapper {
-	List<TempBoardDto> templist();
+	List<TempBoardDto> templist(int userNo);
 	TempBoardDto detail(int tempNo);
 	int insert(TempBoardDto tempboard);
 }

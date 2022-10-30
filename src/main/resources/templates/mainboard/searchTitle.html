@@ -4,9 +4,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/mainboard/mainboardSearch.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>메인 게시판</title>
+<style type="text/css">
+
+
+</style>
 </head>
 <body style="background-color: #f7f7f7;">
 	<!-- 주제로 검색했을 때 결과입니다. -->
@@ -63,7 +68,8 @@
 					<div class="boardTitle mt-2 ms-3">
 						<div>
 							<!-- 게시글 제목 -->
-							<span><strong th:text="${main.mainboardTitle}" style="box-shadow: inset 0 -20px 0 #bfffa1;"></strong></span>
+							<span><strong th:text="${main.mainboardTitle}"></strong></span> 
+							
 						</div>
 					</div>
 					<div class="boardContents mt-2 ms-3">

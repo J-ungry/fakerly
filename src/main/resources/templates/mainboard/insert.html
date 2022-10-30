@@ -15,8 +15,10 @@
 			<img onclick="goBack()" alt="preferPageImg" src="/img/mainboard_arrow.png">
 			<div>
 				<!-- 임시보관함 모달창 참고: https://goddino.tistory.com/74 -->
-				<button type="button" onClick="location.href='/tempboard/templist.do'">임시보관함</button>
-				<button type="button" onClick="location.href='/tempboard/insert.do'">보관</button>
+				<a class="btn btn-outline-secondary" href="/tempboard/templist.do">
+					임시보관함
+				</a>
+				<button class="button" onClick="return submit2(this.form)" enctype="multipart/form-data">보관</button>
 				<button class="button">완료</button>
 			</div>
 		</div>

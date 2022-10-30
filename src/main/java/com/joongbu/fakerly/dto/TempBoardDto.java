@@ -14,7 +14,7 @@ import lombok.Data;
 | title      | varchar(100) | NO   |     | NULL              |                   |         
 | keyword_no | int          | YES  | MUL | NULL              |                   |       
 | contents   | varchar(255) | NO   |     | NULL              |                   |       
-| img        | blob         | YES  |     | NULL              |                   |       
+| img        | varchar(255)         | YES  |     | NULL              |                   |       
 | link       | varchar(255) | YES  |     | NULL              |                   |       
 | time       | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |      
 +------------+--------------+------+-----+-------------------+-------------------+
@@ -26,7 +26,7 @@ public class TempBoardDto {
 	private String title;
 	private int keywordNo;
 	private String contents;
-	//private Blob img;
+	private String img;
 	private String link;
 	private Date time;
 }

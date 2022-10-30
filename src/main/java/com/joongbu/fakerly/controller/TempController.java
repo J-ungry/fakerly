@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.joongbu.fakerly.dto.MainBoardDto;
 import com.joongbu.fakerly.dto.TempBoardDto;
 import com.joongbu.fakerly.dto.UserDto;
+import com.joongbu.fakerly.mapper.MainBoardMapper;
 import com.joongbu.fakerly.mapper.TempBoardMapper;
 
 @RequestMapping("/tempboard")
@@ -22,19 +24,28 @@ import com.joongbu.fakerly.mapper.TempBoardMapper;
 public class TempController {
 	@Autowired
 	TempBoardMapper tempboardMapper;
+	@Autowired
+	MainBoardMapper boardMapper;
 	@GetMapping("/templist.do")
-	public String templist(Model model){
-		System.out.println("work!");
+	public String templist(
+			Model model,
+			@SessionAttribute(required=true) UserDto loginUser,
+			HttpSession session
+			){
+		String msg="";
 		List<TempBoardDto> tempList=null;
 		try {
-			tempList=tempboardMapper.templist();
-			System.out.println(tempList);
+			tempList=tempboardMapper.templist(loginUser.getUser_no());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(tempList==null) {
-			return "/mainboard/main";
-		}else {
+		if(tempList.isEmpty()) {
+			msg="임시보관 한 게시물이 없습니다.";
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/main";
+		} else {
+			msg=loginUser.getUser_name()+"님의 임시보관함입니다.";
+			session.setAttribute("msg", msg);
 			model.addAttribute("tempList", tempList);
 			return "/tempboard/templist";
 		}
@@ -42,27 +53,31 @@ public class TempController {
 
 	@GetMapping("/detail.do")
 	public String detail(
-			@RequestParam (required = true) int tempNo,
-			Model model
+			MainBoardDto mainboard,
+			@SessionAttribute(required=false) UserDto loginUser,
+			Model model,
+			HttpSession session
 			) {
-		TempBoardDto tempboard =null;
+		String msg="";
+		List<MainBoardDto> list=null;
 		try {
-			tempboard=tempboardMapper.detail(tempNo);
-			System.out.println("detail!");
+			list=boardMapper.tempDetail(loginUser.getUser_no());
+			System.out.println(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(tempboard!=null) {
-			model.addAttribute("tempboard" ,tempboard);
-			return "/tempboard/detail";
-		}else {
-			System.out.println("ERROR");
-			return "redirect:/tempboard/templist.do";
+		if(list==null) {
+			msg="알 수 없는 오류";
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/main";
+		} else {
+			model.addAttribute("tempboard", list);
+			return "/tempboard/detail.do";
 		}
 	}
 	@GetMapping("/insert.do")
 	public String insert(
-			@SessionAttribute(required = false)UserDto loginUser,
+			@SessionAttribute(required = false) UserDto loginUser,
 			HttpSession session
 			) {
 		String msg="";
@@ -77,28 +92,28 @@ public class TempController {
 	}
 	@PostMapping("/insert.do")
 	public String insert(
-			TempBoardDto tempboard,
+			MainBoardDto mainboard,
 			@SessionAttribute(required = false) UserDto loginUser,
 			HttpSession session
 			) {
-		int insert=0;
 		String msg="";
+		int tempInsert=0;
 		try {
-			if(loginUser!=null) {
-				insert=tempboardMapper.insert(tempboard);
-			}
+			tempInsert=boardMapper.tempInsert(mainboard);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(insert>0) {
-			msg="임시 저장 성공";
+		if(tempInsert>0) {
+			msg="임시게시판 등록 완료";
 			session.setAttribute("msg", msg);
-			return "redirect:/tempboard/detail.do?tempNo="+tempboard.getTempNo();
-		}else {
-				msg="게시글 작성 실패(db 오류)";
+			return "redirect:/tempboard/templist.do";
+		} else {
+			msg="임시게시판 등록 실패";
 			session.setAttribute("msg", msg);
-			return "redirect:/mainboard/main.do";
-			}
+			return "/mainboard/main";
+		}
+		
+		
 		}
 	}
 
