@@ -8,50 +8,47 @@
 <head>
 <meta charset="UTF-8">
 <title>QNA프로젝트</title>
+<link rel="stylesheet" href="/css/qnaboard/qalist.css">
 </head>
 <body>
 	<header th:include="headerNav"></header>
-	<main class="container mt-5">
-<div class="container">
-		<p class="d-flex justify-content-end">
-			<a class="btn btn-outline-primary" href="/qnaboard/qainsert.do">
-			글작성</a>
-		</p>
+	<div th:include="/sideboard/test"></div>
 
-	<h1>QNA프로젝트</h1>
-		<table>
-		<thead>
-			<tr>
-				<th>no</th>
-				<th>제목</th>
-				<th>게시일</th>
-				<th>글쓴이id</th>
-				<th>닉네임</th>
-				<th>조회수</th>
-				<th>좋아요</th>
-				<th>해결여부</th>
-				<th>게시판 번호</th>
-			
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="link-secondary"
+<div class="container">
+	<div class="article">
+		<div class="d-flex write-bar"> 
+			<div class="write">궁금한 내용을 익명으로 자유롭게 질문하세요</div>
+			<a class="btn" href="/qnaboard/qainsert.do">
+			글작성</a>
+		</div>
+
+
+			<div class="contents"
 				th:onclick="location.href='qadetail.do?qaNo=[[${qnaboard.qaNo}]]'" 
 				th:each="qnaboard:${qaList}">
-				<td th:text="${qnaboard.qaNo}"></td>
-				<td th:text="${qnaboard.title}"></td>
-				<td th:text="${#dates.format(qnaboard.qaTime,'MM월dd일 HH시mm분')}"></td>
-				<td th:text="${qnaboard.user.user_no}"></td>
-				<td th:text="${qnaboard.user.nickname}"></td>
-				<td th:text="${qnaboard.views}"></td>
-				<td th:text="${qnaboard.likes}"></td>
-				<td th:text="${qnaboard.qa_resolve}"></td>
+				<div class="article-header">
 				
-				<td th:text="${qnaboard.qa_side}"></td>
-			</tr>
-		</tbody>
-		</table>
-			<div class="sidebar">
+					<div th:if="${qnaboard.qa_resolve==1}" class="state-check">
+						<p class="q-solve">Q. </p>
+					</div>
+					<div th:if="${qnaboard.qa_resolve==0}" class="state-check">
+						<p class="q-notsolve">Q.</p>
+					</div>
+					<p th:text="${qnaboard.title}" class="title"></p>
+				</div>
+				<div class="article-mid">
+					<p th:text="${qnaboard.contents}"></p>
+				</div>
+				<div class="views">
+					<p>조회수&nbsp;&nbsp;</p>
+					<p th:text="${qnaboard.views}"></p>
+				</div>
+
+			</div>
+	</div>
+
+</div>
+<!-- 			<div class="sidebar">
 		<ul>
 
 			<li><a th:href="@{''(searchQnaRoleNo=)}">전체</a></li>
@@ -61,7 +58,6 @@
 			<li><a th:href="@{''(searchQnaRoleNo=4)}">기획</a></li>
 			
 		</ul>
-	</div>
-
+	</div> -->
 </body>
 </html>
