@@ -1,6 +1,7 @@
 package com.joongbu.fakerly.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -233,61 +234,90 @@ public class MainBoardController {
 	}
 	
 	@PostMapping("/search")
-	public String search(	//'키워드','작성자명' 아직 미구현
- 			Model model,
+	public String search(
 			HttpSession session,
+			Model model,
 			@RequestParam(required=false) String searchConcept,	//검색 카테고리
 			@RequestParam(required=false) String searching		//사용자가 입력한 검색내용
 			) {
-		String msg="";
-		List<MainBoardDto> searchList=null;
-		switch(searchConcept) {
-		case "제목":	//"제목" 카테고리로 검색할 경우
-			try {
-				searchList=boardMapper.searchTitle(searching);
-			} catch (Exception e) {
-				e.printStackTrace();
+			String msg="";
+			List<MainBoardDto> searchList=null;
+			if(searching.isEmpty()) {
+				msg="검색할 단어를 입력해주세요.";
+				session.setAttribute("msg", msg);
+				return "redirect:/mainboard/main";
+			} else {
+				switch(searchConcept) {
+				case "제목":	//"제목" 카테고리로 검색할 경우
+					try {
+						searchList=boardMapper.searchTitle(searching);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(searchList.isEmpty()) {
+						msg="검색 결과가 없습니다.";
+						session.setAttribute("msg", msg);
+						return "redirect:/mainboard/main";
+					} else {
+						msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
+						session.setAttribute("msg", msg);
+						model.addAttribute("searchList", searchList);
+						return "/mainboard/searchTitle";
+					}
+				case "내용":	//"내용" 카테고리로 검색할 경우
+					try {
+						searchList=boardMapper.searchContents(searching);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(searchList.isEmpty()) {
+						msg="검색 결과가 없습니다.";
+						session.setAttribute("msg", msg);
+						return "redirect:/mainboard/main";
+					} else {
+						msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
+						session.setAttribute("msg", msg);
+						model.addAttribute("searchList", searchList);
+						return "/mainboard/searchContents";
+					}
+				case "작성자명":	//"작성자명" 카테고리로 검색할 경우
+					try {
+						searchList=boardMapper.searchName(searching);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(searchList.isEmpty()) {
+						msg="검색 결과가 없습니다.";
+						session.setAttribute("msg", msg);
+						return "redirect:/mainboard/main";
+					} else {
+						msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
+						session.setAttribute("msg", msg);
+						model.addAttribute("searchList", searchList);
+						return "/mainboard/searchName";
+					}
+				case "키워드":	//"키워드" 카테고리로 검색할 경우
+					try {
+						searchList=boardMapper.searchKeyword(searching);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(searchList.isEmpty()) {
+						msg="검색 결과가 없습니다.";
+						session.setAttribute("msg", msg);
+						return "redirect:/mainboard/main";
+					} else {
+						msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
+						session.setAttribute("msg", msg);
+						model.addAttribute("searchList", searchList);
+						return "/mainboard/searchKeyword";
+					}
+				}
 			}
-			msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
-			session.setAttribute("msg", msg);
-			model.addAttribute("searchList", searchList);
-			return "/mainboard/searchTitle";
-		
-		case "내용":	//"내용" 카테고리로 검색할 경우
-			try {
-				searchList=boardMapper.searchContents(searching);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
-			session.setAttribute("msg", msg);
-			model.addAttribute("searchList", searchList);
-			return "/mainboard/searchContents";
-		
-		case "작성자명":	//"작성자명" 카테고리로 검색할 경우
-			try {
-				searchList=boardMapper.searchName(searching);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
-			session.setAttribute("msg", msg);
-			model.addAttribute("searchList", searchList);
-			return "/mainboard/searchName";
-			
-		case "키워드":	//"키워드" 카테고리로 검색할 경우
-			try {
-				searchList=boardMapper.searchKeyword(searching);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			msg="'"+searchConcept+"'/'"+searching+"' 검색결과 입니다.";
-			session.setAttribute("msg", msg);
-			model.addAttribute("searchList", searchList);
-			return "/mainboard/searchKeyword";
+			return "/mainboard/main";
 		}
-		return "/mainboard/main";
-	}
+	
+	
 }
 
 
