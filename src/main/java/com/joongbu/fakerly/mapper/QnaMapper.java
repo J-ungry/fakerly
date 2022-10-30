@@ -13,6 +13,8 @@ public interface QnaMapper {
 	int qainsert(QnaDto qna);
 	int qaupdate(QnaDto qna);
 	int qadelete(int qaNo);
+	
+	QnaDto qadetailReply (int qaNo);
 
 
 }

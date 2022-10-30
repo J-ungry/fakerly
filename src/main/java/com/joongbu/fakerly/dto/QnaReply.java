@@ -18,10 +18,10 @@ import lombok.Data;
 
 @Data
 public class QnaReply {
-	private int rqa_no;
+	private int qa_reply_no;
 	private String contents;
-	private Date qaTime;
+	private Date q_datetime;
 	private String code;
-	private int qa_no;//qnadto의 qa_no 참조
 	private int user_no;
+	private int qa_no;
 }
