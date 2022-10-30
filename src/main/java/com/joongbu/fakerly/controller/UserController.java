@@ -161,7 +161,7 @@ public class UserController {
 					if(newPw.equals(chkNewPw)) {
 						if(!originPw.equals(newPw)) {
 							userMapper.modifyPassword(user.getEmail(), newPw);
-							msg = "비밀번호 변경 성공!";
+							msg = "비밀번호 변경 성공! 로그인 페이지로 이동합니다.";
 							session.setAttribute("msg", msg);
 							return "redirect:/user/login.do";													
 						} else {
