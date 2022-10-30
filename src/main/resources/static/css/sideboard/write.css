@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+div{
+	margin:0;
+	padding:0;
+}
+.main-header{
+	width:100%;
+	z-index:100;
+	background-color: #F7F7F7;
+	padding-top: 20px;
+	padding-bottom:15px;
+}
+.contents{
+	width:70%;
+	margin:auto;
+}
+
+.contents>*{
+	margin:15px;
+}
+
+.p1{
+	font-size: 25px;
+	font-weight: 600;
+}
+
+.btn{
+	background-color:#ED6653;
+	color:#fff;
+}
+
+.btn:hover{
+	border:1px solid #ED6653;
+	color:#ED6653;
+	background-color: #fff;
+}
+
+

@@ -1,5 +1,6 @@
 package com.joongbu.fakerly.dto;
 
+
 import java.sql.Blob;
 import java.util.Date;
 
@@ -26,7 +27,7 @@ public class TempBoardDto {
 	private String title;
 	private int keywordNo;
 	private String contents;
-	//private Blob img;
+//	private Blob img;
 	private String link;
 	private Date time;
 }

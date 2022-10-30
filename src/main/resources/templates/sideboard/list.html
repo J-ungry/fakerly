@@ -1,48 +1,53 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"><!-- 개발할땐 css 배포할땐 min css -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/css/sideboard/list.css">
 <head>
 <meta charset="UTF-8">
 <title>사이드 프로젝트</title>
 </head>
 <body>
 <header th:include="headerNav"></header>
-
-<div class="container">
-		<h1 class="mt-5">Spring_board.board list</h1>
-		<p class="d-flex justify-content-end">
-			<a class="btn btn-outline-primary" href="/sideboard/insert.do">
-			글작성</a>
-		</p>
+<div th:include="/sideboard/test"></div>
+<div th:include="/sideboard/write"></div>
 
 
+<div class="board">
+	<div class="sidebar">
+		<p>함께할 멤버를<br>기다리고 있어요</p>
+		<div class="cate">
+		<ul class="nav flex-column">
+			<li class="nav-item"><a th:href="@{''(searchRoleNo=)}" class="link-secondary nav-link active"><i class="bi bi-list"></i>  전체</a><li>
+			<li class="nav-item"><a th:href="@{''(searchRoleNo=1)}" class="link-secondary nav-link active"><i class="bi bi-display"></i>  프론트엔드</a>
+			<li class="nav-item"><a th:href="@{''(searchRoleNo=2)}" class="link-secondary nav-link active"><i class="bi bi-hdd-stack"></i>  백엔드</a>
+			<li class="nav-item"><a th:href="@{''(searchRoleNo=3)}" class="link-secondary nav-link active"><i class="bi bi-brush"></i>  디자인</a>
+			<li class="nav-item"><a th:href="@{''(searchRoleNo=4)}" class="link-secondary nav-link active"><i class="bi bi-file-earmark-richtext"></i>  기획</a>
+			<li class="nav-item"><a th:href="@{''(searchRoleNo=5)}" class="link-secondary nav-link active"><i class="bi bi-lightning"></i>  기타</a>
+		</ul>
+		</div>
+
+	</div>
+	
 	<div class="boards"><!-- 게시글 들어올 곳 -->
 		<div class="article" th:each="side:${sideList}" th:onclick="location.href='detail.do?sideBoardNo=[[${side.sideBoardNo}]]'"><!-- 게시글 한개 -->
-			글번호:<span th:text="${side.sideBoardNo}"></span>
-			<span th:if="${side.state == 1}">모집중</span>
-			<span th:if="${side.state == 0}">모집 완료</span>
-			제목:<span th:text="${side.title}"></span>
-			요약:<span th:text="${side.summ}"></span>
-			목적:<span th:text="${side.purpose}"></span>
-			좋아요:<span th:text="${side.likes}"></span>
+			<div class="article-top">
+				<span th:if="${side.state == 1}" class="state-ing">모집 중</span>
+				<span th:if="${side.state == 0}" class="state-complete">모집 완료</span>
+				 <span class="mid-bar">    |    </span><span class="title" th:text="${side.title}"></span>
+			</div>
+			<div class="article-mid">
+				<span th:text="${side.summ}"></span>
+			</div>
+			<div class="article-bot">
+			<div class="p-tag purpose"><p th:text="${side.purpose}"></p></div>
+			<div class="p-tag like">좋아요&nbsp;&nbsp;<p th:text="${side.likes}"></p></div>
+			</div>
 		</div>	 
 	</div>
 	
-	<div class="sidebar">
-		<ul>
 
-			<li><a th:href="@{''(searchRoleNo=)}">전체</a></li>
-			<li><a th:href="@{''(searchRoleNo=1)}">프론트엔드</a></li>
-			<li><a th:href="@{''(searchRoleNo=2)}">백엔드</a></li>
-			<li><a th:href="@{''(searchRoleNo=3)}">디자인</a></li>
-			<li><a th:href="@{''(searchRoleNo=4)}">기획</a></li>
-			<li><a th:href="@{''(searchRoleNo=5)}">기타</a></li>
-			
-		</ul>
-	</div>
+
 	
 	<div>
 		

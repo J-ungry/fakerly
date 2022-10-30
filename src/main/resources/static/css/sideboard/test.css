@@ -1,0 +1,17 @@
+@charset "UTF-8";
+/*  */
+.btn{
+	background-color:#ED6653;
+	color:#fff;
+}
+
+.btn:hover{
+	border:1px solid #ED6653;
+	color:#ED6653;
+	background-color: #fff;
+}
+
+/*왜 안돼...*/
+.test:hover {
+	color: #ED6653 !important;
+}

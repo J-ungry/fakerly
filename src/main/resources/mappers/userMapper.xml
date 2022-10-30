@@ -31,5 +31,8 @@
   		set user_no=(select last_insert_id()) 
   		where user_no=1
   	</update>
+  	<select id="profileUser" resultType="com.joongbu.fakerly.dto.UserDto">
+  		select * from user where user_no=#{user_no}
+  	</select>
 </mapper>
 

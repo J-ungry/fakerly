@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.joongbu.fakerly.dto.MainBoardDto;
 import com.joongbu.fakerly.dto.UserDto;
 import com.joongbu.fakerly.mapper.MainBoardMapper;
+import com.joongbu.fakerly.mapper.UserMapper;
 
 import lombok.Data;
 
@@ -34,6 +35,8 @@ public class MainBoardController {
 	DataSource dataSource;
 	@Autowired
 	MainBoardMapper boardMapper;
+	@Autowired
+	UserMapper userMapper;
 	@Value("${spring.servlet.multipart.location}")
 	String imgSavePath;
 	
@@ -237,6 +240,34 @@ public class MainBoardController {
 		System.out.println(searchConcept);
 		System.out.println(searching);
 		return "/mainboard/main";
+	}
+	
+	@GetMapping("/profile.do")
+	public void profile(
+			@RequestParam(required=false) int user_no,
+			Model model
+			
+			) {
+		//유저 정보 출력 (UserDto 저장 후 set)
+		//게시글 정보 출력 (MainBoardDto 저장 후 set)
+		List<MainBoardDto> profileList = null;
+		UserDto user = new UserDto();
+		try {	
+			profileList= boardMapper.profileList(user_no);
+			user = userMapper.profileUser(user_no);
+			if(profileList.size()==0) {
+				System.out.println("이거 비었는디요 ;;");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(user);
+		System.out.println(profileList);
+		model.addAttribute("user",user);
+		model.addAttribute("profileList",profileList);
+		
+
 	}
 	
 	

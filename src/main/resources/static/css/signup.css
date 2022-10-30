@@ -201,7 +201,7 @@ body{
     color: #fff;
 }
 
-.signupForms>button{
+.signupForms>button:not(#accountInfo>button){
     visibility: hidden;
 }
 

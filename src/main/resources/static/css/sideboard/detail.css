@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+.container{
+
+	padding:20px;
+	width:70%;
+	display:flex;
+	color:#333;
+}
+
+/* 전체 레이아웃 */
+.article-content{
+/* 	border:1px solid black; */
+	margin-right:25%;
+	width:75%;
+	height:100%;
+}
+.user-info{
+/* 	border:1px solid black; */
+	width:25%;
+	top:200px;
+	left:70%;
+	position:fixed;
+}
+
+/*게시글 레이아웃 */
+.content-top-header{
+	font-size:30px;
+	font-weight: 600;
+	padding:15px;
+}
+.content-top-mid{
+	padding:15px;
+	font-size:14px;
+	color:#777;
+	padding-top:0;
+}
+.state-ing{
+	color:#48AF5A;
+}
+.state-complete{
+	color: #4284F3;
+}
+.mid-bar{
+	color:#eee;
+}
+
+.title{
+	font-size:25px;
+	font-weight:600;
+	padding:15px;
+	color:#333;
+	
+	
+}
+.role-list{
+/* 	border:1px solid black; */
+	display:flex;
+}
+.roles{
+	padding-left:15px;
+	padding-bottom:15px;
+}
+.text{
+	padding:15px;
+	color:#222;
+}
+.user-info{
+
+}
+
+.user-info-content{
+	padding:15px;
+	background-color:#F7F7F7;
+	text-align: center;
+}
+.company{
+	font-size:13px;
+	color:#aaa;
+}
+.user-img{
+	width:50%;
+	border-radius:70%;
+}
+.likes{
+	padding-top:15px;
+}
+.like-btn{
+
+	width:100%;
+}
+.update{
+	margin-top:10px;
+	border:1px solid black;
+	width:100%;
+
+}
+.update-a{
+ 	color:#fff;
+	text-decoration: none; 
+	display:block;
+	width:100%;
+	height:100%
+}
+
+.update-a:hover{
+	color:#ED6653;
+}
+.update:hover{
+	color:#ED6653;
+}

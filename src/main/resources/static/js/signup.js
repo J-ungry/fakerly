@@ -270,4 +270,4 @@ function temp(){
     btns[5].style.visibility = "visible";
     btns[6].style.visibility = "visible";
 }
-temp();
+//temp();

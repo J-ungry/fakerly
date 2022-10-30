@@ -98,6 +98,11 @@
 		DELETE FROM mainboard
 		WHERE mainboard_no=#{mainboardNo}
 	</delete>
+	
+	<select id="profileList" resultMap="MainBoardMap">
+		SELECT * FROM mainboard
+		WHERE user_no=#{userNo}
+	</select>
 </mapper>
 
 

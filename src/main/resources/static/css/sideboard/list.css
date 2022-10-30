@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+.board{
+	width:70%;
+	margin:auto;
+	display:flex;
+	z-index:1;
+	margin-top:30px;
+	
+	
+}
+/* 전체 레이아웃 */
+.sidebar{
+	width:25%;
+	top:300px;
+
+	position: fixed; 
+
+}
+
+.boards{
+	margin-left:25%;
+	padding:1px;
+	height:100%;
+	width:75%;
+	
+}
+/* 사이드바 레이아웃 */
+.sidebar>p{
+	color:#333;
+	font-weight: bold;
+	font-size:20px;
+}
+
+li{
+	display:flex;
+}
+.bi{
+	font-size:20px;
+	
+}
+
+/* 게시글 레이아웃 */
+.boards div{
+	/* border:1px solid #eee; */
+}
+.article{
+	padding:15px;
+	border-bottom: 1px solid #aaa;
+}
+.article:hover{
+	background-color: #eee;
+	
+}
+/* article top */
+.article-top{
+	font-size:20px;
+
+}
+.state-ing{
+	color:#48AF5A;
+}
+.state-complete{
+	color: #4284F3;
+}
+.mid-bar{
+	color:#eee;
+}
+.title{
+	color:#333;
+}
+/* article-mid */
+.article-mid{
+	padding-top:15px;
+	padding-bottom:15px;
+	color:#333;
+}
+.article-bot{
+	padding-top:15px;
+
+}
+.p-tag{
+	display:flex;
+}
+.purpose{
+	color:#AAAAAA;
+	font-weight: 600;
+	font-size: 13px;
+}
+.like{
+	color:#AAAAAA;
+	font-weight: 200;
+	font-size:13px;
+}
+
