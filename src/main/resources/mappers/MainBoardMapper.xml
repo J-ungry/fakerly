@@ -15,7 +15,7 @@
 		<result column="mainboard_img" property="mainboardImg"/>
 		<result column="mainboard_link" property="mainboardLink"/>
 		<result column="mainboard_time" property="mainboardTime"/>
-
+		
 		<result column="user_name" property="userName"/>
 		<result column="company" property="userCompany"/>
 		<!--  <collection property="preferList" ofType="MainBoardPreferDto">
@@ -63,7 +63,7 @@
 			r.user_no r_user_no,
 			r.mainboard_no r_mainboard_no,
 			u.user_name,
-			u.company 
+			u.company
 			FROM mainboard b
 			LEFT JOIN user u USING(user_no) 
 			LEFT JOIN main_reply r USING(mainboard_no)

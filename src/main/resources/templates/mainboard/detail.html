@@ -67,8 +67,14 @@
 				</div>	
 			</div>
 			
+			<!-- 댓글 수 출력 -->
+			<div>
+				
+			</div>
+			
+			
 			<!-- 댓글 입력(상위계층 댓글) -->
-			<div class="reply w-50 p-3">
+			<div class="reply-container w-50 p-3">
 				<div class="reply-insert">
 					<form name="replyInsertForm"
 						th:if="${session.loginUser!=null}"
@@ -86,9 +92,8 @@
 									<img class="align-middle" src="/img/profile.png">
 								</a>
 							</div>
-							<div class="reply-contents">
+							<div class="reply-insert-contents">
 								<textarea class="tw-flex-1 tw-border-none tw-outline-none tw-h-6 tw-max-h-20 tw-resize-none tw-p-0 tw-text-sm tw-placeholder-gray-500 false" name="contents" id="replyContents" placeholder="게시글에 대한 이야기를 나눠보세요"></textarea>
-								
 							</div>
 						</div>
 						<div>

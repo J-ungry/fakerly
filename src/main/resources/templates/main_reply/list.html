@@ -40,7 +40,7 @@
 						th:id="${reply_up.main_reply_no}"
 						class="reply-update">
 						<button th:onclick="readReplyUpdateForm([[${reply_up.main_reply_no}]])"
-							class="btn btn-outline-secondary btn-sm" type="button">
+							class="btn btn-outline-dark btn-sm" type="button">
 							수정하기
 						</button>
 						
@@ -74,7 +74,7 @@
 								class="btn btn-outline-secondary btn-sm" type="button">
 								취소
 							</button>
-							<button class="btn btn-outline-danger btn-sm">
+							<button class="btn btn-outline-primary btn-sm">
 								수정하기
 							</button>
 							<a th:href="@{/reply/delete(main_reply_no=${reply_up.main_reply_no},mainboard_no=${mainboard.mainboardNo})}" class="btn btn-outline-danger btn-sm">
@@ -90,12 +90,14 @@
 				<!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 --><!-- 기본 대댓글 출력 -->
 				
 				<div th:each="reply_down:${mainboard.replyList}" 
-					th:if="${reply_up.main_reply_no==reply_down.group_no}" 
-					class="rereplydiv">
+					th:if="${reply_up.main_reply_no==reply_down.group_no}">
 					<div class="rereply">
 						<!-- 기본 출력 댓글 --> 
 						<div th:id="'reply_no'+${reply_down.main_reply_no}">
 							<div class="rereplyProfile tw-mb-2 tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-between">
+								<div class="reply-division">
+																	
+								</div>
 								<div class="d-flex flex-column align-self-center">
 									<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
 										<img class="align-middle" src="/img/profile.png">
@@ -118,7 +120,7 @@
 								th:id="${reply_down.main_reply_no}"
 								class="rereply-update">
 								<button th:onclick="readReplyUpdateForm([[${reply_down.main_reply_no}]])"
-									class="btn btn-outline-secondary btn-sm" type="button">
+									class="btn btn-outline-dark btn-sm" type="button">
 									수정하기
 								</button>
 								
@@ -131,6 +133,9 @@
 							<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
 							<div th:id="'reply_update'+${reply_down.main_reply_no}" style="display: none;">
 								<div class="rereplyProfile tw-mb-2 tw-flex tw-flex-row tw-w-full tw-items-center tw-justify-between">
+									<div class="reply-division">
+																	
+									</div>
 									<div class="d-flex flex-column align-self-center">
 										<a href="#">	<!-- 프로필 선택 시 프로필 상세정보로 이동 -->
 											<img class="align-middle" src="/img/profile.png">
@@ -152,7 +157,7 @@
 										class="btn btn-outline-secondary btn-sm" type="button">
 										취소
 									</button>
-									<button class="btn btn-outline-danger btn-sm">
+									<button class="btn btn-outline-primary btn-sm">
 										수정하기
 									</button>
 									<a th:href="@{/reply/delete(main_reply_no=${reply_down.main_reply_no},mainboard_no=${mainboard.mainboardNo})}" class="btn btn-outline-danger btn-sm">
@@ -160,14 +165,7 @@
 									</a>			
 							</div> 
 						</form>
-						
-					
 					</div>
-					
-					
-					
-					
-					
 				</div>
 			
 				<!-- 답글 남기는 폼 -->

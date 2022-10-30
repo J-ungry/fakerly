@@ -40,7 +40,7 @@ main .post-container .boardInfo .userInfo p {
 }
 
 main .post-container .boardInfo .followBtn {
-
+	margin-left: auto;
 }
 
 main .post-container .boardInfo .followBtn button {
@@ -125,41 +125,42 @@ main .post-container .boardBtn .boardComment img {
 	height: 30px;
 }
 
-main .reply{
+main .reply-container{
 	border: 1px solid #dbdbdb;
 	margin: 0 auto;
 	
 }
 
-main .reply .reply-insert{
+main .reply-container .reply-insert{
 	border: 1px solid #dbdbdb;
 	margin-bottom:10px;
 	background-color: #fff;
 }
 
 
-main .reply .reply-insert .reply-info{
+main .reply-container .reply-insert .reply-info{
 	display:flex;
 }
 
-main .reply .reply-insert .reply-contents{
+main .reply-container .reply-insert .reply-insert-contents{
 	width:100%;
+	height:100%;
 }
-main .reply .reply-insert .reply-contents textarea{
+main .reply-container .reply-insert .reply-insert-contents textarea{
 	border: none;
-	margin:auto;
 	width:100%;
+	height:100%;
 }
 
 
-main .reply .reply-insert .reply-info .replyProfile img{
+main .reply-container .reply-insert .reply-info .replyProfile img{
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
-	margin: 20px;
+	margin:20px;
 }
 
-main .reply .reply-insert div .btn{
+main .reply-container .reply-insert div .btn{
 	display:flex;
 	margin-left: auto;
 	margin-right: 5px;
