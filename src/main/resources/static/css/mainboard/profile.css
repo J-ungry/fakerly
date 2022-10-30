@@ -12,6 +12,7 @@
 
 .user-img-div{
 	width:25%;
+	
 }
 .user-img{
 	width:50%;
@@ -26,6 +27,11 @@
 	margin-left:20px;
 
 }
+.user-names i{
+	font-size:20px;	
+	padding:10px;
+	
+}
 .user-company{
 	display:flex;
 	color:#888;
@@ -39,9 +45,109 @@
 }
 .board-info{
 	background-color: #F7F7F7;
+	padding:20px;
 }
 .input-board{
-	width:80%;
-	border:1px solid #333;
+	width:67%;
+	border: 1px solid #eee;
 	margin: auto;
+	display:flex;
+	background-color: #FFFFFF;
+	padding:10px;
+	
+}
+.input-board-img{
+	border-radius:70%;
+	width:8%;
+	object-fit:contain;
+	
+}
+.input-board-img>img{
+	height: 100%;
+	width: 100%;
+	border-radius:70%;
+}
+.input-board-div{
+	height: 90%;
+	width:90%;
+	margin:auto;
+	background-color: #F7F7F7;
+	padding:12px;
+	color:#ccc;
+}
+.content-list{
+	width:70%;
+	
+	margin:auto;
+}
+
+.contents{
+	border: 1px solid #eee;
+	background-color: #fff;
+	padding:20px;
+	margin:20px;
+}
+.contents-header{
+	display: flex;
+}
+.contents-img{
+	width:8%;
+	height: 8%;
+}
+.contents-img>img{
+	width:100%;
+	height:100%;
+	
+}
+
+.contents-header-div div{
+
+	height: 16px;
+	padding-left:10px;
+	font-size:13px;
+	color:#888;
+}
+.contents-header-username{
+	display: flex;
+	color:black;
+	font-weight: 500;
+	
+}
+.contents-header-etc{
+	display:flex;
+
+}
+.title{
+	padding:30px;
+	font-size: 20px;
+	font-weight: 600;
+}
+.article{
+	padding:20px;
+	padding-left:30px;
+	
+}
+.link{
+	width:75%;
+	height:100px;
+	margin:auto;
+	background-color: #F7F7F7;
+	border-radius: 5px;
+}
+.link-text{
+	text-align: center;
+	padding-top:30px;
+}
+.etc{
+	padding-top:20px;
+	display: flex;
+	justify-content: space-between;
+
+}
+.etc *{
+	color:#888888;
+	font-size: 13px;
+}
+.etc>div{
+	display:flex;
 }

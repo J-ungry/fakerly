@@ -47,7 +47,7 @@
 			<div id="postList" class="post-container w-50 p-3 h-25" th:each="main : ${mainList}" style="margin-top: 50px;">	
 				<div class="boardInfo d-flex justify-content-between">
 					<div class="boardProfile d-flex align-self-center">
-						<a href="#">	<!-- 작성자 프로필: user에서 프로필이미지 저장 된다면 그 프로필 이미지로 교체 -->
+						<a th:href="@{/mainboard/profile.do(user_no=${main.userNo})}">	<!-- 작성자 프로필: user에서 프로필이미지 저장 된다면 그 프로필 이미지로 교체 -->
 							<img class="align-middle" src="/img/profile.png">
 						</a>
 						<div class="userInfo d-flex flex-column align-self-center">
