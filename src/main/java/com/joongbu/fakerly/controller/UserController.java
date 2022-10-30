@@ -312,6 +312,33 @@ public class UserController {
 		session.setAttribute("msg", msg);
 		return "redirect:/";
 	}
+	
+	// 비밀번호 수정
+	@GetMapping("/modifyPassword.do")
+	public void modifyPassword(HttpServletRequest req) {
+		System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
+		Enumeration params = req.getParameterNames();
+		System.out.print("Parameter> ");
+		while (params.hasMoreElements()) {
+			String name = (String) params.nextElement();
+			System.out.print(name + " : " + req.getParameter(name) + "\t");
+		}
+		System.out.println();
+	}
+	
+	// 비밀번호 수정 시도
+	@PostMapping("/modifyPassword.do")
+	public String modifyPassword(			
+			HttpServletRequest req, 
+			HttpSession session, 
+			@RequestParam(required = true) String email,
+			@RequestParam(required = true) String pw
+			) {
+				// 기존 비밀번호
+				// 새 비밀번호
+				// 새 비밀번호 확인
+				return "";
+			}
 
 	// JBcrypt 테스트
 	// http://localhost:8888/user/crypt?email=123@gmail.com
