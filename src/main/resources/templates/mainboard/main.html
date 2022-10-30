@@ -37,7 +37,7 @@
 					</select>
 				</div>
 				<div class="input-group d-flex align-items-center">
-	  				<input name="searching" type="text" class="form-control" placeholder="원하시는 게시글을 검색해서 찾아보세요!" aria-label="Recipient's username" aria-describedby="button-addon2">
+	  				<input id="searching" name="searching" type="text" class="form-control" placeholder="원하시는 게시글을 검색해서 찾아보세요!" aria-label="Recipient's username" aria-describedby="button-addon2">
 	  				<button class="btn btn-outline-info" type="submit" id="button-addon2">검색</button>
 	  				<a href="/mainboard/main" class="btn btn-outline-info align-middle" type="button" id="button-addon2">전체 게시글</a>
 				</div>
@@ -106,7 +106,7 @@
 				<div class="boardBtn d-flex justify-content-between">
 					<div class="d-flex">
 						<div class="boardPrefer">
-							<a class="btn" th:href="@{/mainboard/putLike(userNo=${session.loginUser?.user_no},boardNo=${main.mainboardNo})}">
+							<a class="btn" href="#">
 								<img src="/img/mainboardPrefer.png" style="width: 13px; height: 13px;">
 								<span style="font-size: 13px; font-weight: bold;">좋아요</span>	<!-- 좋아요 버튼 -->
 							</a>

@@ -78,6 +78,19 @@
 		(#{userNo},#{keywordNo},#{mainboardTitle},#{mainboardContents},#{mainboardView},#{mainboardImg},#{mainboardLink})
 	</insert>
 	
+	<!-- 임시게시판 insert -->
+	<insert id="tempInsert" parameterType="MainBoardDto">
+		INSERT INTO tempboard
+		(user_no,title,keyword_no,contents,img,link)
+		VALUES
+		(#{userNo},#{mainboardTitle},#{keywordNo},#{mainboardContents},#{mainboardImg},#{mainboardLink})
+	</insert>
+	<!-- 임시게시판 detail -->
+	<select id="tempDetail" resultMap="MainBoardMap">
+		select *
+		from mainboard WHERE user_no=#{userNo}
+ 	</select>
+	
 	<update id="viewUpdate" parameterType="int">
 		UPDATE mainboard SET
 		mainboard_view=mainboard_view+1
@@ -143,6 +156,8 @@
 		FROM mainboard
 		WHERE keyword_no IN(SELECT keyword_no FROM keyword WHERE keyword_name LIKE CONCAT('%',#{keywordName},'%'))
 	</select>
+	
+	
 </mapper>
 
 

@@ -29,13 +29,14 @@ public class MainBoardDto {
 	private String mainboardTitle;
 	private String mainboardContents;
 	private int mainboardView;
+	private int prefer;
 	private String mainboardImg;
 	private String mainboardLink;
 	private Date mainboardTime;
+	
 
 	private String userName;
 	private String userCompany;
-	private int prefer;
 	private String keywordName;
 
 	private List<MainReplyDto> replyList;

@@ -5,7 +5,7 @@
 <title>임시</title>
 </head>
 <body>
-	<header th:include="/headerNav"></header>
+	<header th:include="headerNav"></header>
 	<main class="container mt-5">
 		<h1>나의 임시보관함</h1>
 		<table class="mt-3 table table-striped">
@@ -19,7 +19,7 @@
 					<td>
 						<a 
 						th:text="${temp.tempNo}"
-						th:href="@{/tempboard/detail.do(tempNo=${temp.tempNo})}"></a>
+						th:href="@{/tempboard/detail.do(userNo=${session.loginUser.user_no})}"></a>
 					</td>
 					<td th:text="${temp.title}"></td>
 					<td th:text="${temp.contents}"></td>

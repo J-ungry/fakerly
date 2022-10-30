@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header th:include="/headerNav"></header>
+	<header th:include="headerNav"></header>
 	<main>
 		<div class="post-container w-50 p-3 h-25" style="margin-top: 50px;">	<!-- <div class="post-container">에는 게시판만 넣을 것 -->
 				<div class="boardInfo">	<!-- 작성자 프로필 사진, 이름, 소속, 글 등록 시간, 팔로우버튼 -->
@@ -22,6 +22,7 @@
 						<div><span style="font-size: 14px" class="align-middle"><strong>작성자명</strong></span></div>
 						<div style="font-size: 9px; margin-top: 0; color: #d7d3cd">
 							<span th:text="${tempboard.userCompany}">작성자 소속</span>
+
 							<span>·</span>
 							<span th:text="${#dates.format(tempboard.time,'yyyy-MM-dd HH:mm')}"></span>
 						</div>

@@ -4,32 +4,36 @@
 <head>
 <meta charset="UTF-8">
 <title>유저 프로필 페이지</title>
+<link rel="stylesheet" href="/css/mainboard/profile.css">
 </head>
 <body>
 <header th:include="headerNav"></header>
 <div th:include="/sideboard/test"></div>
-<h1>유저 정보 페이지</h1>
-<p th:text=${user}>
-<p th:text=${profileList}>
 
-<div>
-	<img alt="" src=""> <!-- 요기에 유저 이미지 넣기 (일단 없으니까 대충넣기) -->
-	<div>
-		<p th:text="${user.user_name}">
-		<p th:text="${user.nickname}">
+<div class="containers">
+
+<div class="user-info">
+	<div class="user-img-div">
+		<img class="user-img" src="../img/userprofile.jpg"> <!-- 요기에 유저 이미지 넣기 (일단 없으니까 대충넣기) -->
 	</div>
-	<div>
+	<div class="user-names">
+		<p th:text="${user.user_name}"></p>(
+		<p th:text="${user.nickname}"></p>)
+	</div>
+	<div class="user-company">
 		<i class="bi bi-mortarboard"></i>
-		<p th:text="${user.company}">
+		<p th:text="${user.company}" class="user-company-p"></p>   
 	</div>
 </div>
-<div>
-	<div> <!-- 게시글 작성 part -->
-		<img alt="" src="">
+<div class="board-info">
+	<div class="input-board">
+		<div class> <!-- 게시글 작성 part -->
+			<img alt="" src="../img/userprofile.jpg">
+		</div>
 	</div>
 	<div th:each="profile:${profileList}"> <!-- 게시글 출력 part -->
 		<div>
-			<img alt="" src="">
+			<img alt="" src="../img/userprofile.jpg">
 	 		<p th:text="${user.user_name}"></p>
 			<p th:text="${user.nickname}"></p>
 			<p th:text="${user.company}"></p>
@@ -57,6 +61,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 </body>
 </html>

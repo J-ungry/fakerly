@@ -46,7 +46,6 @@ public class MainBoardController {
 		List<MainBoardDto> mainList=null;
 		try {
 			mainList=boardMapper.list();
-			System.out.println(mainList.get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

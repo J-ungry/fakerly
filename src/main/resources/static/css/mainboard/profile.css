@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.containers{
+	padding-top: 20px;
+
+
+}
+.user-info{
+	width: 100%;
+	padding-left:20%;
+}
+
+.user-img-div{
+	width:25%;
+}
+.user-img{
+	width:50%;
+	border-radius:70%;
+	border: 1px solid #eee;
+	margin:20px;
+}
+.user-names{
+	display:flex;	
+	font-size: 30px;
+	font-weight: 600;
+	margin-left:20px;
+
+}
+.user-company{
+	display:flex;
+	color:#888;
+}
+.user-company i{
+	margin-left:20px;
+	margin-right:10px;
+}
+.user-company-p{
+	font-weight: 600;
+}
+.board-info{
+	background-color: #F7F7F7;
+}
+.input-board{
+	width:80%;
+	border:1px solid #333;
+	margin: auto;
+}

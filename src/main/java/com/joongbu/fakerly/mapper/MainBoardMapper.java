@@ -25,4 +25,7 @@ public interface MainBoardMapper {
 	List<MainBoardDto> searchName(String userName);
 	List<MainBoardDto> searchKeyword(String keywordName);
 
+	
+	int tempInsert(MainBoardDto mainboard);
+	List<MainBoardDto> tempDetail(int userNo);
 }
