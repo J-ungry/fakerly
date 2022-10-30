@@ -113,8 +113,8 @@ public class UserController {
 							System.out.println(session.getAttribute("loginUser"));
 							msg = "로그인 성공!";
 							session.setAttribute("msg", msg);
-							//return "redirect:/mainboard/main"; // 메인 페이지로 이동
-							return "redirect:/user/modifyPassword.do"; // TESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTEST
+							return "redirect:/mainboard/main"; // 메인 페이지로 이동
+							// return "redirect:/user/modifyPassword.do";
 						}
 					}
 				} else {
