@@ -11,5 +11,5 @@ public interface TempBoardMapper {
 	TempBoardDto detail(int tempNo);
 	int insert(TempBoardDto tempboard);
 	int update(TempBoardDto tempboard);
-	int delete(TempBoardDto tempboard);
+	int delete(TempBoardDto tempNo);
 }

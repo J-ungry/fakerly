@@ -11,7 +11,7 @@
 		<table class="mt-3 table table-striped">
 			<thead class="table-dark"> 
 				<tr>
-					<th>번호</th><th>제목</th><th>내용</th><th>일자</th>
+					<th>번호</th><th>제목</th><th>내용</th><th>일자</th><th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,6 +24,9 @@
 					<td th:text="${temp.title}"></td>
 					<td th:text="${temp.contents}"></td>
 					<td th:text="${temp.time}"></td>
+					<td>
+						<a class="btn btn-outline-primary" th:href="@{/tempboard/update.do(tempNo=${temp.tempNo})}">수정</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

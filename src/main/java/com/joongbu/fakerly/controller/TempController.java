@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -106,12 +107,62 @@ public class TempController {
 		if(insert>0) {
 			msg="임시보관성공";
 			session.setAttribute("msg", msg);
-			System.out.println("성공");
-			return "redirect:/tempboard/list.do?tempNo="+tempboard.getUserNo();
+			System.out.println("임시저장성공");
+			return "redirect:/mainboard/main";
 		}else {
 			msg="임시보관실패";
 			session.setAttribute("msg", msg);
 			return "/mainboard/main";
+		}
+	}
+	@GetMapping("/update.do")
+		public String update(
+				@RequestParam(required = true) int tempNo,
+				Model model,
+				@SessionAttribute(required = true)UserDto loginUser,
+				HttpSession session
+				) {
+		TempBoardDto tempboard=null;
+		String msg="";
+		try {
+			tempboard=tempMapper.detail(tempNo);
+			System.out.println(tempboard);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(tempboard!=null && tempboard.getUserNo()==loginUser.getUser_no()) {
+			model.addAttribute("tempboard", tempboard);
+			return "/tempboard/update";
+		}else if(tempboard.getUserNo()!=loginUser.getUser_no()) {
+			msg="글쓴이만 수정 가능";
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/main";
+		}else {
+			System.out.println("ERROR");
+			return "mainboard/main";
+		}
+	}
+	@PostMapping("/update.do")
+	public String update(
+			TempBoardDto tempboard,
+			@SessionAttribute(required=false) UserDto loginUser,
+			HttpSession session
+			) {
+		int update=0;
+		String msg="";
+		try {
+			update=tempMapper.update(tempboard);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(update>0) {
+			msg="업로드 성공";
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/main";
+		} else {
+			msg="업로드 실패";
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/update?mainboardNo="+tempboard.getTempNo();
 		}
 	}
 }

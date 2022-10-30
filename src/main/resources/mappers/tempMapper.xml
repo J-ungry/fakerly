@@ -29,7 +29,7 @@
 		FROM tempboard t INNER JOIN user u 
 		ON t.user_no=u.user_no ORDER BY t.tempboard_no DESC  -->
   </select>
-  <insert id="insert" parameterType="TempBoardDto" useGeneratedKeys="true" keyProperty="tempboardNo">
+  <insert id="insert" parameterType="TempBoardDto" useGeneratedKeys="true" keyProperty="tempNo">
 		<!-- user_no와 keyword_no 작성자의 아이디와 키워드를 가져올 예정 -->
 		INSERT INTO tempboard 
  		(temp_no, user_no, title, keyword_no, contents, link) 

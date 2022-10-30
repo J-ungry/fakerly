@@ -238,8 +238,6 @@ public class MainBoardController {
 		System.out.println(searching);
 		return "/mainboard/main";
 	}
-	
-	
 }
 
 

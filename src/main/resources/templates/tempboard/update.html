@@ -1,22 +1,23 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Fakerly 메인 게시판 글 등록</title>
+<title>Fakerly 메인 게시판 글 수정</title>
 <link rel="stylesheet" href="/css/mainboard/insert.css">
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/mainboard/insert.js"></script>
 </head>
 <body>
-	<form id="MainBoardInsert_Form" action="/mainboard/insert" method="post" enctype="multipart/form-data">
+	<!-- 메인 게시글 수정 폼 -->
+	<!-- id가 insertform으로 되어있는데 바꾸면 css 아예 다 나가서 그냥 그대로 쓰겠습니다. -->
+	<form id="MainBoardInsert_Form" action="/tempboard/update" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="userNo" th:value="${session.loginUser.user_no}">
+		<input type="hidden" name="tempNo" th:value="${tempboard.tempNo}">
 		<div id="MainBoardNav">
 			<img onclick="goBack()" alt="preferPageImg" src="/img/mainboard_arrow.png">
 			<div>
-				<!-- 임시보관함 모달창 참고: https://goddino.tistory.com/74 -->
-				<button type="button" th:onClick="location.href='/tempboard/templist.do'">임시보관함</button>
-				<button class="button" onClick="return submit2(this.form)">보관</button>
+				<a class="btn" href="/mainboard/main">취소</a>
 				<button class="button">완료</button>
 			</div>
 		</div>
@@ -38,17 +39,16 @@
 		</div>
 		<div id="Mainboard">
 			<div id="MainboardTitle">
-				<input type="text" name="mainboardTitle" placeholder="제목을 입력하세요." maxlength="100">
+				<input type="text" name="Title" th:value=${tempboard.title} maxlength="100">
 			</div>
 			<div id="MainboardContents">
-				<div class="form-floating mb-2 mt-3" id="linkInputContainer" style="display: none;">
-					<input name="mainboardLink" type="text" class="form-control" id="floatingInput" placeholder="https://">
-					<label for="floatingInput">링크 입력</label>
+				<div class="mb-2 mt-3" id="linkInputContainer" style="display: none;">
+					<input name="link" class="form-control" type="text" th:value="${tempboard.link}" aria-label="default input example">
 				</div>
 				<div class="mb-3" id="fileInputContainer" style="display: none;">
 					<input class="form-control text text-muted" type="file" id="mainboardImg" name="img">
 				</div>
-				<textarea name="mainboardContents" placeholder="나누고 싶은 생각을 적어주세요.&#13;&#10;링크나 사진을 추가할 수도 있어요." maxlength="254"></textarea>
+				<textarea name="contents" maxlength="254" th:text="${tempboard.contents}"></textarea>
 			</div>
 		</div>
 	</form>
