@@ -30,7 +30,36 @@
 }
 
 .reply .reply-contents{
-	margin-left: 78px;
+	display:flex;
+	margin-left: 2%;
+}
+
+
+
+.reply .reply-contents .reply-writer{
+	width:7%;
+}
+.reply .reply-contents .reply-writer .reply-writer-info{
+	padding:0 5px;
+	width:100%;
+	height:100%;
+	border:none;
+	text-align: center;
+	border-radius: 3px;
+	background-color: #E1BEE7;
+	color: #F3E5F5;
+}
+
+.reply .reply-contents .reply-writer .reply-writer-null{
+	padding:0 5px;
+	width:100%;
+	height:100%;
+	border:none;
+	text-align: center;
+	border-radius: 3px;
+	background-color: #FFF;
+	color: #FFF;
+	user-select: none;
 }
 
 .reply .reply-update button{
@@ -92,7 +121,36 @@
 }
 
 .rereply .rereply-contents{
-	margin-left: 19%;
+	display:flex;
+	margin-left: 12%;
+}
+.rereply .rereply-contents p{
+	margin-left: 2%;
+}
+
+
+
+.rereply .rereply-contents .rereply-writer .rereply-writer-info{
+	padding: 0 5px;
+	width:100%;
+	height:100%;
+	border:none;
+	text-align: center;
+	border-radius: 3px;
+	background-color: #E1BEE7;
+	color: #F3E5F5;
+}
+
+.rereply .rereply-contents .rereply-writer .rereply-writer-null{
+	padding: 0 5px;
+	width:100%;
+	height:100%;
+	border:none;
+	text-align: center;
+	border-radius: 3px;
+	background-color: #FFF;
+	color: #FFF;
+	user-select: none;
 }
 
 .rereply .rereply-update button{
@@ -104,7 +162,7 @@
 }
 
 .rereply .rereply-update-contents{
-	margin-left: 19%;
+	margin-left: 18%;
 }
 
 .rereply .rereply-updateform-btn{
@@ -167,7 +225,7 @@
 }
 
 .insert-reply{
-	margin-left: 13%;
+	margin-left: 5%;
 }
 
 
