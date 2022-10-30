@@ -9,10 +9,30 @@
 		<id column="keyword_no" property="keywordNo"/>
 		<result column="keyword_name" property="keywordName"/>
 	</resultMap>
+	
+	<resultMap type="com.joongbu.fakerly.dto.SkillDto" id="SkillMap">
+		<id column="skill_no" property="skillNo"/>
+		<result column="skill_name" property="skillName"/>
+	</resultMap>
+	
+	<resultMap type="com.joongbu.fakerly.dto.LicenseDto" id="LicenseMap">
+		<id column="license_no" property="licenseNo"/>
+		<result column="license_name" property="licenseName"/>
+	</resultMap>
 
 	<select id="keywordList" resultMap="KeywordMap">
 		select * from keyword 
 		where keyword_no not in (select keyword_no from user_keyword where user_no=#{userNo})
+	</select>
+	
+	<select id="skillList" resultMap="SkillMap">
+		select * from skill 
+		where skill_no not in (select skill_no from user_skill where user_no=#{userNo})
+	</select>
+	
+	<select id="licenseList" resultMap="LicenseMap">
+		select * from license 
+		where license_no not in (select license_no from user_license where user_no=#{userNo})
 	</select>
 	
 	<insert id="insertUserKeyword">
@@ -22,13 +42,47 @@
 		(#{userNo},#{keywordNo})
 	</insert>
 	
+	<insert id="insertUserSkill">
+		insert into user_skill 
+		(user_no, skill_no)
+		values 
+		(#{userNo},#{skillNo})
+	</insert>
+	
+	<insert id="insertUserLicense">
+		insert into user_license 
+		(user_no, license_no)
+		values 
+		(#{userNo},#{licenseNo})
+	</insert>
+	
 	<delete id="deleteUserKeyword">
 		delete from user_keyword 
 		where user_no=#{userNo} and keyword_no=#{keywordNo}
 	</delete>
 	
+	<delete id="deleteUserSkill">
+		delete from user_skill 
+		where user_no=#{userNo} and skill_no=#{skillNo}
+	</delete>
+	
+	<delete id="deleteUserLicense">
+		delete from user_license 
+		where user_no=#{userNo} and license_no=#{licenseNo}
+	</delete>
+	
 	<select id="userKeywordList" resultMap="KeywordMap">
 		select * from keyword 
 		where keyword_no in (select keyword_no from user_keyword where user_no=#{userNo})
+	</select>
+	
+	<select id="userSkillList" resultMap="SkillMap">
+		select * from skill 
+		where skill_no in (select skill_no from user_skill where user_no=#{userNo})
+	</select>
+	
+	<select id="userLicenseList" resultMap="LicenseMap">
+		select * from license 
+		where license_no in (select license_no from user_license where user_no=#{userNo})
 	</select>
 </mapper>

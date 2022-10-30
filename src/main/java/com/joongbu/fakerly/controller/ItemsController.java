@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.joongbu.fakerly.dto.KeywordDto;
+import com.joongbu.fakerly.dto.LicenseDto;
+import com.joongbu.fakerly.dto.SkillDto;
 import com.joongbu.fakerly.mapper.ItemsMapper;
 
 import lombok.Data;
@@ -36,6 +38,34 @@ public class ItemsController {
 		return keywordList;
 	}
 	
+	@GetMapping("/skillList.do")
+	public @ResponseBody List<SkillDto> skillList(int userNo){
+		
+		List<SkillDto> skillList = null;
+		
+		try {
+			skillList = itemsMapper.skillList(userNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return skillList;
+	}
+	
+	@GetMapping("/licenseList.do")
+	public @ResponseBody List<LicenseDto> licenseList(int userNo){
+		
+		List<LicenseDto> licenseList = null;
+		
+		try {
+			licenseList = itemsMapper.licenseList(userNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return licenseList;
+	}
+	
 	@Data
 	class CheckStatus{
 		private int status;
@@ -49,6 +79,40 @@ public class ItemsController {
 		
 		try {
 			insert = itemsMapper.insertUserKeyword(userNo, keywordNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		checkStatus.setStatus(insert);
+		
+		return checkStatus;
+	}
+	
+	@GetMapping("/insertUserSkill.do")
+	public @ResponseBody CheckStatus insertUserSkill(int userNo, int skillNo) {
+		
+		CheckStatus checkStatus = new CheckStatus();
+		int insert = 0;
+		
+		try {
+			insert = itemsMapper.insertUserSkill(userNo, skillNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		checkStatus.setStatus(insert);
+		
+		return checkStatus;
+	}
+	
+	@GetMapping("/insertUserLicense.do")
+	public @ResponseBody CheckStatus insertUserLicense(int userNo, int licenseNo) {
+		
+		CheckStatus checkStatus = new CheckStatus();
+		int insert = 0;
+		
+		try {
+			insert = itemsMapper.insertUserLicense(userNo, licenseNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,6 +139,40 @@ public class ItemsController {
 		return checkStatus;
 	}
 	
+	@GetMapping("/deleteUserSkill.do")
+	public @ResponseBody CheckStatus deleteUserSkill(int userNo, int skillNo) {
+		
+		CheckStatus checkStatus = new CheckStatus();
+		int delete = 0;
+		
+		try {
+			delete = itemsMapper.deleteUserSkill(userNo, skillNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		checkStatus.setStatus(delete);
+		
+		return checkStatus;
+	}
+	
+	@GetMapping("/deleteUserLicense.do")
+	public @ResponseBody CheckStatus deleteUserLicense(int userNo, int licenseNo) {
+		
+		CheckStatus checkStatus = new CheckStatus();
+		int delete = 0;
+		
+		try {
+			delete = itemsMapper.deleteUserLicense(userNo, licenseNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		checkStatus.setStatus(delete);
+		
+		return checkStatus;
+	}
+	
 	@GetMapping("/listUserKeyword.do")
 	public void listUserKeyword(int userNo, Model model) {
 		
@@ -87,6 +185,36 @@ public class ItemsController {
 		}
 		
 		model.addAttribute("userKeywordList",userKeywordList);
+		model.addAttribute("userNo",userNo);
+	}
+	
+	@GetMapping("/listUserSkill.do")
+	public void listUserSkill(int userNo, Model model) {
+		
+		List<SkillDto> userSkillList = null;
+		
+		try {
+			userSkillList = itemsMapper.userSkillList(userNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("userSkillList",userSkillList);
+		model.addAttribute("userNo",userNo);
+	}
+	
+	@GetMapping("/listUserLicense.do")
+	public void listUserLicense(int userNo, Model model) {
+		
+		List<LicenseDto> userLicenseList = null;
+		
+		try {
+			userLicenseList = itemsMapper.userLicenseList(userNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("userLicenseList",userLicenseList);
 		model.addAttribute("userNo",userNo);
 	}
 }

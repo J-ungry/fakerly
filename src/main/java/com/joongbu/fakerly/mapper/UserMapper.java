@@ -23,6 +23,12 @@ public interface UserMapper {
 	UserDto checkNickname(String nickname);
 
 	int updateUserKeyword();
-	
+
 	UserDto profileUser(int user_no);
+
+
+	int updateUserSkill();
+
+	int updateUserLicense();
+
 }
