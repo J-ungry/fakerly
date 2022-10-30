@@ -21,6 +21,11 @@
 		SET pw = #{tempPassword} 
 		WHERE email = #{userEmail}
 	</update>
+	<update id="modifyPassword">
+		UPDATE user 
+		SET pw = #{newPassword} 
+		WHERE email = #{userEmail}
+	</update>
   	<insert id="insert" parameterType="com.joongbu.fakerly.dto.UserDto">
   		insert into user
   		(email, user_name, nickname, pw, auth, birth, phone, state, company, career, aboutme, sex, age, img) 

@@ -1,4 +1,4 @@
-package com.joongbu.fakerly.controller;
+package com.joongbu.fakerly.service;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import org.thymeleaf.context.Context;
-import org.thymeleaf.spring5.SpringTemplateEngine;
 
 @Service
 public class EmailSenderService {

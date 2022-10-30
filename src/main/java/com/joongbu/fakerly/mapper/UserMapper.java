@@ -20,15 +20,14 @@ public interface UserMapper {
 
 	int updateUserKeyword();
 
-
-
 	UserDto profileUser(int user_no);
-
 
 	int updateUserSkill();
 
 	int updateUserLicense();
 
 	int giveTempPassword(String userEmail, String tempPassword);
+
+	int modifyPassword(String userEmail, String newPassword);
 
 }

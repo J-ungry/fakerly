@@ -2,12 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
-  <title>Document</title>
   <link rel="stylesheet" href="/css/login.css" />
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
   <meta charset="UTF-8">
   <script defer="defer" src="/js/login.js"></script>
-  <title>Insert title here</title>
+  <title>로그인</title>
 </head>
 <body>
 <!--   <header th:include="headerNav"></header> -->
@@ -17,9 +16,9 @@
       <form action="/user/login.do" method="POST">
 		 <div>
           <label for="email">이메일</label>
-          <input type="email" id="email" name="email"
-          class="" placeholder="이메일 입력"/>
-          <p></p>
+          <input type="email" id="emailLoginInput" name="email" pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*"
+          class="" placeholder="이메일 입력" required/>
+          <p id="emailChkLogin"></p>
 
         </div>
         <div>
@@ -39,5 +38,12 @@
       </div>
     </div>
   </div>
+    	<th:block th:if="${session.msg!=null}">
+		<script th:inline="javascript">
+		let msg = /*[[${session.msg}]]*/ + "";
+		alert(msg);
+		/*[[${#session.removeAttribute('msg')}]] */
+		</script>
+	</th:block>
 </body>
 </html>

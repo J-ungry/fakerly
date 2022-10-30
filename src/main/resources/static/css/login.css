@@ -207,7 +207,9 @@ input:focus {
 	text-decoration: underline;
 }
 
-#phoneNbChkE, #phoneNbChkP, #emailChkLogin, #emailChkfindE {
+#phoneNbChkE, #phoneNbChkP, #emailChkLogin, #emailChkfindE,
+	#originPasswordValidChk, #newPasswordValidChk, #chkNewPasswordValidChk,
+	#emailChkLogin {
 	text-align: center;
 	color: red;
 	margin-bottom: 8px;
