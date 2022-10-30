@@ -4,7 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/mainboard/mainboardSearch.js"></script>
 <!-- <script defer="defer" src="/js/mainboard/main.js"></script> -->
 <head>
 <meta charset="UTF-8">
@@ -107,7 +106,7 @@
 				<div class="boardBtn d-flex justify-content-between">
 					<div class="d-flex">
 						<div class="boardPrefer">
-							<a class="btn" th:href="@{/mainboard/putLike(userNo=${session.loginUser?.user_no},boardNo=${main.mainboardNo})}">
+							<a class="btn" href="#">
 								<img src="/img/mainboardPrefer.png" style="width: 13px; height: 13px;">
 								<span style="font-size: 13px; font-weight: bold;">좋아요</span>	<!-- 좋아요 버튼 -->
 							</a>
