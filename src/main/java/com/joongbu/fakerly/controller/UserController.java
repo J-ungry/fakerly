@@ -123,7 +123,7 @@ public class UserController {
 				}
 			}
 	
-	// 비밀번호 수정
+	// 비밀번호 수정 페이지
 	@GetMapping("/modifyPassword.do")
 	public String modifyPassword(HttpServletRequest req) {
 		System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
@@ -143,7 +143,6 @@ public class UserController {
 			return "redirect:/user/login.do";
 		}
 		return "/user/modifyPassword";
-		// 세션 체크할 일이 있나?
 	}
 	
 	// 비밀번호 수정 시도
@@ -159,10 +158,16 @@ public class UserController {
 				String msg = "";
 				if (originPw.equals(user.getPw())) {
 					if(newPw == chkNewPw) {
-						userMapper.modifyPassword(user.getEmail(), newPw);
-						msg = "비밀번호 변경 성공!";
-						session.setAttribute("msg", msg);
-						return "redirect:/user/login.do";						
+						if(originPw == newPw) {
+							userMapper.modifyPassword(user.getEmail(), newPw);
+							msg = "비밀번호 변경 성공!";
+							session.setAttribute("msg", msg);
+							return "redirect:/user/login.do";													
+						} else {
+							msg = "기존 비밀번호와 새 비밀번호는 일치할 수 없습니다.";
+							session.setAttribute("msg", msg);
+							return "redirect:/user/modifyPassword.do";
+						}
 					} else {
 						msg = "새 비밀번호가 일치하지 않습니다.";
 						session.setAttribute("msg", msg);
