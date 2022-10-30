@@ -32,22 +32,22 @@
 							<!-- 이미지 있으면 이미지 불러올 예정 -->
 							<span th:text="|${session.loginUser.user_name}님|"></span>
 						</button>
+						<ul class="dropdown-menu">
+	
+					    	<li><a class="dropdown-item" th:href="@{/mainboard/profile.do(user_no=${session.loginUser.user_no})}">프로필</a></li>
+	<!-- 
+					    	<li><a class="dropdown-item" href="/profile/profile">프로필</a></li>
+	 -->
+					    	<li><a class="dropdown-item" href="/user/logout.do">로그아웃</a></li>
+					    	<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="#">문의하기</a></li>
+					  	</ul>
 					</th:block>
 					<th:block th:unless="${session.loginUser!=null}">
 						<a href="/user/login.do" type="button" class="btn btn-light" >
 							로그인
 						</a>
 					</th:block>
-					<ul class="dropdown-menu">
-
-				    	<li><a class="dropdown-item" th:href="@{/mainboard/profile.do(user_no=${session.loginUser.user_no})}">프로필</a></li>
-<!-- 
-				    	<li><a class="dropdown-item" href="/profile/profile">프로필</a></li>
- -->
-				    	<li><a class="dropdown-item" href="/user/logout.do">로그아웃</a></li>
-				    	<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">문의하기</a></li>
-				  	</ul>
 				</div>
 	    	</div>
 	  	</div>
