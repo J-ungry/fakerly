@@ -17,6 +17,7 @@ import lombok.Data;
 //6 rows in set (0.01 sec)
 
 @Data
+
 public class ReQnaDto {
 	private int rqaNo;
 	private String contents;
@@ -24,4 +25,5 @@ public class ReQnaDto {
 	private String code;
 	private int qaNo;//qnadto의 qa_no 참조
 	private int user_no; //userdto의 user_no참조
+
 }

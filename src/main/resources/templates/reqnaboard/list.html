@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>			
+			<p>아마 댓글</p>
+						
+			<div th:each="qnareply:${qnaboard.qareplyList}">
+			<div th:text="${qnareply.qa_reply_no}"></div>
+			<div th:text="${qnareply.contents}"></div>
+			<div th:text="${qnareply.q_datetime}"></div>
+			<div th:text="${qnareply.code}"></div>
+			<div th:text="${qnareply.user_no}"></div>
+			<div th:text="${qnareply.qa_no}"></div>
+		</div>
+		
+		<form>
+			<p>답글 제목
+			<input name ="title" placeholder="답글 제목">
+			</p>
+			<p>답글 내용
+			<input name ="contents" placeholder="답글 내용">
+			</p>
+			<div class="input-group">
+			<button class="btn btn-outline-primary">등록</button>
+			</div>
+		</form>
+		
+		
+</body>
+</html>

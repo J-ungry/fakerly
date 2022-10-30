@@ -39,4 +39,9 @@ public class QnaDto {
 	private List<QnaImgDto> qaImgList;
 
 	private List<ReQnaDto> replyList;
+
+	
+	private String userName;
+	private String userCompany;
+	
 }

@@ -46,12 +46,11 @@ public class MainReplyController {
 		try {
 			insert=replyMapper.insert(reply);
 			System.out.println(reply);
+			System.out.println(insert);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(insert>0) {
-			msg="댓글등록성공";
-			session.setAttribute("msg", msg);
 			return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
 		}else {
 			msg="댓글등록실패";
@@ -77,8 +76,6 @@ public class MainReplyController {
 			e.printStackTrace();
 		}
 		if(update>0) {
-			msg="댓글수정 성공";
-			session.setAttribute("msg",msg);
 			model.addAttribute("reply",reply);
 			return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
 		}else {
@@ -108,9 +105,6 @@ public class MainReplyController {
 			e.printStackTrace();
 		}
 		if(delete>0) {
-			msg="댓글삭제성공";
-			session.setAttribute("msg", msg);
-			System.out.println("reply.get 메인보드:"+reply.getMainboard_no());
 			return "redirect:/mainboard/detail?mainboardNo="+reply.getMainboard_no();
 		}else {
 			msg="댓글삭제실패";

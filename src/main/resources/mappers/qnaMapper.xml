@@ -30,19 +30,16 @@
   		</association> -->
 		<!-- 		<result column="user_no" property="user_no"/>	
 		<result column="nickname" property="nickname"/>  -->
-				<collection property="replyList" ofType="MainReplyDto">
-			<id column="main_reply_no" property="main_reply_no"/>
-			<result column="r_contents" property="contents"/>
-			<result column="r_hierarchy" property="hierarchy"/>
-			<result column="r_group_no" property="group_no"/>
-			<result column="r_reply_time" property="reply_time"/>
-			<result column="r_user_no" property="user_no"/>
-			<result column="r_mainboard_no" property="mainboard_no"/>
+<!-- 
+		<collection property="qareplyList" ofType="reQnaDto">
+			<id column="qa_reply_no" property="qa_reply_no"/>
+			<result column="qr_contents" property="contents"/>
+			<result column="qr_datetime" property="q_datetime"/>
+			<result column="qr_code" property="code"/>
+			<result column="qr_user_no" property="user_no"/>
+			<result column="qr_no" property="qa_no"/>
 		</collection>
-		
-
-
-
+ -->
 
 	</resultMap>
 	<select id="qalist" resultMap="QnaMap">
@@ -57,12 +54,21 @@
 
 	
 	<select id="qadetail" resultMap="QnaMap">
-		select * ,
-		(SELECT COUNT(*) FROM qna_like l where l.qa_no=q.qa_no) likes
+		select q.* ,
+		(SELECT COUNT(*) FROM qna_like l where l.qa_no=q.qa_no) likes,
+		qr.qa_reply_no,
+		qr.contents qr_contents,
+		qr.q_datetime qr_datetime,
+		qr.code qr_code,
+		qr.user_no qr_user_no,
+		qr.qa_no qr_no
 		FROM qna q
-		LEFT JOIN user using(user_no)
+		LEFT JOIN user u using(user_no) 
+		LEFT JOIN qna_reply qr using(qa_no)
 		WHERE qa_no=#{qaNo}
 	</select>
+	
+	
 
 	
 	<!--  useGeneratedKeys="true" keyProperty="qaNo" : 파라미터로 넘어온 QnaDto에 qaNo가 넘어온다. -->
