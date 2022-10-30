@@ -152,6 +152,7 @@ main .reply-container .reply-insert .reply-insert-contents textarea{
 	width:98%;
 	height:100%;
 	margin-top: 10px;
+	resize: none;
 }
 
 
