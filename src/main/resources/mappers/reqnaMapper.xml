@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.joongbu.fakerly.mapper.ReQnaMapper">
+	<resultMap type="ReQnaDto" id="ReQnaMap">
+  		<id column="qa_reply_no" property="qa_reply_no"/>
+		<result column="title" property="title"/>	
+		<result column="contents" property="contents"/>	
+		<result column="code" property="code"/>	
+		<result column="q_datetime" property="q_datetime"/>		
+		<result column="qa_no" property="qa_no"/>		
+		<result column="user_no" property="user_no"/>		
+  </resultMap>
+  
+  
+  	<insert id="insert" parameterType="ReQnaDto">
+		INSERT INTO qna_reply
+		(title,contents,code,qa_no,user_no)
+		VALUES
+		(#{title},#{contents},#{code},#{qa_no},#{user_no})
+	</insert>
+  	<update id="update" parameterType="ReQnaDto">
+		UPDATE qna_reply SET
+		contents=#{contents}
+		WHERE qa_reply_no=#{qa_reply_no}
+	</update>
+	<delete id="delete">
+		DELETE FROM qa_reply_no WHERE qa_reply_no=#{qa_reply_no}
+	</delete>
+  
+  </mapper>
