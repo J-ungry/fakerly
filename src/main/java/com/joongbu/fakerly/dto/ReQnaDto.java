@@ -17,11 +17,11 @@ import lombok.Data;
 //6 rows in set (0.01 sec)
 
 @Data
-public class QnaReply {
-	private int rqa_no;
+public class ReQnaDto {
+	private int rqaNo;
 	private String contents;
-	private Date qaTime;
+	private Date rqaTime;
 	private String code;
-	private int qa_no;//qnadto의 qa_no 참조
-	private int user_no;
+	private int qaNo;//qnadto의 qa_no 참조
+	private int user_no; //userdto의 user_no참조
 }

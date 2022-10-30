@@ -30,6 +30,18 @@
   		</association> -->
 		<!-- 		<result column="user_no" property="user_no"/>	
 		<result column="nickname" property="nickname"/>  -->
+				<collection property="replyList" ofType="MainReplyDto">
+			<id column="main_reply_no" property="main_reply_no"/>
+			<result column="r_contents" property="contents"/>
+			<result column="r_hierarchy" property="hierarchy"/>
+			<result column="r_group_no" property="group_no"/>
+			<result column="r_reply_time" property="reply_time"/>
+			<result column="r_user_no" property="user_no"/>
+			<result column="r_mainboard_no" property="mainboard_no"/>
+		</collection>
+		
+
+
 
 
 	</resultMap>
@@ -38,6 +50,7 @@
 		(SELECT COUNT(*) FROM qna_like l where l.qa_no=q.qa_no) likes
 		FROM qna q
 		LEFT JOIN user using(user_no)
+		order by qa_no desc
 
 		
 	</select>
