@@ -21,7 +21,7 @@
 					<div class="userInfo d-flex flex-column align-self-center">
 						<div><span style="font-size: 14px" class="align-middle"><strong>작성자명</strong></span></div>
 						<div style="font-size: 9px; margin-top: 0; color: #d7d3cd">
-							<span th:text="${tempboard.keywordNo}">작성자 소속</span>
+							<span th:text="${tempboard.userCompany}">작성자 소속</span>
 							<span>·</span>
 							<span th:text="${#dates.format(tempboard.time,'yyyy-MM-dd HH:mm')}"></span>
 						</div>

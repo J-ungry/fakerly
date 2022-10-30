@@ -8,7 +8,7 @@
 	<header th:include="/headerNav"></header>
 	<main class="container mx-auto mt-5"  style="max-width: 600px;">
 		<h1>Spring_board.user detail</h1>
-		<form action="/user/update.do" method="post" class="mt-5" >
+		<form action="/profile/profile" method="post" class="mt-5" >
 			<div class="mb-3 input-group">
 				<label class="input-group-text">프로필사진</label>
 				<input class="form-control" type="file" name="profileImg" th:value="${userDto.img}">

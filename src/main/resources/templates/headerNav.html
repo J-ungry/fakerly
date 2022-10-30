@@ -39,7 +39,11 @@
 						</a>
 					</th:block>
 					<ul class="dropdown-menu">
+
 				    	<li><a class="dropdown-item" th:href="@{/mainboard/profile.do(user_no=${session.loginUser.user_no})}">프로필</a></li>
+<!-- 
+				    	<li><a class="dropdown-item" href="/profile/profile">프로필</a></li>
+ -->
 				    	<li><a class="dropdown-item" href="/user/logout.do">로그아웃</a></li>
 				    	<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="#">문의하기</a></li>

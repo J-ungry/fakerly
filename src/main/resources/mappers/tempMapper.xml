@@ -12,6 +12,11 @@
   	<result column="img" property="img" />
   	<result column="link" property="link" />
   	<result column="time" property="time" />
+  	
+  	<result column="user_name" property="userName"/>
+	<result column="company" property="userCompany"/>
+	<result column="mainboard_title" property="mainboardTitle"/>
+  	
   </resultMap>
   <select id="templist" resultMap="TempBoardMap">
   
@@ -27,9 +32,9 @@
   <insert id="insert" parameterType="TempBoardDto" useGeneratedKeys="true" keyProperty="tempboardNo">
 		<!-- user_no와 keyword_no 작성자의 아이디와 키워드를 가져올 예정 -->
 		INSERT INTO tempboard 
- 		(temp_no, user_no, title, keyword_no, contents, img, link) 
+ 		(temp_no, user_no, title, keyword_no, contents, link) 
  		VALUES 
- 		(#{tempNo}, #{userNo}, #{title}, #{keywordNo}, #{contents}, #{img}, #{link})
+ 		(#{tempNo}, #{userNo}, #{title}, #{keywordNo}, #{contents}, #{link})
 	</insert>
 	
 	<select id="detail" resultMap="TempBoardMap">
@@ -38,6 +43,17 @@
 		LEFT JOIN user using(user_no) 
 		WHERE temp_no=#{tempNo}
 	</select>
+	<update id="update" parameterType="TempBoardDto">
+		UPDATE tempboard SET
+			title=#{title},
+			contents=#{contents}
+			WHERE temp_no=#{tempdNo}	
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM tempboard
+		WHERE temp_no=#{tempNo}
+	</delete>
   </mapper>
   
 <!--

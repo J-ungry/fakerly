@@ -21,3 +21,9 @@ function showImg() {
 	}
 	
 }
+
+function submit2(frm) { 
+    frm.action="/tempboard/insert.do"; 
+    frm.submit(); 
+    return true; 
+  } 
