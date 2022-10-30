@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.joongbu.fakerly.dto.UserDto;
 import com.joongbu.fakerly.mapper.UserMapper;
+import com.joongbu.fakerly.service.EmailSenderService;
 
 @RequestMapping("/user")
 @Controller
