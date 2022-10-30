@@ -1,6 +1,7 @@
 package com.joongbu.fakerly.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -9,7 +10,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
-import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -75,15 +75,6 @@ public class UserController {
 			@RequestParam(required = true) String email,
 			@RequestParam(required = true) String pw
 			) {
-				System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
-				Enumeration params = req.getParameterNames();
-				System.out.print("Parameter> ");
-				while (params.hasMoreElements()) {
-					String name = (String) params.nextElement();
-					System.out.print(name + " : " + req.getParameter(name) + "\t");
-				}
-				System.out.println();
-
 				UserDto loginUser = null;
 				String msg = "";
 
@@ -121,13 +112,60 @@ public class UserController {
 							System.out.println(session.getAttribute("loginUser"));
 							msg = "로그인 성공!";
 							session.setAttribute("msg", msg);
-							return "redirect:/mainboard/main"; // 메인 페이지로 이동
+							//return "redirect:/mainboard/main"; // 메인 페이지로 이동
+							return "redirect:/user/modifyPassword.do"; // TESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTESTEST
 						}
 					}
 				} else {
 					msg = "입력하신 이메일로 가입한 회원이 없습니다.";
 					session.setAttribute("msg", msg);
 					return "redirect:/user/login.do";
+				}
+			}
+	
+	// 비밀번호 수정
+	@GetMapping("/modifyPassword.do")
+	public String modifyPassword(HttpServletRequest req) {
+		System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
+		Enumeration params = req.getParameterNames();
+		System.out.print("Parameter> ");
+		while (params.hasMoreElements()) {
+			String name = (String) params.nextElement();
+			System.out.print(name + " : " + req.getParameter(name) + "\t");
+		}
+		System.out.println();
+
+		HttpSession session = req.getSession();
+		if (session.getAttribute("loginUser") == null) {
+			return "redirect:/user.login.do";
+		}
+		return "/user/modifyPassword";
+		// 세션 체크할 일이 있나?
+	}
+	
+	// 비밀번호 수정 시도
+	@PostMapping("/modifyPassword.do")
+	public String modifyPassword(			
+			HttpServletRequest req, 
+			@RequestParam(required = true) String originPw,
+			@RequestParam(required = true) String newPw
+			) {
+				HttpSession session = req.getSession();
+				UserDto user = (UserDto) session.getAttribute("loginUser");
+				String msg = "";
+				if (originPw == user.getPw()) {
+					try {
+						userMapper.modifyPassword(user.getEmail(), newPw);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					msg = "비밀번호 변경 성공!";
+					session.setAttribute("msg", msg);
+					return "redirect:/user/login.do";
+				} else {
+					msg = "기존 비밀번호가 틀립니다.";
+					session.setAttribute("msg", msg);
+					return "redirect:/user/modifyPassword.do";
 				}
 			}
 
@@ -313,33 +351,8 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	// 비밀번호 수정
-	@GetMapping("/modifyPassword.do")
-	public void modifyPassword(HttpServletRequest req) {
-		System.out.println("\n" + req.getMethod() + "\t" + req.getRequestURI());
-		Enumeration params = req.getParameterNames();
-		System.out.print("Parameter> ");
-		while (params.hasMoreElements()) {
-			String name = (String) params.nextElement();
-			System.out.print(name + " : " + req.getParameter(name) + "\t");
-		}
-		System.out.println();
-	}
-	
-	// 비밀번호 수정 시도
-	@PostMapping("/modifyPassword.do")
-	public String modifyPassword(			
-			HttpServletRequest req, 
-			HttpSession session, 
-			@RequestParam(required = true) String email,
-			@RequestParam(required = true) String pw
-			) {
-				// 기존 비밀번호
-				// 새 비밀번호
-				// 새 비밀번호 확인
-				return "";
-			}
 
+	
 	// JBcrypt 테스트
 	// http://localhost:8888/user/crypt?email=123@gmail.com
 	@GetMapping("/crypt")
