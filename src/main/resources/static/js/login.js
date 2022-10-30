@@ -1,7 +1,4 @@
-
-console.log("login.js");
-
-const emailLoginInput = document.querySelector(".emailLoginInput");
+const emailLoginInput = document.querySelector("#emailLoginInput");
 const emailChkLogin = document.querySelector("#emailChkLogin");
 
 const emailValue = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);

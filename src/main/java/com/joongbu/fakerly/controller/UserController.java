@@ -134,10 +134,13 @@ public class UserController {
 			System.out.print(name + " : " + req.getParameter(name) + "\t");
 		}
 		System.out.println();
-
+		
 		HttpSession session = req.getSession();
+		String msg = "";
 		if (session.getAttribute("loginUser") == null) {
-			return "redirect:/user.login.do";
+			msg = "로그인이 필요합니다.";
+			session.setAttribute("msg", msg);
+			return "redirect:/user/login.do";
 		}
 		return "/user/modifyPassword";
 		// 세션 체크할 일이 있나?
@@ -148,26 +151,30 @@ public class UserController {
 	public String modifyPassword(			
 			HttpServletRequest req, 
 			@RequestParam(required = true) String originPw,
-			@RequestParam(required = true) String newPw
+			@RequestParam(required = true) String newPw,
+			@RequestParam(required = true) String chkNewPw	
 			) {
 				HttpSession session = req.getSession();
 				UserDto user = (UserDto) session.getAttribute("loginUser");
 				String msg = "";
-				if (originPw == user.getPw()) {
-					try {
+				if (originPw.equals(user.getPw())) {
+					if(newPw == chkNewPw) {
 						userMapper.modifyPassword(user.getEmail(), newPw);
-					} catch (Exception e) {
-						e.printStackTrace();
+						msg = "비밀번호 변경 성공!";
+						session.setAttribute("msg", msg);
+						return "redirect:/user/login.do";						
+					} else {
+						msg = "새 비밀번호가 일치하지 않습니다.";
+						session.setAttribute("msg", msg);
+						return "redirect:/user/modifyPassword.do";
 					}
-					msg = "비밀번호 변경 성공!";
-					session.setAttribute("msg", msg);
-					return "redirect:/user/login.do";
 				} else {
 					msg = "기존 비밀번호가 틀립니다.";
 					session.setAttribute("msg", msg);
 					return "redirect:/user/modifyPassword.do";
 				}
 			}
+
 
 	// 이메일/비밀번호 찾기 페이지
 	@GetMapping("/findEmailPassword.do")

@@ -208,8 +208,8 @@ input:focus {
 }
 
 #phoneNbChkE, #phoneNbChkP, #emailChkLogin, #emailChkfindE,
-	#originPasswordValidChk, #newPasswordValidChk, #chkNewPasswordValidChk
-	{
+	#originPasswordValidChk, #newPasswordValidChk, #chkNewPasswordValidChk,
+	#emailChkLogin {
 	text-align: center;
 	color: red;
 	margin-bottom: 8px;
