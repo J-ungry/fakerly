@@ -8,7 +8,7 @@
 	<header th:include="headerNav"></header>
 	<main class="container mt-5">
 		<h1 class="mt-3">QNA 글 작성 페이지</h1>
-		<form action="/qnaboard/qainsert.do" method="post">
+		<form action="/qnaboard/qainsert.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
 		
 		<p>
@@ -25,7 +25,10 @@
 		<p>코드:
 		<input name="code" placeholder="코드 입력">
 		</p>	
-			
+		<p>
+		<label class="input-group-text">이미지 1</label>
+		<input clas="form-control" name="img" type=file>
+		</p>
 		<p>해결 미해결 선택:
 			<input type="radio" name="qa_resolve" value="0" >미해결
 			<input type="radio" name="qa_resolve" value="1" >해결
@@ -43,6 +46,8 @@
 			<button class="btn btn-outline-warning me-2" type="reset">초기화</button>
 			<button class="btn btn-outline-primary">등록</button>
 		</div>
+		
+
 		</form>
 	</main>
 </body>
