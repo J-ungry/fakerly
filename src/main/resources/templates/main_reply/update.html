@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<form id="update" action="/reply/update" method="post">
+		<input type="hidden" name="mainboard_no" th:value="${mainboard.mainboardNo}">
+		<input type="hidden" name="user_no" th:value="${session.loginUser.user_no}">
+		<h3>댓글 수정 (<span th:text="${session.loginUser.nickname}"></span>)</h3>
+		<input type="hidden" name="boardNo" th:value="${mainboard.mainboardNo}"> 
+		<p >
+			<textarea name="contents" id="replyContents" placeholder="내용"></textarea>
+			<label for="replyContents">내용</label>
+		</p>
+		<div>
+			<button>수정</button>
+		</div>
+	</form>
+
+</html>

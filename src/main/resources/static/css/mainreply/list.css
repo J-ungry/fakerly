@@ -1,0 +1,165 @@
+@import
+	url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+	
+#댓글 
+
+.replydiv{
+	border: 1px solid #dbdbdb;
+	margin: 0 auto;
+}
+
+.reply .replyProfile{
+	display:flex;
+	margin: auto;
+}
+
+
+.reply .replyProfile img{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin: 20px;
+}
+
+.reply .replyProfile .reply-info{
+	padding:8px;
+}
+
+.reply .replyProfile .reply-info p{
+	margin-bottom: auto;
+}
+
+.reply .reply-contents{
+	margin-left: 78px;
+}
+
+.reply .reply-update button{
+	display:flex;
+	margin-left: auto;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+
+.reply .reply-update-contents{
+	margin-left: 78px;
+}
+
+.reply .reply-updateform-btn{
+	display:flex;
+	justify-content: flex-end;
+	
+	
+}
+
+.reply .reply-updateform-btn .btn{
+	margin:5px;
+}
+
+
+
+#대댓글
+
+
+.rereply{
+	margin: 0 auto;
+	border:1px solid #000;
+}
+
+
+.rereply .rereplyProfile{
+	display:flex;
+	margin: auto;
+}
+
+
+.rereply .rereplyProfile img{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin: 20px;
+}
+
+.rereply .rereplyProfile .rereply-info{
+	padding:8px;
+}
+
+.rereply .rereplyProfile .rereply-info p{
+	margin-bottom: auto;
+}
+
+.rereply .rereply-contents{
+	margin-left: 78px;
+}
+
+.rereply .rereply-update button{
+	display:flex;
+	margin-left: auto;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+
+.rereply .rereply-update-contents{
+	margin-left: 78px;
+}
+
+.rereply .rereply-updateform-btn{
+	display:flex;
+	justify-content: flex-end;
+	
+	
+}
+
+.rereply .rereply-updateform-btn .btn{
+	margin:5px;
+}
+
+.insert-reply{
+	margin:10px;
+}
+
+
+#대댓글입력폼
+
+.rereply-insert{
+	border: 1px solid #dbdbdb;
+	margin-bottom:10px;
+	background-color: #fff;
+}
+
+
+.rereply-insert .rereply-insert-info{
+	display:flex;
+}
+
+.rereply-insert .rereply-insert-contents{
+	width:100%;
+	height:100%;
+}
+.rereply-insert .rereply-insert-contents textarea{
+	border: none;
+	width:100%;
+	height:100%;
+}
+
+
+.rereply-insert .rereply-insert-info .rereplyProfile img{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin: 20px;
+}
+
+.rereply-insert .div-btn .btn{
+	display:flex;
+	margin-left: auto;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	color:#fff;
+	background-color: #e993a0;
+	border: 1px solid #dbdbdb;
+}
+
+
