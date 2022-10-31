@@ -1,6 +1,8 @@
 package com.joongbu.fakerly.controller;
 
-
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,34 +12,45 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.joongbu.fakerly.dto.MainBoardDto;
 import com.joongbu.fakerly.dto.TempBoardDto;
 import com.joongbu.fakerly.dto.UserDto;
+import com.joongbu.fakerly.mapper.MainBoardMapper;
 import com.joongbu.fakerly.mapper.TempBoardMapper;
-		
+
+
 @RequestMapping("/tempboard")
 @Controller
 public class TempController {
 	@Autowired
-	TempBoardMapper tempMapper;
+	TempBoardMapper tempboardMapper;
+	@Autowired
+	MainBoardMapper boardMapper;
 	@GetMapping("/templist.do")
-	public String templist(Model model){
-		System.out.println("work!");
+	public String templist(
+			Model model,
+			@SessionAttribute(required=true) UserDto loginUser,
+			HttpSession session
+			){
+		String msg="";
 		List<TempBoardDto> tempList=null;
 		try {
-			tempList=tempMapper.templist();
-			System.out.println(tempList);
+			tempList=tempboardMapper.templist(loginUser.getUser_no());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(tempList==null) {
-			return "/mainboard/main";
-		}else {
+		if(tempList.isEmpty()) {
+			msg="임시보관 한 게시물이 없습니다.";
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/main";
+		} else {
+			msg=loginUser.getUser_name()+"님의 임시보관함입니다.";
+			session.setAttribute("msg", msg);
 			model.addAttribute("tempList", tempList);
 			return "/tempboard/templist";
 		}
@@ -45,165 +58,154 @@ public class TempController {
 
 	@GetMapping("/detail.do")
 	public String detail(
-			@RequestParam (required = true) int tempNo,
-			Model model
+			MainBoardDto mainboard,
+			@SessionAttribute(required=false) UserDto loginUser,
+			Model model,
+			HttpSession session
 			) {
-		TempBoardDto tempboard =null;
+		String msg="";
+		List<MainBoardDto> list=null;
 		try {
-			tempboard=tempMapper.detail(tempNo);
-			System.out.println("detail!");
+			list=boardMapper.tempDetail(loginUser.getUser_no());
+			System.out.println(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(tempboard!=null) {
-			System.out.println("detail!!!!");
-			model.addAttribute("tempboard" ,tempboard);
-			return "/tempboard/detail";
-		}else {
-			System.out.println("ERROR");
-			return "redirect:/tempboard/templist.do";
+		if(list==null) {
+			msg="알 수 없는 오류";
+			session.setAttribute("msg", msg);
+			return "redirect:/mainboard/main";
+		} else {
+			model.addAttribute("tempboard", list);
+			return "/tempboard/detail.do";
 		}
 	}
 	@GetMapping("/insert.do")
 	public String insert(
-		TempBoardDto tempboard,
-		@SessionAttribute(required = false) UserDto loginUser,
-		HttpSession session,
-		Model model
-		) {
-	String msg="";
-	if(loginUser!=null) {
-		model.addAttribute("tempboard", tempboard);
-		return "/tempboard/insert";
-	}else {
-		msg="로그인 하셔야 게시글 작성이 가능합니다";
-		session.setAttribute("msg", msg);
-		return "/user/login.do";
-	}	
-}
-	@PostMapping("/insert.do")
-	public String insert(
-			TempBoardDto tempboard,
-			MainBoardDto mainboard,
-			@SessionAttribute(required=true) UserDto loginUser,
+			@SessionAttribute(required = false) UserDto loginUser,
 			HttpSession session
 			) {
 		String msg="";
-		int insert=0;
+		if(loginUser!=null) {
+			return"tempboard/insert";
+		}else {
+			msg="ERROR";
+			System.out.println("HEllo");
+			session.setAttribute("msg", msg);
+			return "redirect:/user/login.do";
+		}
+	}
+	@PostMapping("/insert.do")
+	public String insert(
+			MainBoardDto mainboard,
+			@SessionAttribute(required = false) UserDto loginUser,
+			HttpSession session
+			) {
+		String msg="";
+		int tempInsert=0;
 		try {
-			if(mainboard.getMainboardTitle().isEmpty()) {
-				msg="제목을 입력해주세요.";
-				session.setAttribute("msg", msg);
-				return "redirect:/mainboard/insert?userNo"+loginUser.getUser_no();
-			}else if(mainboard.getMainboardContents().isEmpty()) {
-				msg="게시글을 입력해주세요";
-				return "redirect:/tempboard/insert?userNo"+loginUser.getUser_no();
-			}else {
-				insert=tempMapper.insert(tempboard);
+			tempInsert=boardMapper.tempInsert(mainboard);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(tempInsert>0) {
+			msg="임시게시판 등록 완료";
+			session.setAttribute("msg", msg);
+			return "redirect:/tempboard/templist.do";
+		} else {
+			msg="임시게시판 등록 실패";
+			session.setAttribute("msg", msg);
+			return "/mainboard/main";
+			}
+		}
+	@GetMapping("/update.do")
+	public String update(
+			@RequestParam(required=true) int tempNo,
+			Model model,
+			@SessionAttribute(required=false) UserDto loginUser,
+			HttpSession session
+			) {
+		TempBoardDto tempboard=null;
+		String msg="";
+		try {
+			if(loginUser!=null) {
+				tempboard=tempboardMapper.detail(tempNo);				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(insert>0) {
-			msg="임시보관성공";
-			session.setAttribute("msg", msg);
-			System.out.println("임시저장성공");
-			return "redirect:/mainboard/main";
+		if(tempboard!=null&&tempboard.getTempNo()==tempNo) {
+			model.addAttribute("tempboard",tempboard);
+			return "/tempboard/update.do";			
 		}else {
-			msg="임시보관실패";
+			msg=(loginUser==null)?"로그인하셔야 이용할 수 있습니다.":"글쓴이만 수정 가능 합니다.";
 			session.setAttribute("msg", msg);
-			return "/mainboard/main";
-		}
-	}
-	@GetMapping("/update.do")
-		public String update(
-				@RequestParam(required = true) int tempNo,
-				Model model,
-				@SessionAttribute(required = true)UserDto loginUser,
-				HttpSession session
-				) {
-		TempBoardDto tempboard=null;
-		String msg="";
-		try {
-			tempboard=tempMapper.detail(tempNo);
-			System.out.println(tempboard);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if(tempboard!=null && tempboard.getUserNo()==loginUser.getUser_no()) {
-			model.addAttribute("tempboard", tempboard);
-			return "/tempboard/update";
-		}else if(tempboard.getUserNo()!=loginUser.getUser_no()) {
-			msg="글쓴이만 수정 가능";
-			session.setAttribute("msg", msg);
-			return "redirect:/mainboard/main";
-		}else {
-			System.out.println("ERROR");
-			return "mainboard/main";
+			return "redirect:/tempboard/detail.do?tempNo="+tempNo;
 		}
 	}
 	@PostMapping("/update.do")
 	public String update(
 			TempBoardDto tempboard,
-			@SessionAttribute(required=false) UserDto loginUser,
+			@RequestParam(required=true) int tempNo,
+			@SessionAttribute(required = false) UserDto loginUser,
 			HttpSession session
 			) {
 		int update=0;
 		String msg="";
 		try {
-			update=tempMapper.update(tempboard);
+			if(loginUser==null) {
+				msg="로그인 하셔야 합니다.";
+			}else {
+				if(tempboard.getTempNo()==tempNo) {
+					update=tempboardMapper.update(tempboard);					
+				}else {
+					msg="글쓴이만 수정 가능 합니다.";
+				}
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(update>0) {
-			msg="업로드 성공";
+			msg="수정 성공";
 			session.setAttribute("msg", msg);
-			return "redirect:/mainboard/main";
-		} else {
-			msg="업로드 실패";
+			return "redirect:/tempboard/templist.do?tempNo="+tempboard.getTempNo();			
+		}else {
+			msg="수정 실패(db 오류)";
 			session.setAttribute("msg", msg);
-			return "redirect:/mainboard/update?mainboardNo="+tempboard.getTempNo();
+			return "redirect:/mainboard/main";			
+		}
+	}
+	@GetMapping("/delete.do")
+	public String delete(
+			@RequestParam(required = true) int tempNo,
+			@SessionAttribute(required = false) UserDto loginUser,
+			HttpSession session
+			) {
+		int delete=0;
+		String msg="";
+		try {
+			if(loginUser!=null) {
+				TempBoardDto tempboard=tempboardMapper.detail(tempNo);
+				if(tempboard.getTempNo()==tempNo) {
+					delete=tempboardMapper.delete(tempNo);
+				}else {
+					msg="글쓴이만 삭제 가능";
+				}
+			}else {
+				msg="로그인해야 게시글 삭제 가능";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(delete>0) {
+			msg="삭제 성공";
+			session.setAttribute("msg", msg);
+			return "redirect:/tempboard/templist.do";			
+		}else {
+			msg="삭제 실패(db 오류)";
+			session.setAttribute("msg", msg);
+			return "redirect:/tempboard/update.do?tempNo="+tempNo;			
 		}
 	}
 }
-
-/*public String insert(
-@SessionAttribute(required = false)UserDto loginUser,
-HttpSession session
-) {
-String msg="";
-if(loginUser!=null) {
-return"tempboard/insert";
-}else {
-msg="ERROR";
-System.out.println("HEllo");
-session.setAttribute("msg", msg);
-return "redirect:/user/login.do";
-}
-}
-@PostMapping("/insert.do")
-public String insert(
-TempBoardDto tempboard,
-@SessionAttribute(required = false) UserDto user,
-HttpSession session
-) {
-int insert=0;
-String msg="";
-try {
-if(tempboard!=null) {
-	insert=tempboardMapper.insert(tempboard);
-}
-} catch (Exception e) {
-e.printStackTrace();
-}
-if(insert>0) {
-msg="임시 저장 성공";
-session.setAttribute("msg", msg);
-return "redirect:/tempboard/detail.do?tempNo="+tempboard.getTempNo();
-}else {
-	msg="게시글 작성 실패(db 오류)";
-session.setAttribute("msg", msg);
-return "redirect:/mainboard/main.do";
-}
-}*/
-

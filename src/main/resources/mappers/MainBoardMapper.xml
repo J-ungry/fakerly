@@ -8,14 +8,12 @@
 		<result column="user_no" property="userNo"/>
 		<result column="keyword_no" property="keywordNo"/>
 		<result column="keyword_name" property="keywordName"/>
-		
 		<result column="mainboard_title" property="mainboardTitle"/>
 		<result column="mainboard_contents" property="mainboardContents"/>
 		<result column="mainboard_view" property="mainboardView"/>
 		<result column="mainboard_img" property="mainboardImg"/>
 		<result column="mainboard_link" property="mainboardLink"/>
 		<result column="mainboard_time" property="mainboardTime"/>
-
 		<result column="user_name" property="userName"/>
 		<result column="company" property="userCompany"/>
 		<!--  <collection property="preferList" ofType="MainBoardPreferDto">
@@ -24,6 +22,7 @@
 			<result column="mainboard_prefer" property="mainboardPrefer"/>
 			<result column="user_no" property="userNo"/>
 		</collection> -->
+		
 
 		<collection property="replyList" ofType="MainReplyDto">
 			<id column="main_reply_no" property="main_reply_no"/>
@@ -79,6 +78,19 @@
 		(#{userNo},#{keywordNo},#{mainboardTitle},#{mainboardContents},#{mainboardView},#{mainboardImg},#{mainboardLink})
 	</insert>
 	
+	<!-- 임시게시판 insert -->
+	<insert id="tempInsert" parameterType="MainBoardDto">
+		INSERT INTO tempboard
+		(user_no,title,keyword_no,contents,img,link)
+		VALUES
+		(#{userNo},#{mainboardTitle},#{keywordNo},#{mainboardContents},#{mainboardImg},#{mainboardLink})
+	</insert>
+	<!-- 임시게시판 detail -->
+	<select id="tempDetail" resultMap="MainBoardMap">
+		select *
+		from mainboard WHERE user_no=#{userNo}
+ 	</select>
+	
 	<update id="viewUpdate" parameterType="int">
 		UPDATE mainboard SET
 		mainboard_view=mainboard_view+1
@@ -98,22 +110,44 @@
 		DELETE FROM mainboard
 		WHERE mainboard_no=#{mainboardNo}
 	</delete>
-</mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
-
-
+	<!-- 주제로 검색 -->
+	<select id="searchTitle" resultMap="MainBoardMap">
+		SELECT *,
+		(SELECT user_name FROM user WHERE mainboard.user_no=user.user_no) user_name,
+		(SELECT company FROM user WHERE user_no=mainboard.user_no) company,
+		(SELECT keyword_name FROM keyword WHERE keyword_no=mainboard.keyword_no) keyword_name
+		FROM mainboard WHERE mainboard_title LIKE CONCAT('%',#{mainboardTitle},'%')
+	</select>
+	<!-- 내용으로 검색 -->
+	<select id="searchContents" resultMap="MainBoardMap">
+		SELECT *,
+		(SELECT user_name FROM user WHERE mainboard.user_no=user.user_no) user_name,
+		(SELECT company FROM user WHERE user_no=mainboard.user_no) company,
+		(SELECT keyword_name FROM keyword WHERE keyword_no=mainboard.keyword_no) keyword_name
+		FROM mainboard WHERE mainboard_contents LIKE CONCAT('%',#{mainboardContents},'%')
+	</select>
+	<!-- 작성자명으로 검색 -->
+	<select id="searchName" resultMap="MainBoardMap">
+		SELECT 
+		*,
+		(SELECT user_name FROM user WHERE user_no=mainboard.user_no) user_name,
+		(SELECT company FROM user WHERE user_no=mainboard.user_no) company,
+		(SELECT keyword_name FROM keyword WHERE keyword_no=mainboard.keyword_no) keyword_name
+		FROM mainboard 
+		WHERE user_no IN(SELECT user_no FROM user WHERE user_name LIKE CONCAT('%',#{userName},'%'))
+		ORDER BY mainboard_no DESC
+	</select>
+	<!-- 키워드명으로 검색 -->
+	<select id="searchKeyword" resultMap="MainBoardMap">
+		SELECT
+		*,
+		(SELECT company FROM user WHERE user_no=mainboard.user_no) company, 
+		(SELECT user_name FROM user WHERE user_no=mainboard.user_no) user_name,
+		(SELECT keyword_name FROM keyword WHERE keyword_no=mainboard.keyword_no) keyword_name
+		FROM mainboard
+		WHERE keyword_no IN(SELECT keyword_no FROM keyword WHERE keyword_name LIKE CONCAT('%',#{keywordName},'%'))
+	</select>
+	
+	
+</mapper>

@@ -20,7 +20,8 @@
   </resultMap>
   <select id="templist" resultMap="TempBoardMap">
   
- SELECT *,user_no userNo FROM tempboard 
+ SELECT * FROM tempboard WHERE user_no=#{userNo} ORDER BY temp_no DESC 
+ 
  		<!-- ORDER BY temp_no DESC -->
   
   
@@ -32,9 +33,9 @@
   <insert id="insert" parameterType="TempBoardDto" useGeneratedKeys="true" keyProperty="tempNo">
 		<!-- user_no와 keyword_no 작성자의 아이디와 키워드를 가져올 예정 -->
 		INSERT INTO tempboard 
- 		(temp_no, user_no, title, keyword_no, contents, link) 
+ 		(temp_no, user_no, title, keyword_no, contents, img, link) 
  		VALUES 
- 		(#{tempNo}, #{userNo}, #{title}, #{keywordNo}, #{contents}, #{link})
+ 		(#{tempNo}, #{userNo}, #{title}, #{keywordNo}, #{contents}, #{img}, #{link})
 	</insert>
 	
 	<select id="detail" resultMap="TempBoardMap">
@@ -45,9 +46,12 @@
 	</select>
 	<update id="update" parameterType="TempBoardDto">
 		UPDATE tempboard SET
-			title=#{title},
-			contents=#{contents}
-			WHERE temp_no=#{tempdNo}	
+		title=#{title},
+		contents=#{contents},
+		img=#{img},
+		link=#{link},
+		keyword_no=#{keywordNo}
+		WHERE temp_no=#{tempNo}	
 	</update>
 	
 	<delete id="delete">
