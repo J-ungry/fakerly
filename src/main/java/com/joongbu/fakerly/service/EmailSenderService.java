@@ -23,7 +23,6 @@ public class EmailSenderService {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
-    //			String body, 
 	public void sendEmail(
 			String title, 
 			String to, 
@@ -45,15 +44,5 @@ public class EmailSenderService {
 				helper.setText(html, true);
 
 				javaMailSender.send(message);
-
-				// SimpleMailMessage message = new SimpleMailMessage();
-				// message.setFrom("no-reply@fakerly.com");
-				// message.setTo(toEmail);
-				// message.setSubject(title);
-				// message.setText(body);
-
-				// javaMailSender.send(message);
-
-				// System.out.println("Mail Sent successfully...");
 			}
 }

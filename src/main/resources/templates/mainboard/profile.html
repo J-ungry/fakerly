@@ -20,7 +20,7 @@
 	<div class="user-names">
 		<p th:text="${user.user_name}"></p>(
 		<p th:text="${user.nickname}"></p>)
-		<i class="bi bi-pencil"></i> <!-- 이거 클릭시 비밀번호 수정할 수 있게끔 !!!! -->
+		<i class="bi bi-pencil" th:onclick="location.href='/user/modifyPassword.do'" style="cursor: pointer;"></i> <!-- 이거 클릭시 비밀번호 수정할 수 있게끔 !!!! -->
 	</div>
 	<div class="user-company">
 		<i class="bi bi-mortarboard"></i>
