@@ -16,6 +16,7 @@
 		<association property="user" foreignColumn="user_no">
   		<id column="user_no" property="user_no"/> 
   		<result column="nickname" property="nickname"/>
+  		<result column="user_name" property="user_name"/>
   		</association>
   		
   		<!-- collection.select : board 출력할때 select를 한번 더 호출(==join) -->
@@ -54,17 +55,8 @@
 
 	
 	<select id="qadetail" resultMap="QnaMap">
-		select q.* ,
-		(SELECT COUNT(*) FROM qna_like l where l.qa_no=q.qa_no) likes,
-		qr.qa_reply_no,
-		qr.contents qr_contents,
-		qr.q_datetime qr_datetime,
-		qr.code qr_code,
-		qr.user_no qr_user_no,
-		qr.qa_no qr_no
-		FROM qna q
+		select * FROM qna 
 		LEFT JOIN user u using(user_no) 
-		LEFT JOIN qna_reply qr using(qa_no)
 		WHERE qa_no=#{qaNo}
 	</select>
 	
