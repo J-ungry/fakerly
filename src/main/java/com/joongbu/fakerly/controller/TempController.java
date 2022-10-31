@@ -120,25 +120,23 @@ public class TempController {
 		}
 	@GetMapping("/update.do")
 	public String update(
-			@RequestParam(required=true) int tempNo,
+			@RequestParam(required=false) int tempNo,
 			Model model,
 			@SessionAttribute(required=false) UserDto loginUser,
 			HttpSession session
 			) {
+		System.out.println(tempNo);
 		TempBoardDto tempboard=null;
 		String msg="";
 		try {
-			if(loginUser!=null) {
-				tempboard=tempboardMapper.detail(tempNo);				
-			}
+			tempboard=tempboardMapper.detail(tempNo);				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(tempboard!=null&&tempboard.getTempNo()==tempNo) {
 			model.addAttribute("tempboard",tempboard);
-			return "/tempboard/update.do";			
+			return "/tempboard/update";			
 		}else {
-			msg=(loginUser==null)?"로그인하셔야 이용할 수 있습니다.":"글쓴이만 수정 가능 합니다.";
 			session.setAttribute("msg", msg);
 			return "redirect:/tempboard/detail.do?tempNo="+tempNo;
 		}
@@ -146,30 +144,21 @@ public class TempController {
 	@PostMapping("/update.do")
 	public String update(
 			TempBoardDto tempboard,
-			@RequestParam(required=true) int tempNo,
 			@SessionAttribute(required = false) UserDto loginUser,
 			HttpSession session
 			) {
 		int update=0;
+		System.out.println(tempboard);
 		String msg="";
 		try {
-			if(loginUser==null) {
-				msg="로그인 하셔야 합니다.";
-			}else {
-				if(tempboard.getTempNo()==tempNo) {
-					update=tempboardMapper.update(tempboard);					
-				}else {
-					msg="글쓴이만 수정 가능 합니다.";
-				}
-			}
-			
+			update=tempboardMapper.update(tempboard);					
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(update>0) {
 			msg="수정 성공";
 			session.setAttribute("msg", msg);
-			return "redirect:/tempboard/templist.do?tempNo="+tempboard.getTempNo();			
+			return "redirect:/mainboard/main";			
 		}else {
 			msg="수정 실패(db 오류)";
 			session.setAttribute("msg", msg);

@@ -40,7 +40,7 @@
 	
 	<select id="detail" resultMap="TempBoardMap">
 		SELECT * 
-		FROM tempboard t 
+		FROM tempboard  
 		LEFT JOIN user using(user_no) 
 		WHERE temp_no=#{tempNo}
 	</select>

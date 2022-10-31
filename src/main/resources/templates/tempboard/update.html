@@ -8,7 +8,8 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<form id="MainBoardInsert_Form" action="/tempboard/update.do" method="post" enctype="multipart/form-data">
+	<form id="MainBoardInsert_Form" action="/tempboard/update.do" method="post">
+		<input type="hidden" name="tempNo" th:value="${tempboard.tempNo}">
 		<input type="hidden" name="userNo" th:value="${session.loginUser.user_no}">
 		<div id="MainBoardNav">
 			<img onclick="goBack()" alt="preferPageImg" src="/img/mainboard_arrow.png">
@@ -36,17 +37,14 @@
 		</div>
 		<div id="Mainboard">
 			<div id="MainboardTitle">
-				<input type="text" name="title" placeholder="제목을 입력하세요." maxlength="100">
+				<input type="text" name="title" th:value="${tempboard.title}" maxlength="100">
 			</div>
 			<div id="MainboardContents">
 				<div class="form-floating mb-2 mt-3" id="linkInputContainer" style="display: none;">
 					<input name="link" type="text" class="form-control" id="floatingInput" placeholder="https://">
 					<label for="floatingInput">링크 입력</label>
 				</div>
-				<div class="mb-3" id="fileInputContainer" style="display: none;">
-					<input class="form-control text text-muted" type="file" id="mainboardImg" name="img">
-				</div>
-				<textarea name="mainboardContents" placeholder="나누고 싶은 생각을 적어주세요.&#13;&#10;링크나 사진을 추가할 수도 있어요." maxlength="254"></textarea>
+				<textarea name="contents" th:text="${tempboard.contents}" maxlength="254"></textarea>
 			</div>
 		</div>
 	</form>
