@@ -21,18 +21,15 @@
 	</resultMap>
 
 	<select id="keywordList" resultMap="KeywordMap">
-		select * from keyword 
-		where keyword_no not in (select keyword_no from user_keyword where user_no=#{userNo})
+		select k.* from keyword k left join user_keyword u on k.keyword_no=u.keyword_no and u.user_no=#{userNo} where u.keyword_no is null;
 	</select>
 	
 	<select id="skillList" resultMap="SkillMap">
-		select * from skill 
-		where skill_no not in (select skill_no from user_skill where user_no=#{userNo})
+		select k.* from skill k left join user_skill u on k.skill_no=u.skill_no and u.user_no=#{userNo} where u.skill_no is null;
 	</select>
 	
 	<select id="licenseList" resultMap="LicenseMap">
-		select * from license 
-		where license_no not in (select license_no from user_license where user_no=#{userNo})
+		select k.* from license k left join user_license u on k.license_no=u.license_no and u.user_no=#{userNo} where u.license_no is null;
 	</select>
 	
 	<insert id="insertUserKeyword">
