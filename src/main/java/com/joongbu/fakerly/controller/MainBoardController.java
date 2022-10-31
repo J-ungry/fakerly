@@ -196,34 +196,42 @@ public class MainBoardController {
 			MainBoardDto mainboard,
 			@SessionAttribute(required=false) UserDto loginUser,
 			HttpSession session,
-			MultipartFile img
+			MultipartFile img,
+			Model model
 			) {
-		int update=0;
 		String msg="";
-		try {
-			if(mainboard.getUserNo()==loginUser.getUser_no()) {
-				if(img!=null && !img.isEmpty()) {
-					String [] contentType=img.getContentType().split("/");
-					if(contentType[0].equals("image")) {
-						String fileName="mainboard_"+System.currentTimeMillis()+"."+((int)(Math.random()*10000))+"."+contentType[1];
-						Path path=Paths.get(imgSavePath+"/"+fileName);
-						img.transferTo(path);
-						if(mainboard.getMainboardImg()!=null) {
-							File imgFile=new File(imgSavePath+"/"+mainboard.getMainboardImg());
-							System.out.println("이미지 파일 삭제: "+imgFile.delete());
+		int update=0;
+		if(loginUser.getUser_no()!=mainboard.getUserNo()) {
+			msg="글쓴이만 수정 가능합니다.";
+			return "redirect:/mainboard/main";
+		} else {
+			try {
+				if(mainboard.getUserNo()==loginUser.getUser_no()) {
+					if(img!=null && !img.isEmpty()) {
+						String [] contentType=img.getContentType().split("/");
+						if(contentType[0].equals("image")) {
+							String fileName="mainboard_"+System.currentTimeMillis()+"."+((int)(Math.random()*10000))+"."+contentType[1];
+							Path path=Paths.get(imgSavePath+"/"+fileName);
+							img.transferTo(path);
+							if(mainboard.getMainboardImg()!=null) {
+								File imgFile=new File(imgSavePath+"/"+mainboard.getMainboardImg());
+								System.out.println("이미지 파일 삭제: "+imgFile.delete());
+							}
+							mainboard.setMainboardImg(fileName);
 						}
-						mainboard.setMainboardImg(fileName);
 					}
+					update=boardMapper.update(mainboard);
+				} else {
+					msg="글쓴이만 수정 가능합니다.";
+					session.setAttribute("msg", msg);
+					return "redirect:/mainboard/update?mainboardNo="+mainboard.getMainboardNo();
 				}
-				update=boardMapper.update(mainboard);
-			} else {
-				msg="글쓴이만 수정 가능합니다.";
-				session.setAttribute("msg", msg);
-				return "redirect:/mainboard/update?mainboardNo="+mainboard.getMainboardNo();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
+		
 		if(update>0) {
 			msg="수정 성공";
 			session.setAttribute("msg", msg);

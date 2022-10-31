@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
-<!-- <script defer="defer" src="/js/mainboard/main.js"></script> -->
+<script defer="defer" src="/js/mainboard/main.js"></script> 
 <head>
 <meta charset="UTF-8">
 <title>메인 게시판</title>
@@ -120,10 +120,11 @@
 					<div>
 						<div class="d-flex">
 							<div class="me-2">
-								<!-- 게시글 수정버튼 -->
-								<a th:href="@{/mainboard/update(mainboardNo=${main.mainboardNo})}" class="btn btn-outline-secondary btn-sm">
+								<!-- 게시글 수정버튼 th:href="@{/mainboard/update(mainboardNo=${main.mainboardNo})}" -->
+								<a onclick="updateForm()" class="btn btn-outline-secondary btn-sm">
 									수정
 								</a>
+								
 							</div>
 							<div>
 								<!-- 삭제 모달 호출 -->
@@ -157,6 +158,47 @@
 						</div>
 
 					</div>
+				</div>
+				<div id="updateForm" class="mt-5 pt-2" style="background-color: #f7f7f7; display: none">
+					<form id="MainBoardInsert_Form" action="/mainboard/update" method="post" enctype="multipart/form-data">
+						<div id="Mainboard">
+							<div id="MainboardTitle">
+								제목: <input type="text" name="mainboardTitle" th:value=${main.mainboardTitle} maxlength="100">
+							</div>
+							<div id="MainboardContents">
+								내용: <textarea name="mainboardContents" maxlength="254" th:text="${main.mainboardContents}" style="width:100%; height:150px; resize: none;"></textarea>
+							</div>
+						</div>
+						<div class="mb-3">
+							<div style="border: none;">
+								&lt 키워드 &gt
+								<select name="keywordNo" class="form-select form-select-sm ws-25" aria-label=".form-select-sm example">
+									<!-- 다른 분들은 value를 1~5로 하시면 됩니다. -->
+									<option value="2">HTML</option>
+									<option value="3">CSS</option>
+									<option value="4">JS</option>
+									<option value="5">Java</option>
+									<option value="6">AJAX</option>
+								</select>
+							</div>
+						</div>
+						<div id="MainboardAddFile">
+							<div style="border: none;" class="mb-2">
+								<img alt="linkImg" src="/img/mainboard_link.png" style="width: 30px; height: 30px;">
+								<input class="w-50" type="text" th:value="${main.mainboardLink}" placeholder="링크를 추가해보세요!">
+							</div> 
+							<div class="mb-2">
+								<img alt="fileImg" src="/img/mainboard_picture.png" style="width: 30px; height: 30px;">
+								<input type="file" th:value="${main.mainboardImg}">
+							</div>
+						</div>
+						<input type="hidden" name="userNo" th:value="${session.loginUser.user_no}">
+						<input type="hidden" name="mainboardNo" th:value="${main.mainboardNo}">
+						<div id="MainBoardNav" class="d-flex justify-content-end mb-2">
+							<button class="btn btn-outline-secondary me-2" type="reset">초기화</button>
+							<button class="button btn btn-outline-secondary">수정</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
