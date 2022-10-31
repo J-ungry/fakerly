@@ -325,6 +325,7 @@ public class MainBoardController {
 			}
 			return "/mainboard/main";
 		}
+
 	
 	@GetMapping("/profile.do")
 	public void profile(
@@ -353,13 +354,7 @@ public class MainBoardController {
 		
 
 	}
+
 	
 	
 }
-
-
-
-
-
-
-

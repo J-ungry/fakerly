@@ -2,21 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Fakerly 메인 게시판 글 등록</title>
+<title>수정페이지</title>
 <link rel="stylesheet" href="/css/mainboard/insert.css">
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <script src="/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/mainboard/insert.js"></script>
 </head>
 <body>
-	<form id="MainBoardInsert_Form" action="/mainboard/insert" method="post" enctype="multipart/form-data">
+	<form id="MainBoardInsert_Form" action="/tempboard/update.do" method="post">
+		<input type="hidden" name="tempNo" th:value="${tempboard.tempNo}">
 		<input type="hidden" name="userNo" th:value="${session.loginUser.user_no}">
 		<div id="MainBoardNav">
 			<img onclick="goBack()" alt="preferPageImg" src="/img/mainboard_arrow.png">
 			<div>
 				<!-- 임시보관함 모달창 참고: https://goddino.tistory.com/74 -->
-				<button type="button" th:onClick="location.href='/tempboard/templist.do'">임시보관함</button>
-				<button class="button" onClick="return submit2(this.form)">보관</button>
+				<button type="button" onClick="location.href='/mainboard/main'">취소</button>
 				<button class="button">완료</button>
 			</div>
 		</div>
@@ -28,31 +27,28 @@
 			<div style="border: none;">
 				<select name="keywordNo" class="form-select form-select-sm ws-25" aria-label=".form-select-sm example">
 					<!-- 다른 분들은 value를 1~5로 하시면 됩니다. -->
-					<option value="2">HTML</option>
-					<option value="3">CSS</option>
-					<option value="4">JS</option>
-					<option value="5">Java</option>
-					<option value="6">AJAX</option>
+					<option value="1">HTML</option>
+					<option value="2">CSS</option>
+					<option value="3">JS</option>
+					<option value="4">Java</option>
+					<option value="5">AJAX</option>
 				</select>
 			</div>
 		</div>
 		<div id="Mainboard">
 			<div id="MainboardTitle">
-				<input type="text" name="mainboardTitle" placeholder="제목을 입력하세요." maxlength="100">
+				<input type="text" name="title" th:value="${tempboard.title}" maxlength="100">
 			</div>
 			<div id="MainboardContents">
 				<div class="form-floating mb-2 mt-3" id="linkInputContainer" style="display: none;">
-					<input name="mainboardLink" type="text" class="form-control" id="floatingInput" placeholder="https://">
+					<input name="link" type="text" class="form-control" id="floatingInput" placeholder="https://">
 					<label for="floatingInput">링크 입력</label>
 				</div>
-				<div class="mb-3" id="fileInputContainer" style="display: none;">
-					<input class="form-control text text-muted" type="file" id="mainboardImg" name="img">
-				</div>
-				<textarea name="mainboardContents" placeholder="나누고 싶은 생각을 적어주세요.&#13;&#10;링크나 사진을 추가할 수도 있어요." maxlength="254"></textarea>
+				<textarea name="contents" th:text="${tempboard.contents}" maxlength="254"></textarea>
 			</div>
 		</div>
 	</form>
-	<th:block th:if="${session.msg!=null}">
+<th:block th:if="${session.msg!=null}">
 		<script th:inline="javascript">
 		let msg=/*[[${session.msg}]]*/+"";
 		alert(msg);

@@ -17,7 +17,9 @@ public interface MainBoardMapper {
 	int viewUpdate(int mainboardNo); 
 	int delete(int mainboardNo);
 
+
 	List<MainBoardDto> profileList(int user_no); //유저에 대한 게시글 정보 가져오기
+
 
 	
 	List<MainBoardDto> searchTitle(String mainboardTitle);
@@ -25,7 +27,7 @@ public interface MainBoardMapper {
 	List<MainBoardDto> searchName(String userName);
 	List<MainBoardDto> searchKeyword(String keywordName);
 
-	
 	int tempInsert(MainBoardDto mainboard);
 	List<MainBoardDto> tempDetail(int userNo);
 }
+

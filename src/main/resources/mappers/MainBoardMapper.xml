@@ -14,7 +14,6 @@
 		<result column="mainboard_img" property="mainboardImg"/>
 		<result column="mainboard_link" property="mainboardLink"/>
 		<result column="mainboard_time" property="mainboardTime"/>
-
 		<result column="user_name" property="userName"/>
 		<result column="company" property="userCompany"/>
 		<result column="prefer" property="prefer"/>
@@ -110,6 +109,7 @@
 		DELETE FROM mainboard
 		WHERE mainboard_no=#{mainboardNo}
 	</delete>
+
 	
 
 	<select id="profileList" resultMap="MainBoardMap">
@@ -175,5 +175,4 @@
 
 
 	
-
-
+	
